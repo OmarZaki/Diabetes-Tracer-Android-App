@@ -13,8 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityRegistration">
-        </activity>
+        <activity android:name=".ActivityRegistration"></activity>
         <activity
             android:name=".ActivityLogin"
             android:label="@string/title_activity_login" />
@@ -25,10 +24,15 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityIntro"></activity>
+        <activity android:name=".ActivityIntro" />
+        <activity
+            android:name=".ActivityMain"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

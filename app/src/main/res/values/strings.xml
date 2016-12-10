@@ -27,11 +27,18 @@
     <string name="new_user_password2">password again : </string>
     <string name="new_user_email">Email : </string>
     <string name="new_user_phone">Phone Number: </string>
+    <string name="new_user_Address">User Address: </string>
     <string name="new_user_type">Diabetes Type: </string>
-    <string name="new_user_birth_date">Birth date: Type: </string>
+    <string name="new_user_birth_date">Birth date: </string>
     <string name="new_user_newImage">default </string>
     <string name="new_user_pick_image">Choose From gallery </string>
     <string name="new_user_register_user"> Register Now </string>
     <string name="new_user_cancel">Cancel </string>
     <string name="title_activity_new__user">"Register New User "</string>
+    <string name="title_activity_main">ActivityMain</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

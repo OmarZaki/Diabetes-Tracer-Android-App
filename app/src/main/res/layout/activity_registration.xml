@@ -95,21 +95,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/new_user_Address"
+                android:id="@+id/textViewAddress" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etAddress" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/new_user_type"
                 android:id="@+id/tvType" />
             <Spinner
                 android:id="@+id/spinnerType"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/new_user_birth_date"
-                android:id="@+id/tvBirthDate" />
-            <DatePicker
-                android:id="@+id/dpDatePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+
+            <include layout="@layout/date_picker"/>
             <View
                 android:layout_marginTop="3dp"
                 android:layout_width="fill_parent"

@@ -1,6 +1,9 @@
 package com.example.omar.diabetestracerapp.DataModel;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -11,7 +14,7 @@ import javax.mail.internet.InternetAddress;
 
 public class User {
 
-    public final static String _USER_TABLE="Users";
+    public final static String _USER_TABLE = "Users";
 
     // User Columns names
     public final static String _ID = "id";
@@ -37,6 +40,17 @@ public class User {
     private Boolean type;
     private String token;
     private Date creationDate;
+    private String Address;
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+
 
     public int getId() {
         return id;
@@ -115,8 +129,10 @@ public class User {
     }
 
     public void setCreationDate(java.util.Date creationDate) {
-        this.creationDate = new java.sql.Date(creationDate.getTime());;
+        this.creationDate = new java.sql.Date(creationDate.getTime());
+        ;
     }
+
     /**
      * OMAR: To validate the user fields, You can add more rule as its needed.
      *
@@ -150,5 +166,28 @@ public class User {
         }
 
         return result;
+    }
+
+    public static java.util.Date ConvertStringToDateObject(String date) {
+        java.util.Date convertedDate = null;
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+             convertedDate = df.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return convertedDate;
+    }
+    public static String ConvertDateToString(java.util.Date Date){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(Date.getTime());
+    }
+
+    public static Calendar ConvertIntegersToCalenderObject(int day, int month, int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.YEAR, year);
+        return calendar;
     }
 }
