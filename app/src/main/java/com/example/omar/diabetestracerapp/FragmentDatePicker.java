@@ -38,7 +38,6 @@ public class FragmentDatePicker extends DialogFragment{
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.date_picker_layout,null);
         datePicker= (DatePicker)view.findViewById(R.id.dpCalender);
-
         etDateText= (EditText) getActivity().findViewById(R.id.etDate);
         selectedDate=etDateText.getText().toString();
         if(!selectedDate.equals("")){
@@ -66,6 +65,7 @@ public class FragmentDatePicker extends DialogFragment{
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                     }
                 });
         // Create the AlertDialog object and return it

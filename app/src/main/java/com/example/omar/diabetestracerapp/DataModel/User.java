@@ -1,9 +1,14 @@
 package com.example.omar.diabetestracerapp.DataModel;
 
-import java.sql.Date;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -40,17 +45,27 @@ public class User {
     private Boolean type;
     private String token;
     private Date creationDate;
-    private String Address;
+    private String address;
+
+    private java.util.Date birthDate;
+
+
+    public Date getBirthDate() {
+        return this.birthDate;
+    }
+
+    public void setBirthDate(java.util.Date birthDate) {
+//        this.birthDate =new java.sql.Date(birthDate.getTime());
+        this.birthDate=birthDate;
+    }
 
     public String getAddress() {
-        return Address;
+        return this.address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
-
-
 
     public int getId() {
         return id;
@@ -129,8 +144,8 @@ public class User {
     }
 
     public void setCreationDate(java.util.Date creationDate) {
-        this.creationDate = new java.sql.Date(creationDate.getTime());
-        ;
+//        this.creationDate = new java.sql.Date(creationDate.getTime());
+            this.creationDate= creationDate;
     }
 
     /**
@@ -154,7 +169,7 @@ public class User {
      * @param email
      * @return
      */
-    public Boolean validateEmailFormat(String email) {
+    public static Boolean validateEmailFormat(String email) {
         Boolean result = true;
         try {
 
@@ -168,6 +183,12 @@ public class User {
         return result;
     }
 
+    /**
+     * Convert date as string to Java.util.Date Object
+     *
+     * @param date
+     * @return
+     */
     public static java.util.Date ConvertStringToDateObject(String date) {
         java.util.Date convertedDate = null;
         try {
@@ -178,11 +199,25 @@ public class User {
         }
         return convertedDate;
     }
+
+    /**
+     * Convert Date Object to String
+     * @param Date
+     * @return
+     */
     public static String ConvertDateToString(java.util.Date Date){
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(Date.getTime());
     }
 
+    /**
+     * Convert day, month and year (Integers) to Calender object
+     * @param day
+     * @param month
+     * @param year
+     * @return
+     */
     public static Calendar ConvertIntegersToCalenderObject(int day, int month, int year) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH, day);
@@ -190,4 +225,25 @@ public class User {
         calendar.set(Calendar.YEAR, year);
         return calendar;
     }
+
+    /**
+     * Convert to Json object
+     * @param user
+     * @return
+     */
+    public static org.json.JSONObject toJsonObject(User user){
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(objectToString(user));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    public static String objectToString(Object object){
+        Gson gson = new Gson();
+        return gson.toJson(object);
+    }
+
 }
