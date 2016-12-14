@@ -3,7 +3,6 @@ package com.example.omar.diabetestracerapp;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,15 +12,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.omar.diabetestracerapp.DataModel.User;
-import com.example.omar.diabetestracerapp.asyncTasks.TaskRegistrationRequest;
-import com.example.omar.diabetestracerapp.restClient.RestClient;
+import com.example.omar.diabetestracerapp.data_model.User;
+import com.example.omar.diabetestracerapp.rest_client.RestClient;
 
 import java.util.Date;
 
@@ -29,6 +21,7 @@ import java.util.Date;
 public class ActivityRegistration extends AppCompatActivity {
     public static final String DATE_BUNDLE_TAG = "DATE";
     public Date selectedDateObject;
+    Boolean Result= false;
     /**
      * User Interface Elements
      */
@@ -102,7 +95,13 @@ public class ActivityRegistration extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendRegistrationRequest((Activity) view.getContext());
+                User user = collectUserInfo();
+                // TODO 1: Request to check if the user is already exist.
+               // TODO 2: Request to register new User.
+                    User registeredUser = SendRegistrationRequest((Activity) view.getContext(), user);
+                    // TODO 3: Store and pull the database info.
+                  //  StoreUserInfoInDatabase(registeredUser);
+                    // TODO 4: Move to The the Login activity
 
             }
         });
@@ -111,12 +110,11 @@ public class ActivityRegistration extends AppCompatActivity {
     }
 
     /**
-     * Collect the information
-     * @param activity
+     * collect the user info from the User Interface fields
+     *
      * @return
      */
-    public User SendRegistrationRequest(Activity activity) {
-
+    private User collectUserInfo() {
         User user = new User();
         String password1 = etPassword.getText().toString();
         String password2 = etPasswordAgain.getText().toString();
@@ -137,7 +135,6 @@ public class ActivityRegistration extends AppCompatActivity {
                 user.setPhoneNumber(etPhoneNumber.getText().toString());
                 user.setToken("");
                 String type = spinnerType.getSelectedItem().toString();
-
                 if (type.equals("Type 1")) {
                     user.setType(true);
                 } else {
@@ -145,15 +142,26 @@ public class ActivityRegistration extends AppCompatActivity {
                 }
 
                 user.setBirthDate(User.ConvertStringToDateObject(etSelectedBirthDate.getText().toString()));
-
-                Log.i("TEST", "Hey ! ! ");
-                RestClient client = new RestClient();
-                Boolean b =client.RegistrationRequest(activity,user);
-                Toast.makeText(activity,String.valueOf(b),Toast.LENGTH_SHORT).show();
             }
         }
+        return user;
+    }
 
+
+    /**
+     * Collect the information
+     *
+     * @param activity
+     * @return
+     */
+    public User SendRegistrationRequest(Activity activity, User user ) {
+        RestClient client = new RestClient();
+        client.Registration(activity, user);
         return new User();
 
     }
+
+
+
+
 }
