@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="e022e088a8f1595929bc6a21fbe4348b5abe077d">
+        sha1="48ea3a4c6763426a8bdc141c0d0b81fe2547feca">
         <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5f3e5aa4fa4c5cdd4a0413ca3436ced4bd192085\classes.dex" />
     </item>
     <item
@@ -196,7 +196,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="06a4acd81ac1b03a547c11f6d7182bfed18b72d5">
+        sha1="921927eb07bf4cba0e3e74bd10fcdd685ee4b051">
         <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_ca6ff0c93b3de2663e9e529457b5f4eaeea94ea9\classes.dex" />
     </item>
     <item

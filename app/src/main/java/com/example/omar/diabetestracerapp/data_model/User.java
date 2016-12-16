@@ -1,5 +1,8 @@
 package com.example.omar.diabetestracerapp.data_model;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -18,13 +21,15 @@ import javax.mail.internet.InternetAddress;
  */
 
 public class User {
-
+    //
+     public final static String _USER_ONFO_PUT_EXTRA_STRING="UserInfoToLogIn";
+    // Table name
     public final static String _USER_TABLE = "Users";
 
     // User Columns names
     public final static String _ID = "id";
     public final static String _FIRST_NAME = "fname";
-    public final static String _LAST_NAME = "fname";
+    public final static String _LAST_NAME = "lname";
     public final static String _EMAIL = "email";
     public final static String _PASSWORD = "password";
     public final static String _PHONE_NUMBER = "phone_number";
@@ -32,15 +37,18 @@ public class User {
     public final static String _ADMIN = "admin";
     public final static String _TYPE = "type";
     public final static String _CREATION_DATE = "creation_date";
+    public final static String _BIRTH_DATE= "birth_date";
     public final static String _ADDRESS = "address";
 
-    public String[] USER_COLS = {User._ID,
-            User._FIRST_NAME,
+    public static String[] USER_COLS = {User._FIRST_NAME,
             User._LAST_NAME,
             User._EMAIL,
             User._PASSWORD,
             User._PHONE_NUMBER,
+            User._TOKEN,
             User._TYPE,
+            User._CREATION_DATE,
+            User._BIRTH_DATE,
             User._ADDRESS};
     /**
      * User's fields
@@ -56,7 +64,6 @@ public class User {
     private String token;
     private Date creationDate;
     private String address;
-
     private java.util.Date birthDate;
 
 
@@ -244,16 +251,67 @@ public class User {
     public static org.json.JSONObject toJsonObject(User user){
         JSONObject jsonObject = null;
         try {
-            jsonObject = new JSONObject(objectToString(user));
+            jsonObject = new JSONObject(convertUserToJson(user));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return jsonObject;
     }
 
-    public static String objectToString(Object object){
+    /**
+     * Convert user Java Object to String
+     * @param object
+     * @return
+     */
+    public static String convertUserToJson(User object){
         Gson gson = new Gson();
         return gson.toJson(object);
     }
+    /**
+     * Convert to User Json String to User Object.
+     * @param jsonObject
+     * @return
+     */
+    public static User convertJsonToUser(String jsonObject) {
+        Gson gson = new Gson();
+        User user = gson.fromJson(jsonObject, User.class);
+        return user;
+    }
+    public ContentValues getContentValuesObject(){
+        ContentValues userFieldValues = new ContentValues();
+        userFieldValues.put(User._ID, this.getId());
+        userFieldValues.put(User._FIRST_NAME, this.getFirstName());
+        userFieldValues.put(User._LAST_NAME, this.getLastName());
+        userFieldValues.put(User._EMAIL, this.getEmail());
+        userFieldValues.put(User._ADDRESS, this.getAddress());
+        userFieldValues.put(User._BIRTH_DATE, this.getBirthDate().toString());
+        userFieldValues.put(User._PASSWORD, this.getPassword());
+        userFieldValues.put(User._PHONE_NUMBER, this.getPhoneNumber());
+        userFieldValues.put(User._TYPE, this.getType());
+        userFieldValues.put(User._TOKEN, this.getToken());
+        userFieldValues.put(User._CREATION_DATE, this.getCreationDate().toString());
 
+        return userFieldValues;
+    }
+
+    /**
+     * get Data from Cursor Object
+     * @param cursor
+     * @return
+     */
+    public static User getUserFromCourser(Cursor cursor) {
+        User user = new User();
+        user.setId(cursor.getInt(0));
+        user.setFirstName(cursor.getString(cursor.getColumnIndex(User._FIRST_NAME)));
+        user.setLastName(cursor.getString(cursor.getColumnIndex(User._LAST_NAME)));
+        user.setEmail(cursor.getString(cursor.getColumnIndex(User._EMAIL)));
+        user.setPassword(cursor.getString(cursor.getColumnIndex(User._PASSWORD)));
+        user.setAddress(cursor.getString(cursor.getColumnIndex(User._ADDRESS)));
+        user.setBirthDate(User.ConvertStringToDateObject(cursor.getString(cursor.getColumnIndex(User._BIRTH_DATE))));
+        user.setPhoneNumber(cursor.getString(cursor.getColumnIndex(User._PHONE_NUMBER)));
+        user.setType(cursor.getInt(cursor.getColumnIndex(User._TYPE))>0);
+        user.setToken(cursor.getString(cursor.getColumnIndex(User._TOKEN)));
+        user.setCreationDate(User.ConvertStringToDateObject(cursor.getString(cursor.getColumnIndex(User._CREATION_DATE))));
+        return user;
+    }
 }

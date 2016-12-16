@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SqlHelper extends SQLiteOpenHelper {
     // The database v, if you change the database model , you need to update the database .
     public static final int  DATABASE_VERSION= 1;
-    public static final String DATABASE_NAME="notetaker.db"; // database file name.
+    public static final String DATABASE_NAME="diabetes.db"; // database file name.
     /**
      * Constructor of the SQLHelper
      * @param context
@@ -22,7 +22,6 @@ public class SqlHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(SqlContacts.CREATE_SCHEMA);
         sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_USERS);
     }
 

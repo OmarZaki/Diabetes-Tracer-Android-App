@@ -19,6 +19,8 @@ import java.util.Date;
 
 
 public class ActivityRegistration extends AppCompatActivity {
+
+
     public static final String DATE_BUNDLE_TAG = "DATE";
     public Date selectedDateObject;
     Boolean Result= false;
@@ -96,13 +98,7 @@ public class ActivityRegistration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 User user = collectUserInfo();
-                // TODO 1: Request to check if the user is already exist.
-               // TODO 2: Request to register new User.
-                    User registeredUser = SendRegistrationRequest((Activity) view.getContext(), user);
-                    // TODO 3: Store and pull the database info.
-                  //  StoreUserInfoInDatabase(registeredUser);
-                    // TODO 4: Move to The the Login activity
-
+                SendRegistrationRequest((Activity) view.getContext(), user);
             }
         });
 
@@ -154,11 +150,9 @@ public class ActivityRegistration extends AppCompatActivity {
      * @param activity
      * @return
      */
-    public User SendRegistrationRequest(Activity activity, User user ) {
+    public void SendRegistrationRequest(Activity activity, User user ) {
         RestClient client = new RestClient();
-        client.Registration(activity, user);
-        return new User();
-
+        client.registration(activity, user);
     }
 
 

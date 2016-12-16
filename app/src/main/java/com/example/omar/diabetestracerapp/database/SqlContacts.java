@@ -1,11 +1,13 @@
 package com.example.omar.diabetestracerapp.database;
 
+import com.example.omar.diabetestracerapp.data_model.User;
+
 /**
  * Created by OMAR on 12/14/2016.
  */
 
 public class SqlContacts {
-
+    public static final String DATABASE_NAME="diabetesdb";
     /**
      * Constructor should be a private to prevent being initiated accidentally.
      */
@@ -18,15 +20,6 @@ public class SqlContacts {
 
     // SQL statements
 
-    /**
-     *
-     -- -----------------------------------------------------
-     -- Schema diabetesdb
-     -- -----------------------------------------------------
-     */
-    public static final String CREATE_SCHEMA=
-            "CREATE SCHEMA IF NOT EXISTS `diabetesdb` DEFAULT CHARACTER SET utf8 ;\n" +
-            "     USE `diabetesdb` ;";
 
 
     /**
@@ -36,21 +29,20 @@ public class SqlContacts {
      -- -----------------------------------------------------
      */
     public static final String STATEMENT_CREATE_TABLE_USERS=
-            "CREATE TABLE IF NOT EXISTS `diabetesdb`.`users` (\n" +
-            "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-            "  `fname` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  `lname` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  `phone_number` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  `email` VARCHAR(45) NOT NULL,\n" +
-            "  `password` VARCHAR(45) NOT NULL,\n" +
-            "  `admin` TINYINT(1) NULL DEFAULT NULL,\n" +
-            "  `type` TINYINT(1) NULL DEFAULT NULL,\n" +
-            "  `token` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  `creation_date` DATETIME NULL DEFAULT NULL,\n" +
-            "  `address` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  PRIMARY KEY (`id`))\n" +
-            "ENGINE = InnoDB\n" +
-            "DEFAULT CHARACTER SET = utf8;";
+            "CREATE TABLE IF NOT EXISTS "+User._USER_TABLE+ "(\n" +
+            "  "+ User._ID+ " INTEGER NOT NULL,\n" +
+            "  "+ User._FIRST_NAME+ " TEXT NULL DEFAULT NULL,\n" +
+            "  "+ User._LAST_NAME+ " TEXT NULL DEFAULT NULL,\n" +
+            "  "+ User._PHONE_NUMBER + " TEXT NULL DEFAULT NULL,\n" +
+            "  "+ User._EMAIL + " TEXT NOT NULL,\n" +
+            "  "+ User._PASSWORD + " TEXT NOT NULL,\n" +
+            "  "+ User._ADMIN + " INTEGER NULL DEFAULT NULL,\n" +
+            "  "+ User._TYPE + " INTEGER NULL DEFAULT NULL,\n" +
+            "  "+ User._TOKEN+ " TEXT NULL DEFAULT NULL,\n" +
+            "  "+ User._CREATION_DATE+ " TEXT DATETIME NULL DEFAULT NULL,\n" +
+            "  "+ User._ADDRESS+ " TEXT NULL DEFAULT NULL,\n" +
+            "  "+ User._BIRTH_DATE+ " TEXT NULL DEFAULT NULL,\n" +
+            "  PRIMARY KEY ("+User._ID+"))\n" ;
 
     /**
      *  Table `diabetesdb`.`appointments`

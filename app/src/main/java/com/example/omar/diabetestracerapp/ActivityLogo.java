@@ -6,13 +6,15 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.omar.diabetestracerapp.data_model.User;
+import com.example.omar.diabetestracerapp.database.DataSource;
 
 
 public class ActivityLogo extends AppCompatActivity {
     TextView tvTitle;
     ProgressBar pb;
-
+    DataSource dataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,15 +32,28 @@ public class ActivityLogo extends AppCompatActivity {
                 /**
                  * Check the connection and precondition for the application to run.
                  */
-               // tvTitle.setText("Checking internet Connection");
-               // b =isNetworkAvailable();
-               // tvTitle.setText("Checking internet Connection");
+
+                /**
+                 * Get User from dataBase
+                 */
             }
             @Override
             public void onFinish() {
+                dataSource = new DataSource(getBaseContext());
+                dataSource.open();
+                User user = dataSource.retrieveUserFromDataBase();
+                dataSource.close();
                 finish();
-                Intent intent = new Intent(getBaseContext(),ActivityIntro.class);
-                startActivity(intent);
+                if(user!=null){
+                    Intent intent = new Intent(getBaseContext(),ActivityLogin.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(getBaseContext(),ActivityIntro.class);
+                    startActivity(intent);
+                }
+
+
+
             }
         }.start();
 

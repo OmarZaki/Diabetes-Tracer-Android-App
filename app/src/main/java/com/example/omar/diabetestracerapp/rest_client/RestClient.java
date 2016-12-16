@@ -13,7 +13,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.omar.diabetestracerapp.ActivityLogin;
+import com.example.omar.diabetestracerapp.ActivityMain;
 import com.example.omar.diabetestracerapp.data_model.User;
+import com.example.omar.diabetestracerapp.database.DataSource;
 
 
 import org.json.JSONObject;
@@ -87,8 +89,9 @@ public class RestClient {
      * @param user
      * @return
      */
-    public void RegistrationRequest(final Activity activity, final User user) {
-        User RegisteredUser;
+    public void registrationRequest(final Activity activity, final User user) {
+
+
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(activity);
         String url = get_base_HTTPs_URL() + "/users/register";
@@ -97,9 +100,25 @@ public class RestClient {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Toast.makeText(activity.getBaseContext(), response.getString("email"), Toast.LENGTH_SHORT).show();
+                            if(response.has(User._ID)) {
+                                // Insert into database ;
+                                DataSource dataSource =new DataSource(activity);
+                                dataSource.open();
+                                dataSource.cleanTable(User._USER_TABLE); // users table should be cleaned before insert the new user.
 
-                            Intent intent = new Intent(activity.getBaseContext(), ActivityLogin.class);
+                                Log.i("TAG", response.toString());
+                                dataSource.insertUserToDataBase(User.convertJsonToUser(response.toString()));
+                                Log.i("TAG", "DATABASE HAS BEEN CREATED!");
+                                dataSource.close();
+
+                                Intent intent = new Intent(activity.getBaseContext(), ActivityLogin.class);
+                                intent.putExtra(User._USER_ONFO_PUT_EXTRA_STRING, response.toString());
+                                activity.startActivity(intent);
+
+                            }else{
+                                Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();
+
+                            }
 
 
                         } catch (Exception ex) {
@@ -119,11 +138,14 @@ public class RestClient {
     }
 
     /**
+     *
      * Include check if the user email is existed
      * @param activity
      * @param user
      */
-    public void Registration(final Activity activity, final User user) {
+    public void registration(final Activity activity, final User user) {
+        //  1: Request to check if the user is already exist.
+        //  2: Request to register new User.
 
         RequestQueue queue = Volley.newRequestQueue(activity);
         String url = get_base_HTTPs_URL() + "/users/IsEmailExist";
@@ -134,7 +156,7 @@ public class RestClient {
                         try {
 
                         if(!response.getBoolean("result")){
-                            RegistrationRequest(activity,user);
+                            registrationRequest(activity,user);
 
                         }else{
                             Toast.makeText(activity.getBaseContext(), "Email is already existed", Toast.LENGTH_SHORT).show();
@@ -157,4 +179,47 @@ public class RestClient {
 
     }
 
+    public void logInUser(final Activity activity, final User user){
+        // TODO send a log in request to the server to check if the user is registered.
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(activity);
+        String url = get_base_HTTPs_URL() + "/users/login";
+        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, User.toJsonObject(user),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(!response.has("result")) {
+                                // Insert into database ;
+                                DataSource dataSource =new DataSource(activity);
+//                                dataSource.open();
+//                                // clean all tables should be done when we log out
+//                                dataSource.cleanTable(User._USER_TABLE); // users table should be cleaned before insert the new user.
+//                                dataSource.insertUserToDataBase(User.convertJsonToUser(response.toString()));
+//                                dataSource.close();
+//
+                                Intent intent = new Intent(activity.getBaseContext(), ActivityMain.class);
+                                activity.startActivity(intent);
+
+                            }else{
+                                Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();
+
+                            }
+
+
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Log.i("ERROR",error.getLocalizedMessage());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(strReq);
+
+    }
 }
