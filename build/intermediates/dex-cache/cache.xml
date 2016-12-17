@@ -2,220 +2,211 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\design\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.0.1_577baa946985df4af1c5a98c72f3d47e4dc77ae9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.1_3469ec095ffccf76707a9b88589bd63e893998fd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="48ea3a4c6763426a8bdc141c0d0b81fe2547feca">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5f3e5aa4fa4c5cdd4a0413ca3436ced4bd192085\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.0.1_eecbc6e75dc0f51af7c57d5e8ca074dc722f93cd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.0.1_693e84189c6a0c08405da72d107ca11ab98943a3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.volley\volley\1.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.volley-volley-1.0.0_2bcdaa0fe8aba43cb827bad7555f9ee770143431\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
         sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.0.1_ca08a20c3b3ae8189b1c6782c71a572d8d48e151\classes.dex" />
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.0.1_366f1deee7beb878909b2afd32c813dd96a25bf2.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\.gradle\caches\modules-2\files-2.1\javax.activation\activation\1.1\e6cb541461c2834bdea3eb920f1884d1eb508b50\activation-1.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="e6cb541461c2834bdea3eb920f1884d1eb508b50">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\activation-1.1_c17733f838a66c8a9bcef4b57e4210932e99ee3a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_c00e1fa4d5725e67234cf42261865e0de61e8c1a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.1_e1cdc816b58f9dad68d172aca33a95b0f3d4c269\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\.gradle\caches\modules-2\files-2.1\javax.mail\mail\1.4\1aa1579ae5ecd41920c4f355b0a9ef40b68315dd\mail-1.4.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="1aa1579ae5ecd41920c4f355b0a9ef40b68315dd">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\mail-1.4_ca612862af873c4997e205f732c34373653db3fc\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.1_37b32de7612716892c2a13421206df676ee5ac66\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_91a7383e7bd73420d9888f651590be144a65e819\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.0.1_00cddf2ded31460472c2784ebca32f7bc4c97e6c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_9d3f1cedac046424ab67fcf3d397ee22358c0d8a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.1\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.1\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
         sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.0.1_9efa68c0b259804abc12f12bbde4131ba8c2d1b0\classes.dex" />
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.0.1_41a44d27dda8fee8f8260aac872f60ef7a242093.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
-        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.0.1_32418a8a972c7ffad2fcd922e08a10c9b4f8876d\classes.dex" />
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.0.1_f4e9167d945a6465c305687a430f409e5ab552de.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.volley\volley\1.0.0\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
-        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.0.1_af8add21d2c76c3d32e118bf7574deae4c036767\classes.dex" />
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.volley-volley-1.0.0_95bdc1686d08a5adfddcbfcdbef95fdd7f776060.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
-        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_83da08c568377173cf5c3a59e8da3a8a438edb65\classes.dex" />
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\support-annotations-25.0.1_f806e7f1c9521601d5185bda400639815553d072.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
         sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_16f909033df47f6899ee52440bf69ce638516d72\classes.dex" />
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.0.1_84aa85e3e089785a3ff10cfed44a4df4413d7240.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.0.1_1280d6beee657f8253fbc43908fac5e340ec0b11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
         sha1="f83b00041ecfba705603fec40363416c7de69719">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_b8b716abd2a5ee7a26ba32aa36c1e687fa1e59a7\classes.dex" />
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_4ac8f66f702e7c6c8cf4a34cb9670975c28b774e.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
-        sha1="921927eb07bf4cba0e3e74bd10fcdd685ee4b051">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_ca6ff0c93b3de2663e9e529457b5f4eaeea94ea9\classes.dex" />
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.0.1_97f74756c4263c13767b04773d0bd3d4f6828fa5.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_e20c475def111f614c8c954c04326d094f7965ae.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.0.1_eeea031652518bc6202308449e851e5ea39c80b9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.github.clans\fab\1.6.2\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="7e6a161b3796c15fe00755ce47e03067e568ecc4">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.github.clans-fab-1.6.2_5ed998c2a030fa6a3445c00688b3579c9122124b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\design\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.0.1_636e484dce858402648f5236020c7d079644e8f9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.0.1_b804a60c118a4d05c303fd2d61f109ea5f555021.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.0.1_352b92837b6b33bab931e691942807486505b704.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.0.1_e8741fbe3abaf219d56e7236063696b314fc3e31.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.0.1_7ad8e48c9f17534f6acdb96a42ac62a45cfcaf28.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
         sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_4fb1df7878e512250f7b523c14f6a03fd25da673\classes.dex" />
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_ede1ef26dacc2ca80298f41f29b1307e10dbbcf9.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\OMAR\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.0\c4ba5371a29ac9b2ad6129b1d39ea38750043eff\gson-2.8.0.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_062d5076ab3eacdb68fb27bdd6476730db51bac7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.0\c4ba5371a29ac9b2ad6129b1d39ea38750043eff\gson-2.8.0.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.1"
         sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
-        <dex dex="C:\Users\OMAR\AndroidStudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.8.0_15ed86421bfb1ed4991db92deb634ed70f202e49\classes.dex" />
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\gson-2.8.0_04577784849f07a8fb4525fdcca6decac52af8a9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\javax.activation\activation\1.1\e6cb541461c2834bdea3eb920f1884d1eb508b50\activation-1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="e6cb541461c2834bdea3eb920f1884d1eb508b50">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\activation-1.1_1500d5c5dae9f40687db268448883b4dfa46afd3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_8c2fa2dd6a26e38e45d1ff9d1129093d4dd0c8f2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\javax.mail\mail\1.4\1aa1579ae5ecd41920c4f355b0a9ef40b68315dd\mail-1.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="1aa1579ae5ecd41920c4f355b0a9ef40b68315dd">
+        <dex dex="C:\Users\Pedro\StudioProjects\Diabetes-Tracer-Android-App\app\build\intermediates\pre-dexed\debug\mail-1.4_273c4a0dee13419bfceacb1ff170862d9b479852.jar" />
     </item>
 
 </items>
