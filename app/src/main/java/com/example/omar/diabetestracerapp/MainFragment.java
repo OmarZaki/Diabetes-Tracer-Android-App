@@ -1,6 +1,7 @@
 package com.example.omar.diabetestracerapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -30,8 +31,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     FloatingActionMenu materialDesignFAM;
-    com.github.clans.fab.FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3,
-            floatingActionButton4, floatingActionButton5;
+    com.github.clans.fab.FloatingActionButton sendInsulinActionButton, sendBloodSugarActionButton, sendHeartRateActionButton,
+            sendMealActionButton, sendMedicationActionButton;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -88,38 +89,40 @@ public class MainFragment extends android.support.v4.app.Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         materialDesignFAM = (FloatingActionMenu) getActivity().findViewById(R.id.material_design_android_floating_action_menu);
-        floatingActionButton1 = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item1);
-        floatingActionButton2 = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item2);
-        floatingActionButton3 = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item3);
-        floatingActionButton4 = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item4);
-        floatingActionButton5 = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item5);
+        sendInsulinActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item1);
+        sendBloodSugarActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item2);
+        sendHeartRateActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item3);
+        sendMealActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item4);
+        sendMedicationActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item5);
 
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+        sendInsulinActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu first item clicked
                 /*Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);*/
             }
         });
-        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+        sendBloodSugarActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu second item clicked
 
             }
         });
-        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+        sendHeartRateActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu third item clicked
+                Intent intent = new Intent(v.getContext(), SendHeartRateActivity.class);
+                startActivity(intent);
 
             }
         });
-        floatingActionButton4.setOnClickListener(new View.OnClickListener() {
+        sendMealActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu fourth item clicked
 
             }
         });
-        floatingActionButton5.setOnClickListener(new View.OnClickListener() {
+        sendMedicationActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu fifth item clicked
 

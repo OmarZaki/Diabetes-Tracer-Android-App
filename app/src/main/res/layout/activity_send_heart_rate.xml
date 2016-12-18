@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_send_heart_rate"
     android:layout_width="match_parent"
@@ -9,5 +10,67 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.omar.diabetestracerapp.SendHeartRateActivity">
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_clock"
+        android:id="@+id/HeartRate_iconTime"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="2-Dec-2016"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/HeartRate_iconTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:id="@+id/HeartRate_fieldDate"
+        android:textSize="36sp" />
+
+    <TextView
+        android:layout_below="@+id/HeartRate_fieldDate"
+        android:text="20:00 PM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/HeartRate_fieldTime"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/HeartRate_input"
+        android:text="70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/HeartRate_iconHeart"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:textSize="36sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="bpm"
+        android:layout_below="@id/HeartRate_input"
+        android:textSize="24sp"/>
+
+    <Button
+        android:text="Send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/HeartRate_buttonSend"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_dose"
+        android:id="@+id/HeartRate_iconHeart"
+        android:layout_marginTop="46dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/HeartRate_fieldDate" />
 
 </RelativeLayout>
