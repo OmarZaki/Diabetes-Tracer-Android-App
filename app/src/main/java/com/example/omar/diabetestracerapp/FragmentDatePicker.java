@@ -23,7 +23,7 @@ public class FragmentDatePicker extends DialogFragment{
     String selectedDate="";
     DatePicker datePicker ;
     EditText etDateText;
-
+    int s =0;
 
 
 
