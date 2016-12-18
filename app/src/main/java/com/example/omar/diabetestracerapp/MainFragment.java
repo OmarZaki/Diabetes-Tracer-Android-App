@@ -1,4 +1,4 @@
-package com.example.omar.diabetestracerapp.fragments;
+package com.example.omar.diabetestracerapp;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.omar.diabetestracerapp.R;
 import com.github.clans.fab.FloatingActionMenu;
 
 /**

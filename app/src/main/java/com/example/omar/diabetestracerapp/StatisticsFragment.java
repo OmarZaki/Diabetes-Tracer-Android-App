@@ -1,4 +1,4 @@
-package com.example.omar.diabetestracerapp.fragments;
+package com.example.omar.diabetestracerapp;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,17 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.omar.diabetestracerapp.R;
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ScheduleFragment.OnFragmentInteractionListener} interface
+ * {@link StatisticsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ScheduleFragment#newInstance} factory method to
+ * Use the {@link StatisticsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ScheduleFragment extends Fragment {
+public class StatisticsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +28,7 @@ public class ScheduleFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public ScheduleFragment() {
+    public StatisticsFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +38,11 @@ public class ScheduleFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ScheduleFragment.
+     * @return A new instance of fragment StatisticsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ScheduleFragment newInstance(String param1, String param2) {
-        ScheduleFragment fragment = new ScheduleFragment();
+    public static StatisticsFragment newInstance(String param1, String param2) {
+        StatisticsFragment fragment = new StatisticsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +63,7 @@ public class ScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+        return inflater.inflate(R.layout.fragment_statistics, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

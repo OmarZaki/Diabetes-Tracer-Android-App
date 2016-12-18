@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.omar.diabetestracerapp.fragments.AskDoctorFragment;
-import com.example.omar.diabetestracerapp.fragments.MainFragment;
-import com.example.omar.diabetestracerapp.fragments.ScheduleFragment;
-import com.example.omar.diabetestracerapp.fragments.StatisticsFragment;
+import com.example.omar.diabetestracerapp.AskDoctorFragment;
+import com.example.omar.diabetestracerapp.MainFragment;
+import com.example.omar.diabetestracerapp.ScheduleFragment;
+import com.example.omar.diabetestracerapp.StatisticsFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
