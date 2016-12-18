@@ -46,13 +46,4 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="time_placeholder">Placeholder Text</string>
     <string name="next_dose_text">until next dose</string>
-
-    <!-- Text for send insulin dose activity -->
-    <string name="insulin_dose_quantity_dialog">Choose Quantity of Dose! </string>
-    <string name="insulin_dose_quantity_dialog_title">Dose Quantity ! </string>
-    <string name="select">Select</string>
-    <string name="cancel">Cancel</string>
-    <string name="insulin_dose_unit">ML</string>
-    <string name="setQuantityDose">Click on Icon to add Quantity</string>
-
 </resources>

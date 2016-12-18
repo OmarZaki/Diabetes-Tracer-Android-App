@@ -14,6 +14,8 @@
         android:scrollbars="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabTextColor="#ffffff"
+        app:tabSelectedTextColor="#ffffff"
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways" />
 

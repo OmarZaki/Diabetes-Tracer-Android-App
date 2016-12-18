@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_send_meal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.omar.diabetestracerapp.SendMealActivity">
+
+    <ScrollView
+        android:id="@+id/Meal_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/ic_clock"
+                android:id="@+id/Meal_iconTime"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="@string/placeholder_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Meal_iconTime"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="11dp"
+                android:id="@+id/Meal_fieldDate"
+                android:textSize="36sp" />
+
+            <TextView
+                android:layout_below="@+id/Meal_fieldDate"
+                android:text="@string/placeholder_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Meal_fieldTime"
+                android:textSize="24sp"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/ic_meal"
+                android:id="@+id/Meal_iconMeal"
+                android:layout_marginTop="23dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/Meal_fieldTime" />
+
+            <LinearLayout
+                android:id="@+id/typeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Meal_iconMeal"
+                android:layout_centerHorizontal="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type"
+                    android:textSize="24sp"/>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:hint="@string/meal_type_hint"
+                    android:textSize="24sp"
+                    android:maxLines="1"
+                    android:maxLength="16"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/Meal_fieldDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/typeLayout"
+                android:text="@string/description"
+                android:textSize="24sp"/>
+            <EditText
+                android:id="@+id/Meal_inputDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Meal_fieldDescription"
+                android:layout_marginStart="10dp"
+                android:hint="@string/meal_description_placeholder"
+                android:textSize="24sp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/Meal_inputDescription">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_take_photo"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_send"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

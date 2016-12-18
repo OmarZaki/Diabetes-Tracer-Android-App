@@ -35,7 +35,7 @@
         fab:menu_colorNormal="#000000"
         fab:menu_colorPressed="#333333"
         fab:menu_colorRipple="#99d4d4d4"
-        fab:menu_fab_label="Floating Action Menu"
+        fab:menu_fab_label="Submissions"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
         fab:menu_labels_colorNormal="#333"
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_placeholder"
-            fab:fab_label="Menu Item 1"
+            fab:fab_label="Insulin Dose"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_placeholder"
-            fab:fab_label="Menu Item 2"
+            fab:fab_label="Blood Sugar"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_placeholder"
-            fab:fab_label="Menu Item 3"
+            fab:fab_label="Send Heart Rate"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_placeholder"
-            fab:fab_label="Menu Item 4"
+            fab:fab_label="Send Meal"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_placeholder"
-            fab:fab_label="Menu Item 5"
+            fab:fab_label="Medication"
             fab:fab_size="mini" />
     </com.github.clans.fab.FloatingActionMenu>
 
