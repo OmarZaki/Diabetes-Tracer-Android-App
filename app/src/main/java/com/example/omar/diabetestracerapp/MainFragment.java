@@ -119,6 +119,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
         sendMealActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu fourth item clicked
+                Intent intent = new Intent(v.getContext(), SendMealActivity.class);
+                startActivity(intent);
 
             }
         });

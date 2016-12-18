@@ -51,4 +51,9 @@
     <string name="heart_rate">Heart Rate</string>
     <string name="bpm">bpm</string>
     <string name="button_send">Send</string>
+    <string name="type">Type:</string>
+    <string name="meal_type_hint">Breakfast</string>
+    <string name="description">Description:</string>
+    <string name="meal_description_placeholder">2 scrambled eggs\n1 orange juice</string>
+    <string name="button_take_photo">Take Photo</string>
 </resources>
