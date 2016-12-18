@@ -13,4 +13,11 @@
     tools:context="com.example.omar.diabetestracerapp.ActivityMain"
     tools:showIn="@layout/app_bar_activity_main">
 
+    <Button
+        android:text="Send Insulin Dose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnTest" />
 </RelativeLayout>
