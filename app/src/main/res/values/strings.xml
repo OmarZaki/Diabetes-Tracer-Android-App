@@ -54,4 +54,12 @@
     <string name="meal_description_placeholder">2 scrambled eggs\\\\n1 orange juice</string>
     <string name="button_send">Send</string>
     <string name="button_take_photo">Take Photo</string>
+    <string name="heart_rate">0</string>
+    <string name="bpm">bpm</string>
+    <string name="setQuantityDose">Click on Icon to add quantity</string>
+    <string name="insulin_dose_quantity_dialog">Dose Quantity</string>
+    <string name="insulin_dose_quantity_dialog_title">Choose Quanity of Dose</string>
+    <string name="select">Select</string>
+    <string name="cancel">Cancel</string>
+    <string name="insulin_dose_unit">ML</string>
 </resources>

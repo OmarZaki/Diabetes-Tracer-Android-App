@@ -39,6 +39,7 @@ public class FragmentAddQuantityField extends DialogFragment{
         builder.setMessage(R.string.insulin_dose_quantity_dialog)
                 .setTitle(R.string.insulin_dose_quantity_dialog_title);
 
+
         builder.setPositiveButton(R.string.select, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
