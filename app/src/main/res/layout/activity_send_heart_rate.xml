@@ -39,22 +39,34 @@
         android:textSize="24sp"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:id="@+id/HeartRate_input"
-        android:text="70"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_heartbeat"
+        android:id="@+id/HeartRate_iconHeart"
+        android:layout_marginTop="46dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/HeartRate_fieldTime" />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/HeartRate_iconHeart"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
-        android:textSize="36sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="bpm"
-        android:layout_below="@id/HeartRate_input"
-        android:textSize="24sp"/>
+        android:layout_below="@+id/HeartRate_iconHeart">
+        <EditText
+            android:id="@+id/HeartRate_input"
+            android:hint="0"
+            android:maxLines="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bpm"
+            android:textSize="24sp"/>
+    </LinearLayout>
 
     <Button
         android:text="Send"
@@ -63,14 +75,5 @@
         android:id="@+id/HeartRate_buttonSend"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_dose"
-        android:id="@+id/HeartRate_iconHeart"
-        android:layout_marginTop="46dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/HeartRate_fieldDate" />
 
 </RelativeLayout>
