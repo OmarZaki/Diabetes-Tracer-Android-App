@@ -33,7 +33,8 @@
         <activity android:name=".SendInsulinDoseActivity" />
         <activity android:name=".SendMedicationActivity" />
         <activity android:name=".SendHeartRateActivity" />
-        <activity android:name=".SendBloodSugarActivity"></activity>
+        <activity android:name=".SendBloodSugarActivity" />
+        <activity android:name=".SendMealActivity"></activity>
     </application>
 
 </manifest>
