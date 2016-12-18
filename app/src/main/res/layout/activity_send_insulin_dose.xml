@@ -9,60 +9,69 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.omar.diabetestracerapp.SendInsulinDoseActivity">
+    tools:context="com.example.omar.diabetestracerapp.ActivitySendInsulinDose">
 
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_clock"
-        android:id="@+id/ivIcon"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="2-Dec-2016"
+        android:id="@+id/tvDateSendInsulinDose"
+        android:text="00-XXX-0000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivIcon"
+        android:layout_below="@+id/ivIconDateSendInsulinDose"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
-        android:id="@+id/textView3"
         android:textSize="36sp" />
 
     <TextView
-        android:layout_below="@+id/textView3"
+        android:id="@+id/tvTimeSendInsulinDose"
+        android:layout_below="@+id/tvDateSendInsulinDose"
         android:text="20:00 PM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvInsulinDoseDate"
         android:textSize="24sp"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/tvDoseQuantity"
-        android:text="300 ML"
+        android:id="@+id/tvDoseQuantitySendInsulinDose"
+        android:text="00ML"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivIconDose"
+        android:layout_below="@+id/ivIconDoseSendInsulinDose"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
         android:textSize="36sp" />
 
     <Button
+        android:id="@+id/btnSendInsulinDose"
+        android:onClick="sendOnClick"
         android:text="send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSendInsulinDose"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <ImageView
+        android:id="@+id/ivIconDoseSendInsulinDose"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:srcCompat="@drawable/ic_dose"
-        android:id="@+id/ivIconDose"
         android:layout_marginTop="46dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tvInsulinDoseDate" />
+        android:layout_below="@+id/tvTimeSendInsulinDose" />
+
+    <ImageView
+        android:id="@+id/ivIconDateSendInsulinDose"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_clock"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/ivIconDoseSendInsulinDose" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivIconDoseSendInsulinDose"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView2"
+        android:text="@string/setQuantityDose" />
 </RelativeLayout>

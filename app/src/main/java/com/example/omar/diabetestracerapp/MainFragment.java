@@ -1,6 +1,7 @@
 package com.example.omar.diabetestracerapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -96,9 +97,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //TODO something when floating action menu first item clicked
-                /*Intent intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(getActivity(),ActivitySendInsulinDose.class);
+                startActivity(intent);
             }
         });
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
