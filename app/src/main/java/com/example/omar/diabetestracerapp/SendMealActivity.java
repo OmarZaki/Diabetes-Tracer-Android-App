@@ -12,16 +12,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.omar.diabetestracerapp.data_model.User;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class SendMealActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
     private static final int REQ_CODE_TAKE_PICTURE = 2;
+    private TextView tvDate;
+    private TextView tvTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_meal);
+        tvDate = (TextView) findViewById(R.id.Meal_fieldDate);
+        tvTime = (TextView) findViewById(R.id.Meal_fieldTime);
+
+        /**
+         * To set date and the time
+         */
+        Date currentDate = new Date();
+        String currentDateString = User.ConvertDateToString(currentDate);
+        tvDate.setText(currentDateString);
+        String time = getCurrentTime(currentDate);
+        tvTime.setText(time);
     }
 
     public void takePhoto(View v){
@@ -75,4 +95,13 @@ public class SendMealActivity extends AppCompatActivity {
             imageView.setImageBitmap(imageBitmap);
         }
     }
+
+    private String getCurrentTime(Date currentDate) {
+        Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+        calendar.setTime(currentDate);   // assigns calendar to given date
+        long hours = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
+        long minutes = calendar.get(Calendar.MINUTE);        // get current format;
+        return hours+":"+ minutes;
+    }
+
 }
