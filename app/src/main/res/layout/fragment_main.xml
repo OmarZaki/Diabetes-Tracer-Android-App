@@ -94,22 +94,22 @@
     </com.github.clans.fab.FloatingActionMenu>
 
     <TextView
-        android:text="--H:--M"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textSize="100sp"
-        android:layout_marginTop="158dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:text="00-00-000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:id="@+id/textView5" />
+
+    <TextView
+        android:text="--H:--M"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="90sp"
+        android:layout_marginTop="164dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

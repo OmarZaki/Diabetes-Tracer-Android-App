@@ -22,16 +22,19 @@ import java.util.GregorianCalendar;
  * Activity Main Code
  */
 public class ActivitySendInsulinDose extends AppCompatActivity {
+    /** ----> Back-end instances <--- **/
+    DataSource dataSource;
+    RestClient restClient;
+    /** -----> end <-------*/
+
+
     ImageView ivIconDateSendInsulinDose;
     ImageView ivIconDoseSendInsulinDose;
     TextView tvDate;
     TextView tvTime;
     TextView tvQuantity;
     Button btnSend;
-    /** ----> Back-end instances <--- **/
-    DataSource dataSource;
-    RestClient restClient;
-    /** -----> end <-------*/
+
 
 
     @Override
@@ -47,22 +50,19 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
          * Link user interface elements
          *
          */
-        ivIconDateSendInsulinDose = (ImageView) findViewById(R.id.ivIconDateSendInsulinDose);
-        ivIconDoseSendInsulinDose = (ImageView) findViewById(R.id.ivIconDoseSendInsulinDose);
-        tvDate= (TextView) findViewById(R.id.tvDateSendInsulinDose);
-        tvTime= (TextView) findViewById(R.id.tvTimeSendInsulinDose);
-        tvQuantity=(TextView) findViewById(R.id.tvDoseQuantitySendInsulinDose);
-        btnSend = (Button) findViewById(R.id.btnSendInsulinDose);
-
+        setupUserInterfaceElements();
         /**
          * To set date and the time
          *
          */
+
         Date currentDate = new Date();
+        InsulinDose  currentInsulinDose= dataSource.getCurrentInsulinDose(currentDate);
         String currentDateString = User.ConvertDateToString(currentDate);
         tvDate.setText(currentDateString);
         String time = getCurrentTime(currentDate);
         tvTime.setText(time);
+
         /**
          * Set the onClick
          */
@@ -74,7 +74,15 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
             }
         });
     }
+    private void setupUserInterfaceElements(){
+        ivIconDateSendInsulinDose = (ImageView) findViewById(R.id.ivIconDateSendInsulinDose);
+        ivIconDoseSendInsulinDose = (ImageView) findViewById(R.id.ivIconDoseSendInsulinDose);
+        tvDate= (TextView) findViewById(R.id.tvDateSendInsulinDose);
+        tvTime= (TextView) findViewById(R.id.tvTimeSendInsulinDose);
+        tvQuantity=(TextView) findViewById(R.id.tvDoseQuantitySendInsulinDose);
+        btnSend = (Button) findViewById(R.id.btnSendInsulinDose);
 
+    }
     private String getCurrentTime(Date currentDate) {
 
         Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
