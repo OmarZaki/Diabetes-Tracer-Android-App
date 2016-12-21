@@ -41,7 +41,8 @@ public class User {
     public final static String _BIRTH_DATE= "birth_date";
     public final static String _ADDRESS = "address";
 
-    public static String[] USER_COLS = {User._FIRST_NAME,
+    public static String[] USER_COLS = {User._ID,
+            User._FIRST_NAME,
             User._LAST_NAME,
             User._EMAIL,
             User._PASSWORD,

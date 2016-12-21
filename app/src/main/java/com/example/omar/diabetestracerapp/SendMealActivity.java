@@ -15,11 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.User;
+import com.example.omar.diabetestracerapp.rest_client.RestClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,10 +35,14 @@ public class SendMealActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST = 1;
     private static final int REQ_CODE_TAKE_PICTURE = 2;
+    private Date currentDate;
     private TextView tvDate;
     private TextView tvTime;
+    private EditText etTitle;
+    private EditText etDescription;
     private ImageView imgTakePhoto;
-    String mCurrentPhotoPath;
+    private String mCurrentPhotoPath;
+    private boolean photoTaken = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +50,14 @@ public class SendMealActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_meal);
         tvDate = (TextView) findViewById(R.id.Meal_fieldDate);
         tvTime = (TextView) findViewById(R.id.Meal_fieldTime);
+        etTitle = (EditText) findViewById(R.id.Meal_inputTitle);
+        etDescription = (EditText) findViewById(R.id.Meal_inputDescription);
         imgTakePhoto = (ImageView) findViewById(R.id.Meal_iconMeal);
 
         /**
          * To set date and the time
          */
-        Date currentDate = new Date();
+        currentDate = new Date();
         String currentDateString = User.ConvertDateToString(currentDate);
         tvDate.setText(currentDateString);
         String time = getCurrentTime(currentDate);
@@ -82,10 +91,6 @@ public class SendMealActivity extends AppCompatActivity {
         }
     }
 
-    public void onClick(View v){
-        takePhoto();
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -113,6 +118,7 @@ public class SendMealActivity extends AppCompatActivity {
         if (requestCode == REQ_CODE_TAKE_PICTURE && resultCode == RESULT_OK) {
             ImageView imageView = (ImageView) findViewById(R.id.Meal_iconMeal);
             imageView.setImageURI(Uri.parse(mCurrentPhotoPath));
+            photoTaken = true;
         }
     }
 
@@ -140,7 +146,7 @@ public class SendMealActivity extends AppCompatActivity {
         return image;
     }
 
-    private void takePhoto(){
+    public void takePhoto(View v){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -174,4 +180,20 @@ public class SendMealActivity extends AppCompatActivity {
                 .show();
     }
 
+
+    public void sendOnClick(View v){
+        Meal meal = new Meal();
+        meal.setDate_time(currentDate);
+        String title = etTitle.getText().toString();
+        String description = etDescription.getText().toString();
+        if(!title.equals("") && !description.equals("") && photoTaken){
+            meal.setType(title);
+            meal.setDescription(description);
+            meal.setImage(mCurrentPhotoPath);
+            RestClient client = new RestClient(this);
+            client.sendMeal(meal);
+        } else {
+            Toast.makeText(this, "Fill all required fields.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

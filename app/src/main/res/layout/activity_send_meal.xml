@@ -53,7 +53,7 @@
                 android:layout_marginTop="23dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/Meal_fieldTime"
-                android:onClick="onClick"/>
+                android:onClick="takePhoto"/>
 
             <LinearLayout
                 android:id="@+id/typeLayout"
@@ -67,6 +67,7 @@
                     android:text="@string/type"
                     android:textSize="24sp"/>
                 <EditText
+                    android:id="@+id/Meal_inputTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -99,7 +100,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
-                    android:text="@string/button_send"/>
+                    android:text="@string/button_send"
+                    android:onClick="sendOnClick"/>
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
