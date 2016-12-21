@@ -196,9 +196,11 @@ public class RestClient {
                                     User userfound = User.convertJsonToUser(response.toString());
                                     dataSource.insertUserToDataBase(userfound);
                                 }
+                                activity.finish();
                                 Intent intent = new Intent(activity.getBaseContext(), ActivityMain.class);
                                 intent.putExtra(ActivityLogin.LOGIN_INDICATOR, true);
                                 activity.startActivity(intent);
+
 
                             } else {
                                 Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();

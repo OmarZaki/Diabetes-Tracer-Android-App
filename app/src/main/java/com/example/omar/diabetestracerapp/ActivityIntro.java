@@ -27,6 +27,7 @@ public class ActivityIntro extends AppCompatActivity {
         btnRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent intent = new Intent(getBaseContext(),ActivityRegistration.class);
                 startActivity(intent);
             }
@@ -35,6 +36,7 @@ public class ActivityIntro extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent intent = new Intent(getBaseContext(),ActivityLogin.class);
                 startActivity(intent);
             }

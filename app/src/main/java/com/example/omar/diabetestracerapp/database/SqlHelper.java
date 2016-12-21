@@ -25,7 +25,6 @@ public class SqlHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_USERS);
         sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_INSULIN_DOSE);
-        Log.i("DATABASE", "tables  is crated! ");
     }
 
     @Override
@@ -36,6 +35,7 @@ public class SqlHelper extends SQLiteOpenHelper {
     @Override
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
+        onCreate(db);
     }
 
     @Override

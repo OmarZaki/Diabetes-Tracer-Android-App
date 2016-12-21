@@ -165,6 +165,7 @@ public class ActivityMain extends AppCompatActivity
 
         } else if (id == R.id.nav_logout) {
             // clean the database ;
+            finish();
             dataSource.cleanTables();
             Intent LogoutIntent = new Intent(getBaseContext(), ActivityIntro.class);
             startActivity(LogoutIntent);
