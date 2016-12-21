@@ -35,7 +35,6 @@ public class SqlHelper extends SQLiteOpenHelper {
     @Override
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
-        onCreate(db);
     }
 
     @Override
