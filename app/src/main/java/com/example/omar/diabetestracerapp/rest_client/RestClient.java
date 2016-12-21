@@ -2,10 +2,6 @@ package com.example.omar.diabetestracerapp.rest_client;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,34 +9,21 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.omar.diabetestracerapp.ActivityLogin;
 import com.example.omar.diabetestracerapp.ActivityMain;
-import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
+import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -52,8 +35,8 @@ import java.util.List;
  * http://localhost:8080/ServerApp/app/users/register
  */
 public class RestClient {
-    Activity activity;
-    DataSource dataSource;
+    private Activity activity;
+    private DataSource dataSource;
 
     /**
      * Empty Constructor
@@ -68,10 +51,10 @@ public class RestClient {
      * Constants String
      * http://10.0.2.2:8080/ServerApp/app/
      */
-    static final String _LOCAL_HOST_IP = "10.0.2.2";
-    static final String _HTTP = "http";
-    static final String _HTTP_PORT = "8080";
-    static final String _BASE_APP_NAME = "ServerApp/app";
+    private static final String _LOCAL_HOST_IP = "10.0.2.2";
+    private static final String _HTTP = "http";
+    private static final String _HTTP_PORT = "8080";
+    private static final String _BASE_APP_NAME = "ServerApp/app";
 
     /**
      * build the bas Https url
@@ -115,7 +98,7 @@ public class RestClient {
      * @param user
      * @return
      */
-    public void registrationRequest(final User user) {
+    private void registrationRequest(final User user) {
 
 
         // Instantiate the RequestQueue.
@@ -234,7 +217,7 @@ public class RestClient {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(activity.getBaseContext(), error.getMessage().toString(), Toast.LENGTH_SHORT);
+                Toast.makeText(activity.getBaseContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -336,47 +319,25 @@ public class RestClient {
     }
 
     public void sendMeal(final Meal meal){
-        // TODO send a log in request to the server to check if the user is registered.
-        // Instantiate the RequestQueue.
-        Log.d("[textPic","Getting ready to explode");
         DataSource datasource = new DataSource(this.activity);
         RequestQueue queue = Volley.newRequestQueue(this.activity);
         String url = get_base_HTTPs_URL() + "/users/meal";
         String filepath = meal.getImage();
-        Bitmap bmp = BitmapFactory.decodeFile(meal.getImage());
-        File f = new File(filepath);
-        int size = (int) f.length();
-        byte[] bytes = new byte[size];
         try {
-            BufferedInputStream buf = new BufferedInputStream(new FileInputStream(f));
-            buf.read(bytes, 0, bytes.length);
-            buf.close();
-            meal.setImage(Base64.encodeToString(bytes,Base64.NO_WRAP));
+            meal.encodeImageToBase64String();
             User user = datasource.retrieveUserFromDataBase();
             meal.setUsers_id(user.getId());
-            Gson gson = new Gson();
             //TODO: Send user for authentication
-            JSONObject json = new JSONObject(gson.toJson(meal));
-            meal.setImage(filepath);
-            JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, json,
+            JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, Meal.toJSONObject(meal),
             new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
                         if(response.has("result")) {
-                            //TODO:  Insert into database ;
                             DataSource dataSource =new DataSource(activity);
                             dataSource.insertMealToDataBase(meal);
                             Toast.makeText(activity.getBaseContext(), "Meal sent!", Toast.LENGTH_LONG).show();
                             activity.finish();
-            //                                dataSource.open();
-            //                                // clean all tables should be done when we log out
-            //                                dataSource.cleanTable(User._USER_TABLE); // users table should be cleaned before insert the new user.
-            //                                dataSource.insertUserToDataBase(User.convertJsonToUser(response.toString()));
-            //                                dataSource.close();
-            //
-
-
                         }else{
                             Toast.makeText(activity.getBaseContext(), "Sending Meal failed", Toast.LENGTH_SHORT).show();
 
@@ -391,29 +352,16 @@ public class RestClient {
             }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-            // Log.i("ERROR",error.getLocalizedMessage());
+                Log.i("ERROR",error.getLocalizedMessage());
             }
             });
 
             // Add the request to the RequestQueue.
+            meal.setImage(filepath);
             queue.add(strReq);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            //TODO: Remove this log
-            Log.e("[KBM]","IT BLEW UP SON");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
     }
 
 }

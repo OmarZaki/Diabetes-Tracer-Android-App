@@ -1,11 +1,19 @@
 package com.example.omar.diabetestracerapp.data_model;
 
 import android.content.ContentValues;
+import android.util.Base64;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -106,8 +114,22 @@ public class Meal {
 		Gson gson =new GsonBuilder()
 				.setDateFormat("yyyy-MM-dd hh:mm:ss.S")
 				.create();
-		ArrayList<Meal> mealsAsString = gson.fromJson(meals ,new TypeToken<ArrayList<Meal>>(){}.getType());
-		return mealsAsString;
+        return gson.fromJson(meals ,new TypeToken<ArrayList<Meal>>(){}.getType());
 	}
+
+    public static JSONObject toJSONObject(Meal meal) throws JSONException {
+        Gson gson = new Gson();
+        return new JSONObject(gson.toJson(meal));
+    }
+
+    public void encodeImageToBase64String() throws IOException {
+        File f = new File(this.image);
+        int size = (int) f.length();
+        byte[] bytes = new byte[size];
+        BufferedInputStream buf = new BufferedInputStream(new FileInputStream(f));
+        buf.read(bytes, 0, bytes.length);
+        buf.close();
+        this.image = Base64.encodeToString(bytes,Base64.NO_WRAP);
+    }
 
 }
