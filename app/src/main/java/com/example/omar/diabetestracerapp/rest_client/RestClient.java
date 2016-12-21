@@ -2,6 +2,10 @@ package com.example.omar.diabetestracerapp.rest_client;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,14 +19,22 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.omar.diabetestracerapp.ActivityLogin;
 import com.example.omar.diabetestracerapp.ActivityMain;
+import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
-import com.google.gson.JsonArray;
 
 
-import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -298,4 +310,83 @@ public class RestClient {
 
 
     }
+
+    public void sendMeal(final Meal meal){
+        // TODO send a log in request to the server to check if the user is registered.
+        // Instantiate the RequestQueue.
+        Log.d("[textPic","Getting ready to explode");
+        DataSource datasource = new DataSource(this.activity);
+        RequestQueue queue = Volley.newRequestQueue(this.activity);
+        String url = get_base_HTTPs_URL() + "/users/meal";
+        Bitmap bmp = BitmapFactory.decodeFile(meal.getImage());
+        File f = new File(meal.getImage());
+        int size = (int) f.length();
+        byte[] bytes = new byte[size];
+        try {
+            BufferedInputStream buf = new BufferedInputStream(new FileInputStream(f));
+            buf.read(bytes, 0, bytes.length);
+            buf.close();
+            meal.setImage(Base64.encodeToString(bytes,Base64.NO_WRAP));
+            User user = datasource.retrieveUserFromDataBase();
+            meal.setUsers_id(user.getId());
+            Gson gson = new Gson();
+            //TODO: Send user for authentication
+            JSONObject json = new JSONObject(gson.toJson(meal));;
+            JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, json,
+            new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if(response.has("result")) {
+                            //TODO:  Insert into database ;
+                            DataSource dataSource =new DataSource(activity);
+                            Toast.makeText(activity.getBaseContext(), "Meal sent!", Toast.LENGTH_LONG).show();
+                            activity.finish();
+            //                                dataSource.open();
+            //                                // clean all tables should be done when we log out
+            //                                dataSource.cleanTable(User._USER_TABLE); // users table should be cleaned before insert the new user.
+            //                                dataSource.insertUserToDataBase(User.convertJsonToUser(response.toString()));
+            //                                dataSource.close();
+            //
+
+
+                        }else{
+                            Toast.makeText(activity.getBaseContext(), "Sending Meal failed", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            // Log.i("ERROR",error.getLocalizedMessage());
+            }
+            });
+
+            // Add the request to the RequestQueue.
+            queue.add(strReq);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            //TODO: Remove this log
+            Log.e("[KBM]","IT BLEW UP SON");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
 }

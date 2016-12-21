@@ -1,6 +1,6 @@
 package com.example.omar.diabetestracerapp.data_model;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by OMAR on 12/9/2016.
