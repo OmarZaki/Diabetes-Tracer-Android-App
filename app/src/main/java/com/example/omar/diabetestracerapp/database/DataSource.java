@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
+import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.User;
 
 import java.util.Date;
@@ -162,6 +163,24 @@ public class DataSource {
         cursor.close();
         close();
         return insulinDose;
+    }
+
+    /**
+
+     * Insert the Meal object into the database
+     * @param meal
+     */
+    public void insertMealToDataBase(Meal meal){
+        open();
+        ContentValues contentValues = meal.getContentValuesObject();
+        long i = database.insert(Meal._Meal_TABLE,null,contentValues);
+        if(i!= 0){
+            Log.i("TAG", "Meal's record inserted!") ;
+
+        }else {
+            Log.i("TAG", "Meal's record is not inserted !");
+        }
+        close();
     }
 
 

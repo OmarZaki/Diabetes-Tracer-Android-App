@@ -322,8 +322,9 @@ public class RestClient {
         DataSource datasource = new DataSource(this.activity);
         RequestQueue queue = Volley.newRequestQueue(this.activity);
         String url = get_base_HTTPs_URL() + "/users/meal";
+        String filepath = meal.getImage();
         Bitmap bmp = BitmapFactory.decodeFile(meal.getImage());
-        File f = new File(meal.getImage());
+        File f = new File(filepath);
         int size = (int) f.length();
         byte[] bytes = new byte[size];
         try {
@@ -335,7 +336,8 @@ public class RestClient {
             meal.setUsers_id(user.getId());
             Gson gson = new Gson();
             //TODO: Send user for authentication
-            JSONObject json = new JSONObject(gson.toJson(meal));;
+            JSONObject json = new JSONObject(gson.toJson(meal));
+            meal.setImage(filepath);
             JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, json,
             new Response.Listener<JSONObject>() {
                 @Override
@@ -344,6 +346,7 @@ public class RestClient {
                         if(response.has("result")) {
                             //TODO:  Insert into database ;
                             DataSource dataSource =new DataSource(activity);
+                            dataSource.insertMealToDataBase(meal);
                             Toast.makeText(activity.getBaseContext(), "Meal sent!", Toast.LENGTH_LONG).show();
                             activity.finish();
             //                                dataSource.open();

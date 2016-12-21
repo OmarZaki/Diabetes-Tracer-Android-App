@@ -1,6 +1,7 @@
 package com.example.omar.diabetestracerapp.database;
 
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
+import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.User;
 
 /**
@@ -55,7 +56,15 @@ public class SqlContacts {
                     "  "+InsulinDose._USERS_ID + " INTEGER  NOT NULL,\n" +
                     "  PRIMARY KEY ("+ InsulinDose._ID+ "))\n";
 
-
+    public static final String STATEMENT_CREATE_TABLE_MEAL =
+            "CREATE TABLE IF NOT EXISTS " + Meal._Meal_TABLE+" (\n" +
+                    " "+ Meal._ID+" INTEGER NOT NULL,\n"+
+                    " "+ Meal._TYPE+" TEXT NULL DEFAULT NULL,\n"+
+                    " "+ Meal._DESCRIPTION+" TEXT NULL DEFAULT NULL,\n"+
+                    " "+ Meal._DATE_TIME+" TEXT DATETIME NULL DEFAULT NULL,\n"+
+                    " "+ Meal._IMAGE+" TEXT NULL DEFAULT NULL,\n"+
+                    " "+ Meal._USERS_ID+" INTEGER NOT NULL,\n"+
+                    " PRIMARY KEY ("+ Meal._ID+"))\n";
 
 
 
@@ -123,26 +132,6 @@ public class SqlContacts {
      */
 
 
-    /**
-     * Table `diabetesdb`.`meal`
-     */
-    public static final String STATEMENT_CREATE_TABLE_MEAL=
-            "CREATE TABLE IF NOT EXISTS `diabetesdb`.`meal` (\n" +
-                    "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-                    "  `type` VARCHAR(45) NULL DEFAULT NULL,\n" +
-                    "  `date_time` DATETIME NULL DEFAULT NULL,\n" +
-                    "  `description` VARCHAR(45) NULL DEFAULT NULL,\n" +
-                    "  `image` VARCHAR(45) NULL DEFAULT NULL,\n" +
-                    "  `Users_id` INT(11) NOT NULL,\n" +
-                    "  PRIMARY KEY (`id`),\n" +
-                    "  INDEX `fk_Meal_Users_idx` (`Users_id` ASC),\n" +
-                    "  CONSTRAINT `fk_Meal_Users`\n" +
-                    "    FOREIGN KEY (`Users_id`)\n" +
-                    "    REFERENCES `diabetesdb`.`users` (`id`)\n" +
-                    "    ON DELETE NO ACTION\n" +
-                    "    ON UPDATE NO ACTION)\n" +
-                    "ENGINE = InnoDB\n" +
-                    "DEFAULT CHARACTER SET = utf8;" ;
     /**
      *  Table `diabetesdb`.`messages`
      */
