@@ -23,8 +23,12 @@ import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -171,7 +175,7 @@ public class RestClient {
                         try {
 
                             if (!response.getBoolean("result")) {
-                                registrationRequest(user);
+                                registrationRequest( user);
 
                             } else {
                                 Toast.makeText(activity.getBaseContext(), "Email is already existed", Toast.LENGTH_SHORT).show();
@@ -209,7 +213,7 @@ public class RestClient {
                             if (!response.has("result")) {
 
                                 dataSource = new DataSource(activity);
-                                if (dataSource.retrieveUserFromDataBase() == null) {
+                                if(dataSource.retrieveUserFromDataBase()==null) {
                                     User userfound = User.convertJsonToUser(response.toString());
                                     dataSource.insertUserToDataBase(userfound);
                                 }
@@ -378,7 +382,7 @@ public class RestClient {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } 
     }
 
     public String getStringImage(Bitmap bmp){
