@@ -2,6 +2,11 @@ package com.example.omar.diabetestracerapp.data_model;
 
 import android.content.ContentValues;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -94,6 +99,15 @@ public class Meal {
 		userFieldValues.put(Meal._IMAGE, this.getImage());
 		userFieldValues.put(Meal._USERS_ID, this.getUsers_id());
 		return userFieldValues;
+	}
+
+
+	public static ArrayList<Meal> convertJsonToList(String meals) {
+		Gson gson =new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+				.create();
+		ArrayList<Meal> mealsAsString = gson.fromJson(meals ,new TypeToken<ArrayList<Meal>>(){}.getType());
+		return mealsAsString;
 	}
 
 }

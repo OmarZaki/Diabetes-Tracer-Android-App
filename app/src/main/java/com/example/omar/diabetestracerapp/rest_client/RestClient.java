@@ -305,8 +305,28 @@ public class RestClient {
         });
 
         queue.add(arrayRequest);
+
+        url = get_base_HTTPs_URL() + "/users/allMeals";
+        arrayRequest = new CustomJsonArrayRequest(Request.Method.POST, url, User.toJsonObject(user), new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.i("RESPONSE", response.toString());
+                dataSource.cleanTable(Meal._Meal_TABLE);
+                List<Meal> meals = Meal.convertJsonToList(response.toString());
+                dataSource.insertListOfMeals(meals);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("ERROR_VOLLEY", "ERROR in the response ");
+            }
+        });
+
+        queue.add(arrayRequest);
+
         // TODO 3: Sync Categories .
-        // TODO 4: Sync Meals .
         // TODO 5: Sync Appointment.
         // TODO 6: Sync Messages.
 

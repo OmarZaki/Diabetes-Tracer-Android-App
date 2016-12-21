@@ -183,5 +183,24 @@ public class DataSource {
         close();
     }
 
+    /**
+     * Insert the list of meals from database;
+     * @param meals
+     */
+    public void insertListOfMeals(List<Meal> meals){
+        open();
+        for (Meal meal : meals) {
+            ContentValues mealContentValues = meal.getContentValuesObject();
+            long i = database.insert(Meal._Meal_TABLE,null,mealContentValues);
+            if(i!= 0){
+                Log.i("TAG", "Meals record inserted!") ;
+
+            }else {
+                Log.i("TAG", "Meals record is not inserted !");
+            }
+        }
+        close();
+    }
+
 
 }
