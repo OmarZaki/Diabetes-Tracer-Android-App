@@ -40,7 +40,7 @@
         <activity android:name=".SendMedicationActivity" />
         <activity android:name=".SendHeartRateActivity" />
         <activity android:name=".SendBloodSugarActivity" />
-        <activity android:name=".SendMealActivity"></activity>
+        <activity android:name=".ActivitySendMeal"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

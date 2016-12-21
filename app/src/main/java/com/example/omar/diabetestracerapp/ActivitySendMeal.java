@@ -31,7 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class SendMealActivity extends AppCompatActivity {
+public class ActivitySendMeal extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST = 1;
     private static final int REQ_CODE_TAKE_PICTURE = 2;
