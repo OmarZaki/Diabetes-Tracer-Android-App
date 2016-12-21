@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -24,7 +25,7 @@ public class InsulinDose {
     public final static String _InsulinDose_TABLE = "insulinDose";
     public static final String _DATE_FORMAT_NOW="yyyy-MM-dd HH:mm:ss";
 
-    public static String[] _INSULIN_COLS = {User._ID,
+    public static String[] _INSULIN_COLS = {InsulinDose._ID,
             InsulinDose._ORIGANL_ID,
             InsulinDose._TAKEN,
             InsulinDose._QUANTITY,
@@ -151,7 +152,9 @@ public class InsulinDose {
         return insulinDoseAsString;
     }
     public static ArrayList<InsulinDose> convertJsonToList(String insulinDose) {
-        Gson gson = new Gson();
+        Gson gson =new  GsonBuilder()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .create();
         ArrayList<InsulinDose> insulinDoseAsString = gson.fromJson(insulinDose,new TypeToken<ArrayList<InsulinDose>>(){}.getType());
         return insulinDoseAsString;
     }
@@ -161,7 +164,9 @@ public class InsulinDose {
      * @return
      */
     public static InsulinDose convertStringToObject(String insulinDoseAsString){
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .create();
         InsulinDose dose = gson.fromJson(insulinDoseAsString, InsulinDose.class);
         return dose;
     }
@@ -171,7 +176,9 @@ public class InsulinDose {
      * @return
      */
     public static String convertObjectToString(InsulinDose insulinDose){
-        Gson gson = new Gson();
+        Gson gson = new  GsonBuilder()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .create();
         String dose= gson.toJson(insulinDose);
         return dose;
     }

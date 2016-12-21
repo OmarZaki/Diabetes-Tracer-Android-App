@@ -73,6 +73,15 @@ public class DataSource {
         long i2 = database.delete(InsulinDose._InsulinDose_TABLE,null,null);
         close();
     }
+    public void cleanTable(String tableName){
+        open();
+        long i = database.delete(tableName,null,null);
+        close();
+    }
+    public void deleteDatabase(Context context){
+        context.deleteDatabase(SqlHelper.DATABASE_NAME);
+        Log.i("DATABASE", "Database has been erased !");
+    }
 
     /**
      * get the User from database
@@ -118,12 +127,12 @@ public class DataSource {
     public void updateInsulinDoseRecord(InsulinDose insulinDose){
         open();
         ContentValues cv = insulinDose.getContentValuesObject();
-        long i = database.update(InsulinDose._InsulinDose_TABLE,cv,InsulinDose._ORIGANL_ID+"="+insulinDose.getOriginal_id(),null);
+        long i = database.update(InsulinDose._InsulinDose_TABLE,cv,InsulinDose._ID+"="+insulinDose.getId(),null);
         if(i!= 0){
-            Log.i("TAG", "User's record inserted!") ;
+            Log.i("TAG", "Insulin's record is inserted!") ;
 
         }else {
-            Log.i("TAG", "User's record is not inserted !");
+            Log.i("TAG", "Insulin's record is not inserted !");
         }
         open();
     }
@@ -150,6 +159,7 @@ public class DataSource {
                 return insulinDose;
             }
         }
+        cursor.close();
         close();
         return insulinDose;
     }

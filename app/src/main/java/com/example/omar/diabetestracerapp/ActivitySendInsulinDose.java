@@ -58,11 +58,11 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
 
         Date currentDate = new Date();
         InsulinDose  currentInsulinDose= dataSource.getCurrentInsulinDose(currentDate);
-        String currentDateString = User.ConvertDateToString(currentDate);
+        String currentDateString = User.ConvertDateToString(currentInsulinDose.getDate_time());
         tvDate.setText(currentDateString);
-        String time = getCurrentTime(currentDate);
+        String time = getCurrentTime(currentInsulinDose.getDate_time());
         tvTime.setText(time);
-
+        tvQuantity.setText(String.valueOf(currentInsulinDose.getQuantity()) + "ML");
         /**
          * Set the onClick
          */
@@ -104,6 +104,7 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
         //TODO 4: if request success -> done.
 
         //TODO 5: if request not -> mark user as dirty flag;
+
 
     }
 }

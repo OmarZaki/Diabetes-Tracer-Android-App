@@ -9,6 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -17,11 +18,14 @@ import com.example.omar.diabetestracerapp.ActivityMain;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
+import com.google.gson.JsonArray;
 
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -34,11 +38,13 @@ import java.util.ArrayList;
 public class RestClient {
     Activity activity;
     DataSource dataSource;
+
     /**
      * Empty Constructor
      */
     public RestClient(Activity activity) {
         this.activity = activity;
+        dataSource = new DataSource(activity.getBaseContext());
     }
 
 
@@ -62,7 +68,6 @@ public class RestClient {
 
     /**
      * Get the full url Path for the Restful Api server App;
-     *
      */
     public void HelloTest() {
         // Instantiate the RequestQueue.
@@ -154,7 +159,7 @@ public class RestClient {
                         try {
 
                             if (!response.getBoolean("result")) {
-                                registrationRequest( user);
+                                registrationRequest(user);
 
                             } else {
                                 Toast.makeText(activity.getBaseContext(), "Email is already existed", Toast.LENGTH_SHORT).show();
@@ -192,7 +197,7 @@ public class RestClient {
                             if (!response.has("result")) {
 
                                 dataSource = new DataSource(activity);
-                                if(dataSource.retrieveUserFromDataBase()==null) {
+                                if (dataSource.retrieveUserFromDataBase() == null) {
                                     User userfound = User.convertJsonToUser(response.toString());
                                     dataSource.insertUserToDataBase(userfound);
                                 }
@@ -213,7 +218,7 @@ public class RestClient {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                 Toast.makeText(activity.getBaseContext(), error.getMessage().toString(),Toast.LENGTH_SHORT);
+                Toast.makeText(activity.getBaseContext(), error.getMessage().toString(), Toast.LENGTH_SHORT);
             }
         });
 
@@ -223,6 +228,7 @@ public class RestClient {
 
     /**
      * Send Insulin dose .
+     *
      * @param insulinDose
      */
     public void SendInsulinDose(InsulinDose insulinDose) {
@@ -235,7 +241,8 @@ public class RestClient {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.has("result")) {
-                                Toast.makeText(activity.getBaseContext(), "Dose has been sent", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity.getBaseContext(), "Dose has been Sent ! ", Toast.LENGTH_SHORT).show();
+                                activity.finish();
                             } else {
                                 Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();
 
@@ -258,47 +265,37 @@ public class RestClient {
 
     /**
      * Synchronize data.
+     *
      * @param user
      */
     public void syncData(User user) {
         RequestQueue queue = Volley.newRequestQueue(activity);
-
-        // TODO 2: Sync Insulin doses data;
         String url = get_base_HTTPs_URL() + "/users/allDoses";
-        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, User.toJsonObject(user),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (!response.has("result")) {
-                                // Store the list in database
-                                ArrayList<InsulinDose> dosesList = InsulinDose.convertJsonToList(response.toString());
-                                dataSource = new DataSource(activity);
-                                dataSource.insertListOfInsulinDoses(dosesList);
+        CustomJsonArrayRequest arrayRequest = new CustomJsonArrayRequest(Request.Method.POST, url, User.toJsonObject(user), new Response.Listener<JSONArray>() {
 
-                            } else {
-                                Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.i("RESPONSE", response.toString());
+                dataSource.cleanTable(InsulinDose._InsulinDose_TABLE);
+                List<InsulinDose> insulinDoses = InsulinDose.convertJsonToList(response.toString());
+                dataSource.insertListOfInsulinDoses(insulinDoses);
 
-                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Log.i("ERROR",error.getLocalizedMessage());
+                Log.i("ERROR_VOLLEY", "ERROR in the response ");
             }
         });
+
+        queue.add(arrayRequest);
         // TODO 3: Sync Categories .
         // TODO 4: Sync Meals .
         // TODO 5: Sync Appointment.
         // TODO 6: Sync Messages.
 
 
-        // Add the request to the RequestQueue.
-        queue.add(strReq);
+
 
     }
 }
