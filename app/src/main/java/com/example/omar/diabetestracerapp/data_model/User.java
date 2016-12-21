@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -199,7 +200,23 @@ public class User {
 
         return result;
     }
+    /**
+     * Convert date as string to Java.util.Date Object
+     *
+     * @param date
+     * @return
+     */
+    public static java.util.Date ConvertStringToDateObjectFormDB(String date) {
+        java.util.Date parsedDate = null;
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy");
+            parsedDate = df.parse(date);
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parsedDate;
+    }
     /**
      * Convert date as string to Java.util.Date Object
      *
@@ -264,7 +281,9 @@ public class User {
      * @return
      */
     public static String convertUserToJson(User object){
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .create();
         return gson.toJson(object);
     }
     /**
@@ -273,7 +292,9 @@ public class User {
      * @return
      */
     public static User convertJsonToUser(String jsonObject) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .create();
         User user = gson.fromJson(jsonObject, User.class);
         return user;
     }
@@ -307,11 +328,12 @@ public class User {
         user.setEmail(cursor.getString(cursor.getColumnIndex(User._EMAIL)));
         user.setPassword(cursor.getString(cursor.getColumnIndex(User._PASSWORD)));
         user.setAddress(cursor.getString(cursor.getColumnIndex(User._ADDRESS)));
-        user.setBirthDate(User.ConvertStringToDateObject(cursor.getString(cursor.getColumnIndex(User._BIRTH_DATE))));
+        user.setBirthDate(new Date(User.ConvertStringToDateObjectFormDB(cursor.getString(cursor.getColumnIndex(User._BIRTH_DATE))).getTime()));
         user.setPhoneNumber(cursor.getString(cursor.getColumnIndex(User._PHONE_NUMBER)));
         user.setType(cursor.getInt(cursor.getColumnIndex(User._TYPE))>0);
         user.setToken(cursor.getString(cursor.getColumnIndex(User._TOKEN)));
-        user.setCreationDate(User.ConvertStringToDateObject(cursor.getString(cursor.getColumnIndex(User._CREATION_DATE))));
+        user.setCreationDate(User.ConvertStringToDateObjectFormDB(cursor.getString(cursor.getColumnIndex(User._CREATION_DATE))));
         return user;
     }
+
 }

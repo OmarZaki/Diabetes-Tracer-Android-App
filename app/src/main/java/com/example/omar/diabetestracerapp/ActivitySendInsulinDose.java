@@ -1,6 +1,7 @@
 package com.example.omar.diabetestracerapp;
 
 
+import android.database.DataSetObservable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.User;
+import com.example.omar.diabetestracerapp.database.DataSource;
+import com.example.omar.diabetestracerapp.rest_client.RestClient;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,12 +28,21 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
     TextView tvTime;
     TextView tvQuantity;
     Button btnSend;
+    /** ----> Back-end instances <--- **/
+    DataSource dataSource;
+    RestClient restClient;
+    /** -----> end <-------*/
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_insulin_dose);
+        /** -------> Back-End Logic <------ **/
+        dataSource= new DataSource(this);
+        restClient= new RestClient(this);
+        /** -------> end <-------- */
+
         /**
          * Link user interface elements
          *
@@ -72,6 +85,17 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
     }
 
     public void sendOnClick(final View view) {
-        //TODO: Rest function for sending Insulin dose
+
+        //TODO1: get current date InsulinDose Object from database;
+        InsulinDose insulinDose=dataSource.getCurrentInsulinDose(new Date());
+        //TODO2: SetTaken(True).
+        insulinDose.setTaken(true);
+        dataSource.updateInsulinDoseRecord(insulinDose);
+        //TODO3: Send request to server to change this data;
+        restClient.SendInsulinDose(insulinDose);
+        //TODO 4: if request success -> done.
+
+        //TODO 5: if request not -> mark user as dirty flag;
+
     }
 }

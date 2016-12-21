@@ -101,8 +101,6 @@ public class ActivityRegistration extends AppCompatActivity {
                 SendRegistrationRequest((Activity) view.getContext(), user);
             }
         });
-
-
     }
 
     /**
@@ -151,8 +149,8 @@ public class ActivityRegistration extends AppCompatActivity {
      * @return
      */
     public void SendRegistrationRequest(Activity activity, User user ) {
-        RestClient client = new RestClient();
-        client.registration(activity, user);
+        RestClient client = new RestClient(this);
+        client.registration(user);
     }
 
 

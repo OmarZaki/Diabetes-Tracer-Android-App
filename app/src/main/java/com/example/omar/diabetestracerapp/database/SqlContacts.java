@@ -1,5 +1,6 @@
 package com.example.omar.diabetestracerapp.database;
 
+import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.User;
 
 /**
@@ -43,6 +44,20 @@ public class SqlContacts {
             "  "+ User._ADDRESS+ " TEXT NULL DEFAULT NULL,\n" +
             "  "+ User._BIRTH_DATE+ " TEXT NULL DEFAULT NULL,\n" +
             "  PRIMARY KEY ("+User._ID+"))\n" ;
+
+    public static final String STATEMENT_CREATE_TABLE_INSULIN_DOSE =
+            "CREATE TABLE IF NOT EXISTS "+ InsulinDose._InsulinDose_TABLE+" (\n" +
+                    "  "+ InsulinDose._ID+ " INTEGER NOT NULL,\n" +
+                    "  "+ InsulinDose._ORIGANL_ID+ " INTEGER NOT NULL ,\n" +
+                    "  "+InsulinDose._QUANTITY + " INTEGER NULL DEFAULT NULL,\n" +
+                    "  "+InsulinDose._TAKEN + " INTEGER NULL DEFAULT '0',\n" +
+                    "  "+InsulinDose._DATE_TIME + " TEXT  NULL DEFAULT NULL,\n" +
+                    "  "+InsulinDose._USERS_ID + " INTEGER  NOT NULL,\n" +
+                    "  PRIMARY KEY ("+ InsulinDose._ID+ "))\n";
+
+
+
+
 
     /**
      *  Table `diabetesdb`.`appointments`
@@ -106,22 +121,7 @@ public class SqlContacts {
     /**
      *  Table `diabetesdb`.`insulindose`
      */
-    public static final String STATEMENT_CREATE_TABLE_INSULINEDOSE=
-            "CREATE TABLE IF NOT EXISTS `diabetesdb`.`insulindose` (\n" +
-            "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-            "  `quantity` FLOAT NULL DEFAULT NULL,\n" +
-            "  `taken` TINYINT(1) NULL DEFAULT '0',\n" +
-            "  `date_time` DATETIME NULL DEFAULT NULL,\n" +
-            "  `Users_id` INT(11) NOT NULL,\n" +
-            "  PRIMARY KEY (`id`),\n" +
-            "  INDEX `fk_InsulinDose_Users1_idx` (`Users_id` ASC),\n" +
-            "  CONSTRAINT `fk_InsulinDose_Users1`\n" +
-            "    FOREIGN KEY (`Users_id`)\n" +
-            "    REFERENCES `diabetesdb`.`users` (`id`)\n" +
-            "    ON DELETE NO ACTION\n" +
-            "    ON UPDATE NO ACTION)\n" +
-            "ENGINE = InnoDB\n" +
-            "DEFAULT CHARACTER SET = utf8;\n";
+
 
     /**
      * Table `diabetesdb`.`meal`

@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -25,6 +26,8 @@ import com.github.clans.fab.FloatingActionMenu;
  * create an instance of this fragment.
  */
 public class MainFragment extends android.support.v4.app.Fragment {
+
+    ImageView ivTimeLeft;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -89,11 +92,18 @@ public class MainFragment extends android.support.v4.app.Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         materialDesignFAM = (FloatingActionMenu) getActivity().findViewById(R.id.material_design_android_floating_action_menu);
+//        materialDesignFAM.bringToFront();
         sendInsulinActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item1);
+//        sendBloodSugarActionButton.bringToFront();
         sendBloodSugarActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item2);
+//        sendBloodSugarActionButton.bringToFront();
         sendHeartRateActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item3);
+//        sendHeartRateActionButton.bringToFront();
         sendMealActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item4);
+//        sendMealActionButton.bringToFront();
         sendMedicationActionButton = (com.github.clans.fab.FloatingActionButton) getActivity().findViewById(R.id.material_design_floating_action_menu_item5);
+//        sendMealActionButton.bringToFront();
+        ivTimeLeft =(ImageView)getActivity().findViewById(R.id.ivMainCircle);
 
         sendInsulinActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

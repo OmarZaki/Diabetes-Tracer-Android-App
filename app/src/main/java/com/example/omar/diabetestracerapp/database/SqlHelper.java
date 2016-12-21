@@ -3,6 +3,7 @@ package com.example.omar.diabetestracerapp.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by OMAR on 12/14/2016.
@@ -23,11 +24,13 @@ public class SqlHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_USERS);
+        sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_INSULIN_DOSE);
+        Log.i("DATABASE", "tables  is crated! ");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        onCreate(sqLiteDatabase);
     }
 
     @Override

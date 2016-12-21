@@ -1,7 +1,9 @@
 package com.example.omar.diabetestracerapp.data_model;
 
 import java.sql.Date;
-
+/**
+ * Created by OMAR on 12/9/2016.
+ */
 public class Messages {
 	
 	public final static String _Messages_TABLE="Messages";

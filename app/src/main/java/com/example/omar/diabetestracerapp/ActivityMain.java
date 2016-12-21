@@ -1,5 +1,6 @@
 package com.example.omar.diabetestracerapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -14,9 +15,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.omar.diabetestracerapp.auxiliary.TabsPagerAdapter;
+import com.example.omar.diabetestracerapp.data_model.User;
+import com.example.omar.diabetestracerapp.database.DataSource;
+import com.example.omar.diabetestracerapp.rest_client.RestClient;
 
 public class ActivityMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    RestClient restClient;
+    DataSource dataSource;
+    User currentUser;
 
     TabLayout tabLayout;
 
@@ -24,6 +32,30 @@ public class ActivityMain extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /**
+         * Set User Interface Elements
+         */
+        setUserInterfaceElements();
+
+        /** -------> Back-end Logic <------ **/
+        restClient = new RestClient(this);
+        dataSource = new DataSource(this);
+        currentUser = dataSource.retrieveUserFromDataBase();
+        if (currentUser != null) {
+            Boolean login = getIntent().getExtras().getBoolean(ActivityLogin.LOGIN_INDICATOR);
+            if (login) {
+                restClient.syncData(currentUser);
+            }
+        }
+        /** ------------ end -------------**/
+
+    }
+
+    /**
+     * Set user interface Elements.
+     */
+    private void setUserInterfaceElements() {
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -64,14 +96,19 @@ public class ActivityMain extends AppCompatActivity
                         toast.show();
                         */
                         break;
-                    case 1: break;
-                    case 2: break;
-                    case 3: break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
                 }
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
@@ -126,8 +163,11 @@ public class ActivityMain extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_logout) {
+            // clean the database ;
+            dataSource.cleanTables();
+            Intent LogoutIntent = new Intent(getBaseContext(), ActivityIntro.class);
+            startActivity(LogoutIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,7 +175,7 @@ public class ActivityMain extends AppCompatActivity
         return true;
     }
 
-    private void setupTablayout(){
+    private void setupTablayout() {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }

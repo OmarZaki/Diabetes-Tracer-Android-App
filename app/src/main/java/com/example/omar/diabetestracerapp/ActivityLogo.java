@@ -9,17 +9,28 @@ import android.widget.TextView;
 
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
+import com.example.omar.diabetestracerapp.rest_client.RestClient;
 
 
 public class ActivityLogo extends AppCompatActivity {
+    /** ------> Back-end Logic Parameters <----- **/
+    DataSource dataSource;
+    RestClient restClient;
+
+    /** -------> end <------- **/
     TextView tvTitle;
     ProgressBar pb;
-    DataSource dataSource;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_logo);
+        /** -------> Back-end Logic <------------ */
+        dataSource = new DataSource(this);
+
+        /** ---------> End <---------- */
+
 
         // link UI with elements
         pb = (ProgressBar) findViewById(R.id.pb_waiting);
@@ -32,17 +43,10 @@ public class ActivityLogo extends AppCompatActivity {
                 /**
                  * Check the connection and precondition for the application to run.
                  */
-
-                /**
-                 * Get User from dataBase
-                 */
             }
             @Override
             public void onFinish() {
-                dataSource = new DataSource(getBaseContext());
-                dataSource.open();
                 User user = dataSource.retrieveUserFromDataBase();
-                dataSource.close();
                 finish();
                 if(user!=null){
                     Intent intent = new Intent(getBaseContext(),ActivityLogin.class);

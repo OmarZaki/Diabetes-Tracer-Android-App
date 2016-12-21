@@ -4,23 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.omar.diabetestracerapp.ActivityMain">
-
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        fab:srcCompat="@drawable/circle_main"
+        android:id="@+id/ivMainCircle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        />
     <!-- TODO: Center time -->
-    <TextView
-        android:id="@+id/time_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="30sp"
-        android:text="@string/time_placeholder" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/time_text"
-        android:text="@string/next_dose_text"/>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/material_design_android_floating_action_menu"
@@ -100,5 +92,7 @@
             fab:fab_label="Medication"
             fab:fab_size="mini" />
     </com.github.clans.fab.FloatingActionMenu>
+
+
 
 </RelativeLayout>

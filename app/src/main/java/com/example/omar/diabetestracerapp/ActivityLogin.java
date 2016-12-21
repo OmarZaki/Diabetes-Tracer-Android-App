@@ -1,5 +1,8 @@
 package com.example.omar.diabetestracerapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,33 +12,37 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 import com.example.omar.diabetestracerapp.rest_client.RestClient;
+import com.example.omar.diabetestracerapp.shared_preference.SharedPreferenceMethods;
 
 
 /**
  * A login screen that offers login via email/password.
  */
-public class ActivityLogin extends AppCompatActivity  {
-    DataSource dataSource;
-
-
+public class ActivityLogin extends AppCompatActivity {
+    public static final String LOGIN_INDICATOR = "Login";
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-
+     * --------> Back-end Logic <-------
+     **/
+    DataSource dataSource;
+    RestClient restClient;
+    SharedPreferenceMethods sharedPreferenceMethods;
+    /**
+     * ------->  End <-------
+     **/
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private Button btnLogin;
+    private Button btnRegistration;
+    private CheckBox cbRememberMe;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -44,12 +51,45 @@ public class ActivityLogin extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // setup user interface elements;
+        SetUserInterfaceElements();
+
+
+        /** ------> Back End Logic <------ **/
+        /*
+        1. Get User from database .
+        2. Since we came over here, this means that user has already registered in the the app
+                            -> setup the user email and password.
+         */
+        restClient = new RestClient(this);
+        dataSource = new DataSource(getBaseContext());
+        sharedPreferenceMethods = new SharedPreferenceMethods(this);
+        dataSource.open();
+        User user = dataSource.retrieveUserFromDataBase();
+        dataSource.close();
+        if (user != null) {
+            if (sharedPreferenceMethods.retrieveRmemeberMeIndicator()) {
+                restClient.logInUser(user);
+            } else {
+
+                mEmailView.setText(user.getEmail());
+                mPasswordView.setText(user.getPassword());
+
+            }
+        }
+        /** --------- > End Logic <------- **/
+    }
+
+
+    /**
+     * Set up user interface Elements and Actions
+     */
+    private void SetUserInterfaceElements() {
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
-
         mPasswordView = (EditText) findViewById(R.id.password);
+        cbRememberMe = (CheckBox) findViewById(R.id.checkBox);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -68,24 +108,18 @@ public class ActivityLogin extends AppCompatActivity  {
                 attemptLogin();
             }
         });
-
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        dataSource = new DataSource(getBaseContext());
-        dataSource.open();
-        User user = dataSource.retrieveUserFromDataBase();
-        dataSource.close();
-        if(user!=null) {
-            mEmailView.setText(user.getEmail());
-            mPasswordView.setText(user.getPassword());
-        }
+        btnRegistration = (Button) findViewById(R.id.btnRegistration);
+        btnRegistration.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), ActivityRegistration.class);
+                startActivity(intent);
+            }
+        });
     }
-
-
-
-
-
 
 
     /**
@@ -130,15 +164,20 @@ public class ActivityLogin extends AppCompatActivity  {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            User user =new User();
+            // if the remember me is checked, we don't need to show up Activity Login.
+
+            if (cbRememberMe.isChecked()) {
+                sharedPreferenceMethods.storeRememberMeIndicator(true);
+            }
+            User user = new User();
             user.setEmail(email);
             user.setPassword(password);
+            restClient.logInUser(user);
 
-            RestClient rc = new RestClient();
-            rc.logInUser(this,user);
 
         }
     }
+
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -149,10 +188,6 @@ public class ActivityLogin extends AppCompatActivity  {
         //TODO: Replace this with your own logic
         return password.length() > 2;
     }
-
-
-
-
 
 
 }

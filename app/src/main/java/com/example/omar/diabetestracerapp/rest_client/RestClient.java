@@ -14,11 +14,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.omar.diabetestracerapp.ActivityLogin;
 import com.example.omar.diabetestracerapp.ActivityMain;
+import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 /**
@@ -29,11 +32,15 @@ import org.json.JSONObject;
  * http://localhost:8080/ServerApp/app/users/register
  */
 public class RestClient {
+    Activity activity;
+    DataSource dataSource;
     /**
      * Empty Constructor
      */
-    public RestClient() {
+    public RestClient(Activity activity) {
+        this.activity = activity;
     }
+
 
     /**
      * Constants String
@@ -56,11 +63,10 @@ public class RestClient {
     /**
      * Get the full url Path for the Restful Api server App;
      *
-     * @param activity
      */
-    public void HelloTest(final Activity activity) {
+    public void HelloTest() {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(activity);
+        RequestQueue queue = Volley.newRequestQueue(this.activity);
         String url = get_base_HTTPs_URL() + "/hello";
 
         // Request a string response from the provided URL.
@@ -85,37 +91,30 @@ public class RestClient {
     /**
      * Register New Patient to the System.
      *
-     * @param activity
      * @param user
      * @return
      */
-    public void registrationRequest(final Activity activity, final User user) {
+    public void registrationRequest(final User user) {
 
 
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(activity);
+        RequestQueue queue = Volley.newRequestQueue(this.activity);
         String url = get_base_HTTPs_URL() + "/users/register";
         JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, User.toJsonObject(user),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(response.has(User._ID)) {
+                            if (response.has(User._ID)) {
                                 // Insert into database ;
-                                DataSource dataSource =new DataSource(activity);
-                                dataSource.open();
-                                dataSource.cleanTable(User._USER_TABLE); // users table should be cleaned before insert the new user.
-
-                                Log.i("TAG", response.toString());
+                                dataSource = new DataSource(activity);
+                                dataSource.cleanTables(); // users table should be cleaned before insert the new user.
                                 dataSource.insertUserToDataBase(User.convertJsonToUser(response.toString()));
-                                Log.i("TAG", "DATABASE HAS BEEN CREATED!");
-                                dataSource.close();
-
                                 Intent intent = new Intent(activity.getBaseContext(), ActivityLogin.class);
                                 intent.putExtra(User._USER_ONFO_PUT_EXTRA_STRING, response.toString());
                                 activity.startActivity(intent);
 
-                            }else{
+                            } else {
                                 Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();
 
                             }
@@ -138,16 +137,15 @@ public class RestClient {
     }
 
     /**
-     *
      * Include check if the user email is existed
-     * @param activity
+     *
      * @param user
      */
-    public void registration(final Activity activity, final User user) {
+    public void registration(final User user) {
         //  1: Request to check if the user is already exist.
         //  2: Request to register new User.
 
-        RequestQueue queue = Volley.newRequestQueue(activity);
+        RequestQueue queue = Volley.newRequestQueue(this.activity);
         String url = get_base_HTTPs_URL() + "/users/IsEmailExist";
         JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.POST, url, User.toJsonObject(user),
                 new Response.Listener<JSONObject>() {
@@ -155,12 +153,12 @@ public class RestClient {
                     public void onResponse(JSONObject response) {
                         try {
 
-                        if(!response.getBoolean("result")){
-                            registrationRequest(activity,user);
+                            if (!response.getBoolean("result")) {
+                                registrationRequest( user);
 
-                        }else{
-                            Toast.makeText(activity.getBaseContext(), "Email is already existed", Toast.LENGTH_SHORT).show();
-                        }
+                            } else {
+                                Toast.makeText(activity.getBaseContext(), "Email is already existed", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -179,34 +177,67 @@ public class RestClient {
 
     }
 
-    public void logInUser(final Activity activity, final User user){
-        // TODO send a log in request to the server to check if the user is registered.
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(activity);
+    /**
+     * @param user
+     */
+    public void logInUser(final User user) {
+
+        RequestQueue queue = Volley.newRequestQueue(this.activity);
         String url = get_base_HTTPs_URL() + "/users/login";
         JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, User.toJsonObject(user),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(!response.has("result")) {
-                                // Insert into database ;
-                                DataSource dataSource =new DataSource(activity);
-//                                dataSource.open();
-//                                // clean all tables should be done when we log out
-//                                dataSource.cleanTable(User._USER_TABLE); // users table should be cleaned before insert the new user.
-//                                dataSource.insertUserToDataBase(User.convertJsonToUser(response.toString()));
-//                                dataSource.close();
-//
+                            if (!response.has("result")) {
+
+                                dataSource = new DataSource(activity);
+                                if(dataSource.retrieveUserFromDataBase()==null) {
+                                    User userfound = User.convertJsonToUser(response.toString());
+                                    dataSource.insertUserToDataBase(userfound);
+                                }
                                 Intent intent = new Intent(activity.getBaseContext(), ActivityMain.class);
+                                intent.putExtra(ActivityLogin.LOGIN_INDICATOR, true);
                                 activity.startActivity(intent);
 
-                            }else{
+                            } else {
+                                Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                 Toast.makeText(activity.getBaseContext(), error.getMessage().toString(),Toast.LENGTH_SHORT);
+            }
+        });
+
+        queue.add(strReq);
+
+    }
+
+    /**
+     * Send Insulin dose .
+     * @param insulinDose
+     */
+    public void SendInsulinDose(InsulinDose insulinDose) {
+
+        RequestQueue queue = Volley.newRequestQueue(this.activity);
+        String url = get_base_HTTPs_URL() + "/users/setTakenTrue";
+        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, InsulinDose.toJsonObject(insulinDose),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.has("result")) {
+                                Toast.makeText(activity.getBaseContext(), "Dose has been sent", Toast.LENGTH_SHORT).show();
+                            } else {
                                 Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();
 
                             }
-
-
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -218,6 +249,52 @@ public class RestClient {
                 // Log.i("ERROR",error.getLocalizedMessage());
             }
         });
+        // Add the request to the RequestQueue.
+        queue.add(strReq);
+
+    }
+
+    /**
+     * Synchronize data.
+     * @param user
+     */
+    public void syncData(User user) {
+        RequestQueue queue = Volley.newRequestQueue(activity);
+
+        // TODO 2: Sync Insulin doses data;
+        String url = get_base_HTTPs_URL() + "/users/allDoses";
+        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, User.toJsonObject(user),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (!response.has("result")) {
+                                // Store the list in database
+                                ArrayList<InsulinDose> dosesList = InsulinDose.convertJsonToList(response.toString());
+                                dataSource = new DataSource(activity);
+                                dataSource.insertListOfInsulinDoses(dosesList);
+
+                            } else {
+                                Toast.makeText(activity.getBaseContext(), "registration Failed !", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Log.i("ERROR",error.getLocalizedMessage());
+            }
+        });
+        // TODO 3: Sync Categories .
+        // TODO 4: Sync Meals .
+        // TODO 5: Sync Appointment.
+        // TODO 6: Sync Messages.
+
+
         // Add the request to the RequestQueue.
         queue.add(strReq);
 
