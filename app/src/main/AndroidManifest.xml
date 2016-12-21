@@ -3,6 +3,7 @@
     package="com.example.omar.diabetestracerapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission
         android:name="android.permission.CAMERA" />
 
@@ -40,6 +41,18 @@
         <activity android:name=".SendHeartRateActivity" />
         <activity android:name=".SendBloodSugarActivity" />
         <activity android:name=".SendMealActivity"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.diabetestracerapp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
+
     </application>
 
 </manifest>
