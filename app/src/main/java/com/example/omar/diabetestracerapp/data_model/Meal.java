@@ -1,5 +1,7 @@
 package com.example.omar.diabetestracerapp.data_model;
 
+import android.content.ContentValues;
+
 import java.util.Date;
 
 /**
@@ -16,6 +18,13 @@ public class Meal {
 	public final static String _IMAGE = "image";
 	public final static String _DATE_TIME = "date_time";
 	public final static String _USERS_ID = "Users_id";
+
+	public static String[] MEAL_COLS = {Meal._ID,
+			Meal._TYPE,
+			Meal._DESCRIPTION,
+			Meal._IMAGE,
+			Meal._DATE_TIME,
+			Meal._USERS_ID};
 	
 	private int id;
 	private String type;
@@ -75,5 +84,16 @@ public class Meal {
 	public void setDate_time(Date date_time) {
 		this.date_time = date_time;
 	}
-	
+
+	public ContentValues getContentValuesObject(){
+		ContentValues userFieldValues = new ContentValues();
+		userFieldValues.put(Meal._ID, this.getId());
+		userFieldValues.put(Meal._TYPE, this.getType());
+		userFieldValues.put(Meal._DESCRIPTION, this.getDescription());
+		userFieldValues.put(Meal._DATE_TIME, this.getDate_time().toString());
+		userFieldValues.put(Meal._IMAGE, this.getImage());
+		userFieldValues.put(Meal._USERS_ID, this.getUsers_id());
+		return userFieldValues;
+	}
+
 }
