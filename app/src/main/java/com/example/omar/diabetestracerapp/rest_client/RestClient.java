@@ -382,7 +382,7 @@ public class RestClient {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } 
+        }
     }
 
     public String getStringImage(Bitmap bmp){
