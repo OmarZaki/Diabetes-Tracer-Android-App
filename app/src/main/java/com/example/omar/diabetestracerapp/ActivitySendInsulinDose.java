@@ -69,6 +69,11 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FragmentAddQuantityField fragmentAddQuantityField = new FragmentAddQuantityField();
+                fragmentAddQuantityField.setMax(1000);
+                fragmentAddQuantityField.setMin(0);
+                fragmentAddQuantityField.setTitle(R.string.insulin_dose_quantity_dialog_title);
+                fragmentAddQuantityField.setMessage(R.string.insulin_dose_quantity_dialog);
+                fragmentAddQuantityField.setTextView(R.id.tvDoseQuantitySendInsulinDose);
                 fragmentAddQuantityField.show(getFragmentManager(),"TAG");
             }
         });

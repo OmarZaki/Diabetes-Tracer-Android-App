@@ -23,21 +23,28 @@ import org.w3c.dom.Text;
 public class FragmentAddQuantityField extends DialogFragment{
     NumberPicker npQuantity;
     TextView tvActivityQuantity;
+
+    private int textView;
+    private int message;
+    private int title;
+    private int max=1000;
+    private int min=0;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder  builder = new AlertDialog.Builder(getActivity());
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_add_quantity,null);
-        tvActivityQuantity = (TextView) getActivity().findViewById(R.id.tvDoseQuantitySendInsulinDose);
+        tvActivityQuantity = (TextView) getActivity().findViewById(textView);
 
         // inflate and set the layout for the dialog
         // Pass null as the parent view because its going in dialog layout.
         builder.setView(view);
         npQuantity= (NumberPicker) view.findViewById(R.id.npQuantity);
-        npQuantity.setMinValue(0);
-        npQuantity.setMaxValue(1000);
-        builder.setMessage(R.string.insulin_dose_quantity_dialog)
-                .setTitle(R.string.insulin_dose_quantity_dialog_title);
+        npQuantity.setMinValue(min);
+        npQuantity.setMaxValue(max);
+        builder.setMessage(message)
+                .setTitle(title);
 
 
         builder.setPositiveButton(R.string.select, new DialogInterface.OnClickListener() {
@@ -56,5 +63,25 @@ public class FragmentAddQuantityField extends DialogFragment{
 
 
         return builder.create();
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public void setMessage(int message) {
+        this.message = message;
+    }
+
+    public void setTitle(int title) {
+        this.title = title;
+    }
+
+    public void setTextView(int textView) {
+        this.textView = textView;
     }
 }

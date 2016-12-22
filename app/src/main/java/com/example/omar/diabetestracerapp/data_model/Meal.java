@@ -112,9 +112,10 @@ public class Meal {
 
 	public static ArrayList<Meal> convertJsonToList(String meals) {
 		Gson gson =new GsonBuilder()
-				.setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+				.setDateFormat("yyyy-MM-dd hh:mm:ss")
 				.create();
-        return gson.fromJson(meals ,new TypeToken<ArrayList<Meal>>(){}.getType());
+        ArrayList<Meal> mealsAsString = gson.fromJson(meals, new TypeToken<ArrayList<Meal>>(){}.getType());
+        return mealsAsString;
 	}
 
     public static JSONObject toJSONObject(Meal meal) throws JSONException {
