@@ -2,12 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.omar.diabetestracerapp.AskDoctorFragment">
+    tools:context="com.example.omar.diabetestracerapp.FragmentAskDoctor">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+
+        android:padding="10dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Date:"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvMessageDate" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etMessageDate"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:text="Ask your doctor Here : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvMessage"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:inputType="textMultiLine"
+            android:gravity="top|left"
+            android:id="@+id/etMessage" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send Message"
+            android:id="@+id/btnSendMessageToDoctor" />
+    </LinearLayout>
 </FrameLayout>

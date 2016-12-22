@@ -27,6 +27,7 @@ public class SqlHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_USERS);
         sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_INSULIN_DOSE);
         sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_MEAL);
+        sqLiteDatabase.execSQL(SqlContacts.STATEMENT_CREATE_TABLE_MESSAGES);
     }
 
     @Override

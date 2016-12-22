@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.omar.diabetestracerapp.AskDoctorFragment;
+import com.example.omar.diabetestracerapp.FragmentAskDoctor;
 import com.example.omar.diabetestracerapp.MainFragment;
 import com.example.omar.diabetestracerapp.ScheduleFragment;
 import com.example.omar.diabetestracerapp.StatisticsFragment;
@@ -24,7 +24,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return ScheduleFragment.newInstance("One", "Two");
             case 2:
-                return AskDoctorFragment.newInstance("One","Two");
+                return FragmentAskDoctor.newInstance();
             case 3:
                 return StatisticsFragment.newInstance("A","Thing");
         }

@@ -56,7 +56,8 @@
             android:id="@+id/material_design_floating_action_menu_item1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_placeholder"
+            android:src="@drawable/ic_dose_menu"
+
             fab:fab_label="Insulin Dose"
             fab:fab_size="mini" />
 

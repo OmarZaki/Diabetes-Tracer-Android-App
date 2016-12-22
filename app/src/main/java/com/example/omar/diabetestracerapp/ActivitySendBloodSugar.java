@@ -3,7 +3,7 @@ package com.example.omar.diabetestracerapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SendBloodSugarActivity extends AppCompatActivity {
+public class ActivitySendBloodSugar extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

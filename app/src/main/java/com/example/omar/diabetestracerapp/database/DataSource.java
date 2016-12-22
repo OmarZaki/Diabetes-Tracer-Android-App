@@ -8,8 +8,10 @@ import android.util.Log;
 
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
+import com.example.omar.diabetestracerapp.data_model.Messages;
 import com.example.omar.diabetestracerapp.data_model.User;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -143,7 +145,7 @@ public class DataSource {
      * @param date
      * @return
      */
-    public InsulinDose getCurrentInsulinDose(Date date){
+    public InsulinDose retrieveCurrentInsulinDose(Date date){
 
         //TODO 1. Get All records from dataBase;
         //TODO 2. Extract the current date record ;
@@ -202,5 +204,60 @@ public class DataSource {
         close();
     }
 
+    /**
+     * Insert one Message object.
+     * @param messages
+     */
+    public void insertMessage(Messages messages){
+        open();
+        ContentValues messagesContentValuesObject = messages.getContentValuesObject();
+        long i = database.insert(Messages._MESSAGES_TABLE,null,messagesContentValuesObject);
+        if(i!=0 ){
+            Log.i("DATASOURCE", "Message Object has been inserted to local database");
+        }else{
+            Log.i("DATASOURCE-ERROR","Message object insertion failed !");
+
+        }
+        close();
+    }
+
+    /**
+     * Insert a list of messages.
+     * @param messagesList
+     */
+    public void insertListOfMessages(List<Messages> messagesList){
+        open();
+        for(Messages msg : messagesList) {
+            ContentValues messagesContentValuesObject = msg.getContentValuesObject();
+            long i = database.insert(Messages._MESSAGES_TABLE, null, messagesContentValuesObject);
+            if (i != 0) {
+                Log.i("DATASOURCE", "Message Object has been inserted to local database");
+            } else {
+                Log.i("DATASOURCE-ERROR", "Message object insertion failed !");
+
+            }
+        }
+        close();
+    }
+
+    /**
+     * Retrieve all messages records
+     * @return
+     */
+    public List<Messages> retrieveListMessages(){
+        List<Messages> messagesList = null;
+
+        open();
+        Cursor cursor = database.query(Messages._MESSAGES_TABLE,Messages._MESSAGES_COLS,null,null,null,null,null);
+        cursor.moveToFirst();
+        while(cursor.moveToNext()){
+            messagesList = new ArrayList<Messages>();
+            Messages messages = Messages.getMessageObjectFromCursor(cursor);
+            messagesList.add(messages);
+        }
+        cursor.close();
+        close();
+        return messagesList;
+    }
 
 }

@@ -2,7 +2,9 @@ package com.example.omar.diabetestracerapp.rest_client;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -14,8 +16,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.omar.diabetestracerapp.ActivityLogin;
 import com.example.omar.diabetestracerapp.ActivityMain;
+import com.example.omar.diabetestracerapp.R;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
+import com.example.omar.diabetestracerapp.data_model.Messages;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 
@@ -158,7 +162,7 @@ public class RestClient {
                         try {
 
                             if (!response.getBoolean("result")) {
-                                registrationRequest( user);
+                                registrationRequest(user);
 
                             } else {
                                 Toast.makeText(activity.getBaseContext(), "Email is already existed", Toast.LENGTH_SHORT).show();
@@ -196,7 +200,7 @@ public class RestClient {
                             if (!response.has("result")) {
 
                                 dataSource = new DataSource(activity);
-                                if(dataSource.retrieveUserFromDataBase()==null) {
+                                if (dataSource.retrieveUserFromDataBase() == null) {
                                     User userfound = User.convertJsonToUser(response.toString());
                                     dataSource.insertUserToDataBase(userfound);
                                 }
@@ -314,11 +318,9 @@ public class RestClient {
         // TODO 6: Sync Messages.
 
 
-
-
     }
 
-    public void sendMeal(final Meal meal){
+    public void sendMeal(final Meal meal) {
         DataSource datasource = new DataSource(this.activity);
         RequestQueue queue = Volley.newRequestQueue(this.activity);
         String url = get_base_HTTPs_URL() + "/users/meal";
@@ -329,31 +331,31 @@ public class RestClient {
             meal.setUsers_id(user.getId());
             //TODO: Send user for authentication
             JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, Meal.toJSONObject(meal),
-            new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        if(response.has("result")) {
-                            DataSource dataSource =new DataSource(activity);
-                            dataSource.insertMealToDataBase(meal);
-                            Toast.makeText(activity.getBaseContext(), "Meal sent!", Toast.LENGTH_LONG).show();
-                            activity.finish();
-                        }else{
-                            Toast.makeText(activity.getBaseContext(), "Sending Meal failed", Toast.LENGTH_SHORT).show();
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response.has("result")) {
+                                    DataSource dataSource = new DataSource(activity);
+                                    dataSource.insertMealToDataBase(meal);
+                                    Toast.makeText(activity.getBaseContext(), "Meal sent!", Toast.LENGTH_LONG).show();
+                                    activity.finish();
+                                } else {
+                                    Toast.makeText(activity.getBaseContext(), "Sending Meal failed", Toast.LENGTH_SHORT).show();
+
+                                }
+
+
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
 
                         }
-
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("ERROR", error.getLocalizedMessage());
                 }
-            }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("ERROR",error.getLocalizedMessage());
-            }
             });
 
             // Add the request to the RequestQueue.
@@ -364,4 +366,40 @@ public class RestClient {
         }
     }
 
+    public void SendMessage(final Messages message) {
+
+
+        RequestQueue queue = Volley.newRequestQueue(this.activity);
+        String url = get_base_HTTPs_URL() + "/users/insertMessage";
+        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, Messages.toJsonObject(message),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                            if(response.has(Messages._ID)){
+                                // convert to Messages Object
+                                Messages messages = Messages.convertJsonToMessages(response.toString());
+                                // insert into database
+                                dataSource.insertMessage(messages);
+                                EditText etText = (EditText)activity.findViewById(R.id.etMessage);
+                                etText.setText("");
+                                Toast.makeText(activity.getBaseContext(), "Message has been sent", Toast.LENGTH_SHORT).show();
+
+                                Log.i("DATASOURSE", "MESSAGE SENT AND INSERTED ! ");
+
+                            }else{
+                                Log.i("DATASOURSE-ERROR", "MESSAGE DOES NOT SENT NOR INSERTED ! ");
+                            }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Log.i("ERROR",error.getLocalizedMessage());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(strReq);
+    }
 }

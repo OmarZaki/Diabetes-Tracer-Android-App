@@ -2,6 +2,7 @@ package com.example.omar.diabetestracerapp.database;
 
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
+import com.example.omar.diabetestracerapp.data_model.Messages;
 import com.example.omar.diabetestracerapp.data_model.User;
 
 /**
@@ -65,7 +66,16 @@ public class SqlContacts {
                     " "+ Meal._IMAGE+" TEXT NULL DEFAULT NULL,\n"+
                     " "+ Meal._USERS_ID+" INTEGER NOT NULL,\n"+
                     " PRIMARY KEY ("+ Meal._ID+"))\n";
-
+    /**
+     *  Table `diabetesdb`.`messages`
+     */
+    public static final String STATEMENT_CREATE_TABLE_MESSAGES=
+            "CREATE TABLE IF NOT EXISTS "+ Messages._MESSAGES_TABLE+" (\n" +
+                    "  "+ Messages._ID+ " INTEGER NOT NULL,\n" +
+                    "  "+ Messages._TEXT+ " TEXT NULL DEFAULT NULL,\n" +
+                    "  "+ Messages._DATE_TIME+ " TEXT NULL DEFAULT NULL,\n" +
+                    "  "+ Messages._USERS_ID+ " INTEGER NOT NULL,\n" +
+                    "  PRIMARY KEY ("+Messages._ID+"))\n" ;
 
 
     /**
@@ -132,23 +142,7 @@ public class SqlContacts {
      */
 
 
-    /**
-     *  Table `diabetesdb`.`messages`
-     */
-    public static final String STATEMENT_CREATE_TABLE_MESSAGES= "CREATE TABLE IF NOT EXISTS `diabetesdb`.`messages` (\n" +
-            "  `id` INT(11) NOT NULL,\n" +
-            "  `text` TEXT NULL DEFAULT NULL,\n" +
-            "  `date_time` DATETIME NULL DEFAULT NULL,\n" +
-            "  `Users_id` INT(11) NOT NULL,\n" +
-            "  PRIMARY KEY (`id`),\n" +
-            "  INDEX `fk_Messages_Users1_idx` (`Users_id` ASC),\n" +
-            "  CONSTRAINT `fk_Messages_Users1`\n" +
-            "    FOREIGN KEY (`Users_id`)\n" +
-            "    REFERENCES `diabetesdb`.`users` (`id`)\n" +
-            "    ON DELETE NO ACTION\n" +
-            "    ON UPDATE NO ACTION)\n" +
-            "ENGINE = InnoDB\n" +
-            "DEFAULT CHARACTER SET = utf8;\n";
+
     /**
      * SETUP parameters
      */

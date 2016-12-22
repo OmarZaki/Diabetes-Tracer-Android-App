@@ -1,7 +1,6 @@
 package com.example.omar.diabetestracerapp;
 
 
-import android.database.DataSetObservable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -57,7 +56,7 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
          */
 
         Date currentDate = new Date();
-        InsulinDose  currentInsulinDose= dataSource.getCurrentInsulinDose(currentDate);
+        InsulinDose  currentInsulinDose= dataSource.retrieveCurrentInsulinDose(currentDate);
         String currentDateString = User.ConvertDateToString(currentInsulinDose.getDate_time());
         tvDate.setText(currentDateString);
         String time = getCurrentTime(currentInsulinDose.getDate_time());
@@ -95,7 +94,7 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
     public void sendOnClick(final View view) {
 
         //TODO1: get current date InsulinDose Object from database;
-        InsulinDose insulinDose=dataSource.getCurrentInsulinDose(new Date());
+        InsulinDose insulinDose=dataSource.retrieveCurrentInsulinDose(new Date());
         //TODO2: SetTaken(True).
         insulinDose.setTaken(true);
         dataSource.updateInsulinDoseRecord(insulinDose);
