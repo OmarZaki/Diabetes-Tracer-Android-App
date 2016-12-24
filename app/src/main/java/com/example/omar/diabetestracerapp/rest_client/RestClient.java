@@ -272,6 +272,7 @@ public class RestClient {
      * @param user
      */
     public void syncData(User user) {
+
         RequestQueue queue = Volley.newRequestQueue(activity);
         String url = get_base_HTTPs_URL() + "/users/allDoses";
         CustomJsonArrayRequest arrayRequest = new CustomJsonArrayRequest(Request.Method.POST, url, User.toJsonObject(user), new Response.Listener<JSONArray>() {

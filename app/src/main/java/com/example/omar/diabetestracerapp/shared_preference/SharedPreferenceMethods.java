@@ -35,6 +35,30 @@ public class SharedPreferenceMethods {
         return rememberMeIndicator;
     }
 
+    public void storeHoursLeft(long hours){
+        SharedPreferences.Editor  editor= this.sharedPreferences.edit();
+        editor.putLong(SharedKeys.TODAY_HOURS_LEFT,hours);
+        editor.commit();
+    }
+
+    public void storeMinutesLeft(long minutes){
+        SharedPreferences.Editor  editor= this.sharedPreferences.edit();
+        editor.putLong(SharedKeys.TODAY_MINUTES_LEFT,minutes);
+        editor.commit();
+    }
+
+    public Long retrieveHoursLeft(){
+        Long hoursLeft = sharedPreferences.getLong(SharedKeys.TODAY_HOURS_LEFT,-1);
+        return hoursLeft;
+    }
+    public Long retrieveMinutesLeft(){
+        Long MinutesLeft = sharedPreferences.getLong(SharedKeys.TODAY_MINUTES_LEFT,-1);
+        return MinutesLeft;
+
+    }
+
+
+
 
 
 

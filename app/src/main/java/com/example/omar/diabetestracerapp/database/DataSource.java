@@ -110,6 +110,7 @@ public class DataSource {
      */
     public void insertListOfInsulinDoses(List<InsulinDose> insulinDoses){
         open();
+        Log.i("INSULINDOSE-INSERT","Inserted");
         for (InsulinDose insulin :insulinDoses) {
             ContentValues insulinContentValues= insulin.getContentValuesObject();
             long i = database.insert(InsulinDose._InsulinDose_TABLE,null,insulinContentValues);
@@ -154,6 +155,7 @@ public class DataSource {
         InsulinDose insulinDose=null;
         Cursor cursor = database.query(InsulinDose._InsulinDose_TABLE, InsulinDose._INSULIN_COLS,null, null,null,null,null);
         cursor.moveToFirst();
+        Log.i("DATASOURCE-INSULINDOSE", "Get insulin dose");
         while (cursor.moveToNext()){
             insulinDose = InsulinDose.getInsulinDoseObject(cursor);
             String currentDate = InsulinDose.getDateFromDateTimeObejct(date);

@@ -95,19 +95,19 @@
     </com.github.clans.fab.FloatingActionMenu>
 
     <TextView
-        android:text="00-00-000"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/tvTimeLeft"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView5" />
+        android:id="@+id/tvTodayDate" />
 
     <TextView
-        android:text="--H:--M"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textSize="90sp"
+        android:id="@+id/tvTimeLeft"
+        android:textSize="70sp"
         android:layout_marginTop="164dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />

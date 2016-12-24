@@ -16,6 +16,7 @@ import com.example.omar.diabetestracerapp.rest_client.RestClient;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.function.IntUnaryOperator;
 
 /**
  * Activity Main Code
@@ -57,9 +58,9 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
 
         Date currentDate = new Date();
         InsulinDose  currentInsulinDose= dataSource.retrieveCurrentInsulinDose(currentDate);
-        String currentDateString = User.ConvertDateToString(currentInsulinDose.getDate_time());
+        String currentDateString = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
         tvDate.setText(currentDateString);
-        String time = getCurrentTime(currentInsulinDose.getDate_time());
+        String time = InsulinDose.getCurrentTime(currentInsulinDose.getDate_time());
         tvTime.setText(time);
         tvQuantity.setText(String.valueOf(currentInsulinDose.getQuantity()) + "ML");
         /**
@@ -82,14 +83,7 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
         btnSend = (Button) findViewById(R.id.btnSendInsulinDose);
 
     }
-    private String getCurrentTime(Date currentDate) {
 
-        Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
-        calendar.setTime(currentDate);   // assigns calendar to given date
-        long hours = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
-        long minutes = calendar.get(Calendar.MINUTE);        // get current format;
-        return hours+":"+ minutes;
-    }
 
     public void sendOnClick(final View view) {
 
