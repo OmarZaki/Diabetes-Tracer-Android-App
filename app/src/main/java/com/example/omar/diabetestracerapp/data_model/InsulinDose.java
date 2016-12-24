@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -191,5 +192,96 @@ public class InsulinDose {
         }
         return jsonObject;
     }
+
+    /**
+     * get the the time from Date Object.
+     *
+     * @param currentDate
+     * @return return a date format.
+     */
+    public static String getCurrentTime(Date currentDate) {
+        Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+        calendar.setTime(currentDate);   // assigns calendar to given date
+        long hours = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
+        long minutes = calendar.get(Calendar.MINUTE);        // get current format;
+        return hours+":"+ minutes;
+    }
+
+    /**
+     * get the hours from the date object.
+     * @param currentDate
+     * @return
+     */
+    public static Long getHours(Date currentDate){
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(currentDate);
+        long hours= calendar.get(Calendar.HOUR_OF_DAY);
+        if(hours==0) hours=23;
+        return hours;
+    }
+
+    /**
+     * get minutes from the date object.
+     * @param currentDate
+     * @return
+     */
+    public static Long getMinutes(Date currentDate){
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(currentDate);
+        long minutes = calendar.get(Calendar.MINUTE) ;
+        if(minutes==0) minutes=60;
+        return minutes;
+    }
+
+    /**
+     * get the number of hours that're left for the next insulin dose.
+     * @param insulinDoseDate
+     * @param currentDate
+     * @return
+     */
+    public static Integer getHoursLeft(Date insulinDoseDate, Date currentDate){
+        long insulinDoseHours = getHours(insulinDoseDate);
+        long currentDoseHours = getHours(currentDate);
+        Integer hoursLeft =   (int)(insulinDoseHours-currentDoseHours);
+        return hoursLeft;
+    }
+
+    /**
+     * get the number of minutes that're left for the next insulin dose.
+     *
+     * @param insulinDoseDate
+     * @param currentDate
+     * @return
+     */
+    public static Integer getMinutesLeft(Date insulinDoseDate, Date currentDate){
+
+        long currentDoseMinutes= getMinutes(currentDate);
+        long insulinDoseMinutes= getMinutes(insulinDoseDate);
+        int minutesLeft= (int)(insulinDoseMinutes-currentDoseMinutes);
+        return  minutesLeft;
+    }
+
+    /**
+     * Convert Date Object to String
+     * @param Date
+     * @return
+     */
+    public static String ConvertDateToString(java.util.Date Date){
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(Date.getTime());
+    }
+    public static Long [] getTimeLeft(Date insulinDoseDate, Date currentDate){
+        Date sub = new Date(insulinDoseDate.getTime()-currentDate.getTime());
+        long Hours  = getHours(sub);
+        long Minutes= getMinutes(sub);
+        Long time [] = new Long[2];
+        time[0] = Hours;
+        time[1] = Minutes;
+        return time;
+    }
+
+
+
 
 }

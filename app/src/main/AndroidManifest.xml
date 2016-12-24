@@ -37,7 +37,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ActivitySendInsulinDose" />
-        <activity android:name=".SendMedicationActivity" />
+        <activity android:name=".ActivitySendMedication" />
         <activity android:name=".SendHeartRateActivity" />
         <activity android:name=".ActivitySendBloodSugar" />
         <activity android:name=".ActivitySendMeal"></activity>

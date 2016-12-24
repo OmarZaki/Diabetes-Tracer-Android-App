@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.omar.diabetestracerapp.FragmentAskDoctor;
-import com.example.omar.diabetestracerapp.MainFragment;
+import com.example.omar.diabetestracerapp.FragmentMain;
 import com.example.omar.diabetestracerapp.ScheduleFragment;
 import com.example.omar.diabetestracerapp.StatisticsFragment;
 
@@ -20,7 +20,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         //TODO: Change arguments received by fragments
         switch(position){
             case 0:
-                return MainFragment.newInstance("One", "Two");
+                return FragmentMain.newInstance();
             case 1:
                 return ScheduleFragment.newInstance("One", "Two");
             case 2:
