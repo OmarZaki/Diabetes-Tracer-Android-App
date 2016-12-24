@@ -28,7 +28,7 @@ public class ActivityLogo extends AppCompatActivity {
         setContentView(R.layout.activity_logo);
         /** -------> Back-end Logic <------------ */
         dataSource = new DataSource(this);
-
+        //dataSource.deleteDatabase(this);
         /** ---------> End <---------- */
 
 

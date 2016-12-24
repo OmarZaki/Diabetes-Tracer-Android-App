@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class SendHeartRateActivity extends AppCompatActivity {
+public class ActivitySendHeartRate extends AppCompatActivity {
 
     TextView tvDate;
     TextView tvTime;

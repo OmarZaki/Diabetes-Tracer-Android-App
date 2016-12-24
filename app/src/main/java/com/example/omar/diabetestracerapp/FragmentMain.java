@@ -22,7 +22,6 @@ import com.example.omar.diabetestracerapp.shared_preference.SharedPreferenceMeth
 import com.github.clans.fab.FloatingActionMenu;
 
 
-import java.sql.Time;
 import java.util.Date;
 
 
@@ -77,7 +76,8 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        HoursLeft = new Long(0);
+        MinutesLeft = new Long(2);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
         });
         sendHeartRateActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SendHeartRateActivity.class);
+                Intent intent = new Intent(v.getContext(), ActivitySendHeartRate.class);
                 startActivity(intent);
             }
         });
@@ -283,6 +283,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
                 tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
                 b=true;
             }
+
             if(HoursLeft==0 && MinutesLeft==0){
                 ivTimeLeftCircle.setImageResource(R.drawable.circle_main_send);
             }

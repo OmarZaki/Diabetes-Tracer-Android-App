@@ -38,7 +38,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ActivitySendInsulinDose" />
         <activity android:name=".ActivitySendMedication" />
-        <activity android:name=".SendHeartRateActivity" />
+        <activity android:name=".ActivitySendHeartRate" />
         <activity android:name=".ActivitySendBloodSugar" />
         <activity android:name=".ActivitySendMeal"></activity>
 

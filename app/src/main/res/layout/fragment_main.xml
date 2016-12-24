@@ -65,7 +65,7 @@
             android:id="@+id/material_design_floating_action_menu_item2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_placeholder"
+            android:src="@drawable/ic_blood_sugar_menu"
             fab:fab_label="Blood Sugar"
             fab:fab_size="mini" />
 
@@ -73,7 +73,7 @@
             android:id="@+id/material_design_floating_action_menu_item3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_placeholder"
+            android:src="@drawable/ic_heart_rate_menu"
             fab:fab_label="Send Heart Rate"
             fab:fab_size="mini" />
 
@@ -81,7 +81,7 @@
             android:id="@+id/material_design_floating_action_menu_item4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_placeholder"
+            android:src="@drawable/ic_meal_menu"
             fab:fab_label="Send Meal"
             fab:fab_size="mini" />
 
@@ -89,7 +89,7 @@
             android:id="@+id/material_design_floating_action_menu_item5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_placeholder"
+            android:src="@drawable/ic_medication_menu"
             fab:fab_label="Medication"
             fab:fab_size="mini" />
     </com.github.clans.fab.FloatingActionMenu>
