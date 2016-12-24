@@ -62,4 +62,7 @@
     <string name="select">Select</string>
     <string name="cancel">Cancel</string>
     <string name="insulin_dose_unit">ML</string>
+    <string name="setHeartRate">Click on icon to set heart rate</string>
+    <string name="heart_rate_quantity_dialog_title">Choose measured Heart Rate</string>
+    <string name="heart_rate_quantity_dialog">Hear Rate</string>
 </resources>
