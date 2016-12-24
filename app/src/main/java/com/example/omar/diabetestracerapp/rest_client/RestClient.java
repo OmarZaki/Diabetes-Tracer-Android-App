@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.omar.diabetestracerapp.ActivityLogin;
 import com.example.omar.diabetestracerapp.ActivityMain;
 import com.example.omar.diabetestracerapp.R;
+import com.example.omar.diabetestracerapp.data_model.Categories;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.Messages;
@@ -314,7 +315,25 @@ public class RestClient {
 
         queue.add(arrayRequest);
 
-        // TODO 3: Sync Categories .
+        url = get_base_HTTPs_URL() + "/users/allCategories";
+        arrayRequest = new CustomJsonArrayRequest(Request.Method.POST, url, User.toJsonObject(user), new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.i("RESPONSE", response.toString());
+                dataSource.cleanTable(Categories._Categories_TABLE);
+                List<Categories> categories = Categories.convertJsonToList(response.toString());
+                dataSource.insertListOfCategories(categories);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("ERROR_VOLLEY", "ERROR in the response ");
+            }
+        });
+
+        queue.add(arrayRequest);
         // TODO 5: Sync Appointment.
         // TODO 6: Sync Messages.
 
@@ -363,6 +382,49 @@ public class RestClient {
             meal.setImage(filepath);
             queue.add(strReq);
         } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendCategories(final Categories categories) {
+        DataSource datasource = new DataSource(this.activity);
+        RequestQueue queue = Volley.newRequestQueue(this.activity);
+        String url = get_base_HTTPs_URL() + "/users/categories";
+        try {
+            User user = datasource.retrieveUserFromDataBase();
+            categories.setUsers_id(user.getId());
+            //TODO: Send user for authentication
+            JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, Categories.toJSONObject(categories),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response.has("result")) {
+                                    DataSource dataSource = new DataSource(activity);
+                                    dataSource.insertCategoriesToDataBase(categories);
+                                    Toast.makeText(activity.getBaseContext(), "Entry sent!", Toast.LENGTH_LONG).show();
+                                    activity.finish();
+                                } else {
+                                    Toast.makeText(activity.getBaseContext(), "Sending entry failed", Toast.LENGTH_SHORT).show();
+
+                                }
+
+
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("ERROR", error.getLocalizedMessage()+"");
+                }
+            });
+
+            // Add the request to the RequestQueue.
+            queue.add(strReq);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }

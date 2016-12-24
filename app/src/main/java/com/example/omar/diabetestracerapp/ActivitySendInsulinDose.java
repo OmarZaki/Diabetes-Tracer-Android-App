@@ -75,6 +75,7 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
                 fragmentAddQuantityField.setTitle(R.string.insulin_dose_quantity_dialog_title);
                 fragmentAddQuantityField.setMessage(R.string.insulin_dose_quantity_dialog);
                 fragmentAddQuantityField.setTextView(R.id.tvDoseQuantitySendInsulinDose);
+                fragmentAddQuantityField.setUnit(R.string.insulin_dose_unit);
                 fragmentAddQuantityField.show(getFragmentManager(),"TAG");
             }
         });

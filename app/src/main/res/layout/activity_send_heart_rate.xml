@@ -47,14 +47,21 @@
         android:layout_marginTop="46dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/HeartRate_fieldTime" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/HeartRate_iconHeart"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/HeartRate_textHelp"
+        android:text="@string/setHeartRate" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/HeartRate_iconHeart">
-        <EditText
+        android:layout_below="@+id/HeartRate_textHelp">
+        <TextView
             android:id="@+id/HeartRate_input"
             android:hint="@string/heart_rate"
             android:maxLines="1"
@@ -74,6 +81,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/HeartRate_buttonSend"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="sendOnClick"/>
 
 </RelativeLayout>

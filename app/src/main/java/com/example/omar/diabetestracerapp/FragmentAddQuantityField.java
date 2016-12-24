@@ -28,7 +28,9 @@ public class FragmentAddQuantityField extends DialogFragment{
     private int message;
     private int title;
     private int max=1000;
+    private int value = -1;
     private int min=0;
+    private int unit=-1;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -43,6 +45,9 @@ public class FragmentAddQuantityField extends DialogFragment{
         npQuantity= (NumberPicker) view.findViewById(R.id.npQuantity);
         npQuantity.setMinValue(min);
         npQuantity.setMaxValue(max);
+        if(value>=0){
+            npQuantity.setValue(value);
+        }
         builder.setMessage(message)
                 .setTitle(title);
 
@@ -51,7 +56,11 @@ public class FragmentAddQuantityField extends DialogFragment{
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 long q = npQuantity.getValue();
-                tvActivityQuantity.setText(String.valueOf(q) +getString( R.string.insulin_dose_unit));
+                String res = String.valueOf(q);
+                if(unit>=0){
+                    res=res+getString(unit);
+                }
+                tvActivityQuantity.setText(res);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -83,5 +92,13 @@ public class FragmentAddQuantityField extends DialogFragment{
 
     public void setTextView(int textView) {
         this.textView = textView;
+    }
+
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

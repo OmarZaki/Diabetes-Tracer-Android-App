@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.omar.diabetestracerapp.data_model.Categories;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.Messages;
@@ -180,9 +181,26 @@ public class DataSource {
         long i = database.insert(Meal._Meal_TABLE,null,contentValues);
         if(i!= 0){
             Log.i("TAG", "Meal's record inserted!") ;
-
         }else {
             Log.i("TAG", "Meal's record is not inserted !");
+        }
+        close();
+    }
+
+    /**
+
+     * Insert the Meal object into the database
+     * @param categories
+     */
+    public void insertCategoriesToDataBase(Categories categories){
+        open();
+        ContentValues contentValues = categories.getContentValuesObject();
+        long i = database.insert(Categories._Categories_TABLE,null,contentValues);
+        if(i!= 0){
+            Log.i("TAG", "Entry inserted!") ;
+
+        }else {
+            Log.i("TAG", "Entry is not inserted !");
         }
         close();
     }
@@ -196,6 +214,25 @@ public class DataSource {
         for (Meal meal : meals) {
             ContentValues mealContentValues = meal.getContentValuesObject();
             long i = database.insert(Meal._Meal_TABLE,null,mealContentValues);
+            if(i!= 0){
+                Log.i("TAG", "Meals record inserted!") ;
+
+            }else {
+                Log.i("TAG", "Meals record is not inserted !");
+            }
+        }
+        close();
+    }
+
+    /**
+     * Insert the list of categories from database;
+     * @param categoriesList
+     */
+    public void insertListOfCategories(List<Categories> categoriesList){
+        open();
+        for (Categories categories : categoriesList) {
+            ContentValues categoriesContentValues = categories.getContentValuesObject();
+            long i = database.insert(Categories._Categories_TABLE, null, categoriesContentValues);
             if(i!= 0){
                 Log.i("TAG", "Meals record inserted!") ;
 

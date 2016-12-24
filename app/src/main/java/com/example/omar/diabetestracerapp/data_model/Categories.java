@@ -1,6 +1,16 @@
 package com.example.omar.diabetestracerapp.data_model;
 
-import java.sql.Date;
+import android.content.ContentValues;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
 /**
  * Created by OMAR on 12/9/2016.
  */
@@ -57,5 +67,28 @@ public class Categories {
 			return true;
 		return false;
 	}
-	
+
+	public static JSONObject toJSONObject(Categories categories) throws JSONException {
+		Gson gson = new Gson();
+		return new JSONObject(gson.toJson(categories));
+	}
+
+	public ContentValues getContentValuesObject(){
+		ContentValues userFieldValues = new ContentValues();
+		userFieldValues.put(Categories._ID, this.getId());
+		userFieldValues.put(Categories._VALUE, this.getValue());
+		userFieldValues.put(Categories._CATEGORY_NAME_ID, this.getCategory_name_id());
+		userFieldValues.put(Categories._DATE_TIME, this.getDate_time().toString());
+		userFieldValues.put(Categories._USERS_ID, this.getUsers_id());
+		return userFieldValues;
+	}
+
+    public static ArrayList<Categories> convertJsonToList(String categories) {
+        Gson gson =new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss")
+                .create();
+        ArrayList<Categories> categoriesAsString = gson.fromJson(categories, new TypeToken<ArrayList<Categories>>(){}.getType());
+        return categoriesAsString;
+    }
+
 }

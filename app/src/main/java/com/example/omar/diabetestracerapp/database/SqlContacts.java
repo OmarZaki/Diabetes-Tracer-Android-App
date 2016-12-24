@@ -1,5 +1,6 @@
 package com.example.omar.diabetestracerapp.database;
 
+import com.example.omar.diabetestracerapp.data_model.Categories;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.Messages;
@@ -77,6 +78,14 @@ public class SqlContacts {
                     "  "+ Messages._USERS_ID+ " INTEGER NOT NULL,\n" +
                     "  PRIMARY KEY ("+Messages._ID+"))\n" ;
 
+    public static final String STATEMENT_CREATE_TABLE_CATEGORIES =
+            "CREATE TABLE IF NOT EXISTS " + Categories._Categories_TABLE+" (\n" +
+                    " "+ Categories._ID+" INTEGER NOT NULL,\n"+
+                    " "+ Categories._VALUE+" TEXT NULL DEFAULT NULL,\n"+
+                    " "+ Categories._DATE_TIME+" TEXT DATETIME NULL DEFAULT NULL,\n"+
+                    " "+ Categories._USERS_ID+" INTEGER NOT NULL,\n"+
+                    " "+ Categories._CATEGORY_NAME_ID+" INTEGER NOT NULL,\n"+
+                    " PRIMARY KEY ("+ Categories._ID+"))\n";
 
     /**
      *  Table `diabetesdb`.`appointments`
