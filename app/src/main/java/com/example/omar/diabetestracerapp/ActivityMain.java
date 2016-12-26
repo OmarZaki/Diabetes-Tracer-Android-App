@@ -13,11 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.omar.diabetestracerapp.auxiliary.TabsPagerAdapter;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 import com.example.omar.diabetestracerapp.rest_client.RestClient;
+
+import org.w3c.dom.Text;
 
 public class ActivityMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +31,13 @@ public class ActivityMain extends AppCompatActivity
     User currentUser;
 
     TabLayout tabLayout;
+    TextView tvPatientName;
+    TextView tvPatientEmail;
+    TextView tvFirstName;
+
+    TextView tvPhone;
+    TextView tvBirthdate;
+    TextView tvType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +46,6 @@ public class ActivityMain extends AppCompatActivity
         /**
          * Set User Interface Elements
          */
-        setUserInterfaceElements();
-
         /** -------> Back-end Logic <------ **/
         restClient = new RestClient(this);
         dataSource = new DataSource(this);
@@ -46,9 +55,15 @@ public class ActivityMain extends AppCompatActivity
             if (login) {
                 restClient.syncData(currentUser);
             }
-        }
-        /** ------------ end -------------**/
 
+
+        }
+
+
+
+
+        /** ------------ end -------------**/
+        setUserInterfaceElements();
     }
 
     /**
@@ -61,14 +76,43 @@ public class ActivityMain extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+
+
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                tvPatientEmail = (TextView) findViewById(R.id.tvPatientEmail);
+                tvPatientName=(TextView) findViewById(R.id.tvPatientName);
+                // get menu from navigationView
+
+
+                tvPatientName.setText(currentUser.getFirstName());
+                tvPatientEmail.setText(currentUser.getEmail());
+            }
+        };
+
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Menu menu = navigationView.getMenu();
+        MenuItem miUser= menu.findItem(R.id.nav_name);
+        MenuItem miPhone=  menu.findItem(R.id.nav_phone);
+        MenuItem miBirthdate= menu.findItem(R.id.nav_birth_date);
+        MenuItem miType= menu.findItem(R.id.nav_type);
 
+        miUser.setTitle(currentUser.getFirstName()+" "+ currentUser.getLastName());
+        miPhone.setTitle(currentUser.getPhoneNumber());
+        miBirthdate.setTitle(User.ConvertDateToString(currentUser.getBirthDate()));
+        miType.setTitle((currentUser.getType()==true)? "Type 1":"Type 2");
         setupTablayout();
 
         final ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -113,6 +157,10 @@ public class ActivityMain extends AppCompatActivity
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+
+
+
     }
 
     @Override
@@ -153,13 +201,13 @@ public class ActivityMain extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_name) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_phone) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_birth_date) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_type) {
 
         } else if (id == R.id.nav_share) {
 
@@ -169,6 +217,7 @@ public class ActivityMain extends AppCompatActivity
             dataSource.deleteDatabase(getBaseContext());
             Intent LogoutIntent = new Intent(getBaseContext(), ActivityIntro.class);
             startActivity(LogoutIntent);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

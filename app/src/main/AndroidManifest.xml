@@ -36,11 +36,16 @@
             android:name=".ActivityMain"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActivitySendInsulinDose" />
-        <activity android:name=".ActivitySendMedication" />
-        <activity android:name=".ActivitySendHeartRate" />
-        <activity android:name=".ActivitySendBloodSugar" />
-        <activity android:name=".ActivitySendMeal"></activity>
+        <activity android:name=".ActivitySendInsulinDose"
+            android:label="@string/title_activity_send_insulin_dose"/>
+        <activity android:name=".ActivitySendMedication"
+            android:label="@string/title_activity_send_medication"/>
+        <activity android:name=".ActivitySendHeartRate"
+            android:label="@string/title_activity_send_heart_rate"/>
+        <activity android:name=".ActivitySendBloodSugar"
+            android:label="@string/title_activity_send_blood_sugar"/>
+        <activity android:name=".ActivitySendMeal"
+            android:label="@string/title_activity_send_meal"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

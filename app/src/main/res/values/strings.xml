@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DiabetesTracerApp</string>
+    <string name="app_name">Diabetes Tracer App</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -15,7 +15,7 @@
         completions."
     </string>
 
-    <string name="title_activity_logo">ActivityLogo</string>
+    <string name="title_activity_logo"> Welcome to Diabetes App</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
@@ -35,7 +35,15 @@
     <string name="new_user_register_user"> Register Now </string>
     <string name="new_user_cancel">Cancel </string>
     <string name="title_activity_new__user">"Register New User "</string>
-    <string name="title_activity_main">ActivityMain</string>
+    <string name="title_activity_main">Diabetes Tracer</string>
+    <string name="title_activity_send_insulin_dose">Send Insulin dose</string>
+    <string name="title_activity_send_meal">Send Meal</string>
+    <string name="title_activity_send_medication">Send Medication</string>
+    <string name="title_activity_send_blood_sugar">Send Blood Sugar</string>
+    <string name="title_activity_send_heart_rate">Send Heart Rate</string>
+
+
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
