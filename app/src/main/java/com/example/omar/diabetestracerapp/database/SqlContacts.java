@@ -4,6 +4,7 @@ import com.example.omar.diabetestracerapp.data_model.Categories;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.Messages;
+import com.example.omar.diabetestracerapp.data_model.Schedule;
 import com.example.omar.diabetestracerapp.data_model.User;
 
 /**
@@ -12,6 +13,8 @@ import com.example.omar.diabetestracerapp.data_model.User;
 
 public class SqlContacts {
     public static final String DATABASE_NAME="diabetesdb";
+
+
     /**
      * Constructor should be a private to prevent being initiated accidentally.
      */
@@ -88,6 +91,17 @@ public class SqlContacts {
                     " PRIMARY KEY ("+ Categories._ID+"))\n";
 
     /**
+     * This to collect will store all the events that collected from other tables.
+     * it will be stored only in the local database and will not be
+     */
+    public static final java.lang.String STATEMENT_CREATE_TABLE_SCHEDULE =
+            "CREATE TABLE IF NOT EXISTS "+ Schedule._SCHEDULE_TABLE+" (\n" +
+                    "  "+ Schedule._COL_TITLE+ " TEXT NOT NULL ,\n" +
+                    "  "+Schedule._COL_DATE + " TEXT NULL DEFAULT NULL" +
+                    "  "+Schedule._COL_TYPE+ " INTEGER NULL DEFAULT NULL" +
+                    ")\n";
+
+    /**
      *  Table `diabetesdb`.`appointments`
      */
     public static final String STATEMENT_CREATE_TABLE_APPOINTMENTS=
@@ -159,6 +173,7 @@ public class SqlContacts {
             "SET SQL_MODE=@OLD_SQL_MODE;\n" +
             "SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;\n" +
             "SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;";
+
 
 
 }

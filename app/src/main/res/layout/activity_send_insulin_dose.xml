@@ -54,7 +54,7 @@
         android:id="@+id/ivIconDoseSendInsulinDose"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_dose"
+        app:srcCompat="@drawable/ic_item_dose"
         android:layout_marginTop="46dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/tvTimeSendInsulinDose" />

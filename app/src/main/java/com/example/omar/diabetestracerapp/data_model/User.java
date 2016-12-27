@@ -36,7 +36,7 @@ public class User {
     public final static String _PHONE_NUMBER = "phone_number";
     public final static String _TOKEN = "token";
     public final static String _ADMIN = "admin";
-    public final static String _TYPE = "type";
+    public final static String _TYPE = "Type";
     public final static String _CREATION_DATE = "creation_date";
     public final static String _BIRTH_DATE= "birth_date";
     public final static String _ADDRESS = "address";

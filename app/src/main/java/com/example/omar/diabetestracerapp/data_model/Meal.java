@@ -26,7 +26,7 @@ public class Meal {
 	
 	// Meal Columns names
 	public final static String _ID = "id";
-	public final static String _TYPE = "type";
+	public final static String _TYPE = "Type";
 	public final static String _DESCRIPTION = "description";
 	public final static String _IMAGE = "image";
 	public final static String _DATE_TIME = "date_time";

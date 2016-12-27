@@ -10,6 +10,7 @@ import com.example.omar.diabetestracerapp.data_model.Categories;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.Messages;
+import com.example.omar.diabetestracerapp.data_model.Schedule;
 import com.example.omar.diabetestracerapp.data_model.User;
 
 import java.util.ArrayList;
@@ -297,6 +298,23 @@ public class DataSource {
         cursor.close();
         close();
         return messagesList;
+    }
+
+
+    public void storeListEvents(){
+        open();
+        // TODO 1. GET all Messages,
+        // TODO 2. GET all InsulinDoses.
+        // TODO 3. GET all Meals.
+        // TODO 4. GET all Categories.
+        // TODO 5. Insert them in The Schedule table.
+
+        close();
+
+    }
+    public List<Schedule> retrieveALlEventByDate(){
+        // TODO 1. select the records ordered by date.
+        return new ArrayList<Schedule>();
     }
 
 }
