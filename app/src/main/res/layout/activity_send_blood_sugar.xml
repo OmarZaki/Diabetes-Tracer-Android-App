@@ -8,6 +8,93 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.omar.diabetestracerapp.ActivitySendBloodSugar">
+    tools:context="com.example.omar.diabetestracerapp.ActivitySendBloodSugar"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_clock"
+        android:id="@+id/BloodSugar_iconTime"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/placeholder_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BloodSugar_iconTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:id="@+id/BloodSugar_fieldDate"
+        android:textSize="36sp" />
+
+    <TextView
+        android:layout_below="@+id/BloodSugar_fieldDate"
+        android:text="@string/placeholder_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/BloodSugar_fieldTime"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_blood_sugar"
+        android:id="@+id/BloodSugar_iconLevel"
+        android:layout_marginTop="46dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/BloodSugar_fieldTime" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BloodSugar_iconLevel"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/BloodSugar_textHelp"
+        android:text="@string/setBloodSugar" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/BloodSugar_textHelp">
+        <Spinner
+            android:id="@+id/BloodSugar_input"
+            android:hint="@string/_5"
+            android:maxLines="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp" />
+        <TextView
+            android:id="@+id/BloodSugar_point"
+            android:text="@string/point"
+            android:maxLines="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp" />
+        <Spinner
+            android:id="@+id/BloodSugar_input_dec"
+            android:hint="@string/_5"
+            android:maxLines="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mmol"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+    <Button
+        android:text="@string/button_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/BloodSugar_buttonSend"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="sendOnClick"/>
 
 </RelativeLayout>
