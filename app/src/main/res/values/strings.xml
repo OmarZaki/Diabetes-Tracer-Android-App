@@ -79,6 +79,7 @@
     <string name="blood_sugar_quantity_dialog">Blood Sugar</string>
     <string name="point">.</string>
     <string name="_5">5</string>
+    <string name="medication_name">Medication Name</string>
 
     <string-array name="numbers_array">
         <item>0</item>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_send_medication"
     android:layout_width="match_parent"
@@ -9,5 +10,67 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.omar.diabetestracerapp.ActivitySendMedication">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/ic_clock"
+                android:id="@+id/Medication_iconTime"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="@string/placeholder_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Medication_iconTime"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="11dp"
+                android:id="@+id/Medication_fieldDate"
+                android:textSize="36sp" />
+
+            <TextView
+                android:layout_below="@+id/Medication_fieldDate"
+                android:text="@string/placeholder_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Medication_fieldTime"
+                android:textSize="24sp"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/ic_medication"
+                android:id="@+id/Medication_iconMed"
+                android:layout_marginTop="46dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/Medication_fieldTime" />
+
+            <EditText
+                android:id="@+id/Medication_input"
+                android:hint="@string/medication_name"
+                android:layout_below="@id/Medication_iconMed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:maxLength="44"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:text="@string/button_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Medication_buttonSend"
+                android:layout_below="@id/Medication_input"
+                android:layout_centerHorizontal="true"
+                android:onClick="sendOnClick"/>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
