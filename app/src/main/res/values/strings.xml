@@ -72,5 +72,26 @@
     <string name="insulin_dose_unit">ML</string>
     <string name="setHeartRate">Click on icon to set heart rate</string>
     <string name="heart_rate_quantity_dialog_title">Choose measured Heart Rate</string>
-    <string name="heart_rate_quantity_dialog">Hear Rate</string>
+    <string name="heart_rate_quantity_dialog">Heart Rate</string>
+    <string name="mmol">mmol/L</string>
+    <string name="setBloodSugar">Click on the icon to set blood sugar level</string>
+    <string name="blood_sugar_quantity_dialog_title">Choose measured Blood Sugar level</string>
+    <string name="blood_sugar_quantity_dialog">Blood Sugar</string>
+    <string name="point">.</string>
+    <string name="_5">5</string>
+    <string name="medication_name">Medication Name</string>
+
+    <string-array name="numbers_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
 </resources>

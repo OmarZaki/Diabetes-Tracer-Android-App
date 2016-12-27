@@ -42,7 +42,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_heartbeat"
+        app:srcCompat="@drawable/ic_heart_rate"
         android:id="@+id/HeartRate_iconHeart"
         android:layout_marginTop="46dp"
         android:layout_centerHorizontal="true"
