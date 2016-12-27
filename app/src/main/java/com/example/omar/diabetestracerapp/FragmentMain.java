@@ -46,6 +46,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     Long HoursLeft;
     Long MinutesLeft;
     String todayDate;
+    Boolean taken;
     /**
      * ----------> end <----------
      **/
@@ -159,18 +160,25 @@ public class FragmentMain extends android.support.v4.app.Fragment {
         dataSource = new DataSource(this.getActivity());
         InsulinDose currentInsulinDose = dataSource.retrieveCurrentInsulinDose(todayCurrentDate);
         if (currentInsulinDose != null) {
-            todayDate = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
-            tvTodayDate.setText(todayDate);
-            // TODO 2. Calculate the date left for the dose.
-            Long[] time = InsulinDose.getTimeLeft(currentInsulinDose.getDate_time(), todayCurrentDate);
-            HoursLeft = time[0];
-            MinutesLeft = time[1];
+            if(!currentInsulinDose.getTaken()) {
+                taken = false;
+                todayDate = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
+                Log.d("DATES", "InsulinDose: " + currentInsulinDose.getDate_time().toString() + "/Current: " + todayCurrentDate.toString());
+                tvTodayDate.setText(todayDate);
+                // TODO 2. Calculate the date left for the dose.
+                Long[] time = InsulinDose.getTimeLeft(currentInsulinDose.getDate_time(), todayCurrentDate);
+                HoursLeft = time[0];
+                MinutesLeft = time[1];
 
 //            int HoursLeft = InsulinDose.getHoursLeft(currentInsulinDose.getDate_time(), todayCurrentDate);
 //            int MinutesLeft = InsulinDose.getMinutesLeft(currentInsulinDose.getDate_time(), todayCurrentDate);
 
-            tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
-            // save the itme
+                tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
+                // save the itme
+            } else {
+                taken = true;
+                tvTimeLeft.setText("Dose Taken");
+            }
 
         }
 
@@ -276,16 +284,19 @@ public class FragmentMain extends android.support.v4.app.Fragment {
         @Override
         public void run() {
             tvTodayDate.setText(todayDate);
-            if(b) {
-                tvTimeLeft.setText(HoursLeft + "H" + " " + MinutesLeft + "M");
-                b=false;
-            }else{
-                tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
-                b=true;
-            }
-
-            if(HoursLeft==0 && MinutesLeft==0){
-                ivTimeLeftCircle.setImageResource(R.drawable.circle_main_send);
+            if(!taken) {
+                if (b) {
+                    tvTimeLeft.setText(HoursLeft + "H" + " " + MinutesLeft + "M");
+                    b = false;
+                } else {
+                    tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
+                    b = true;
+                }
+                if(HoursLeft==0 && MinutesLeft==0){
+                    ivTimeLeftCircle.setImageResource(R.drawable.circle_main_send);
+                }
+            } else {
+                tvTimeLeft.setText("Dose Taken");
             }
                 Log.i("HEY", "DELAY!");
             timeLive.postDelayed(this,1000);

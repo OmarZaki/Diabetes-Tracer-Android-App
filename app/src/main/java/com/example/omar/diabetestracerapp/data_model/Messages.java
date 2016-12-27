@@ -117,14 +117,14 @@ public class Messages {
 
     private static String convertUserToJson(Messages message) {
         Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .setDateFormat("yyyy-MM-dd HH:mm:ss.S")
                 .create();
         return gson.toJson(message);
     }
 
     public static Messages convertJsonToMessages(String response) {
         Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .setDateFormat("yyyy-MM-dd HH:mm:ss.S")
                 .create();
         Messages message = gson.fromJson(response, Messages.class);
         return message;
