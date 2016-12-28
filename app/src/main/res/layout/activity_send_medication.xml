@@ -46,7 +46,7 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_medication"
+                app:srcCompat="@drawable/ic_item_medication"
                 android:id="@+id/Medication_iconMed"
                 android:layout_marginTop="46dp"
                 android:layout_centerHorizontal="true"

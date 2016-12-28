@@ -73,7 +73,7 @@ public class Schedule {
         Schedule schedule= new Schedule();
         schedule.setTitle(cursor.getString(cursor.getColumnIndex(Schedule._COL_TITLE)));
         schedule.setType(TypeEvent.valueOf(cursor.getString(cursor.getColumnIndex(Schedule._COL_TYPE))));
-        schedule.setDate(User.ConvertStringToDateObject(cursor.getString(cursor.getColumnIndex(Schedule._COL_DATE))));
+        schedule.setDate(User.ConvertStringToDateObjectFormDB(cursor.getString(cursor.getColumnIndex(Schedule._COL_DATE))));
         return schedule;
     }
 }

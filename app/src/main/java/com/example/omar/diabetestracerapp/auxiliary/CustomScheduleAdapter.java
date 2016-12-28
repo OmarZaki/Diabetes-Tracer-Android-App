@@ -61,7 +61,7 @@ public class CustomScheduleAdapter extends ArrayAdapter {
 
         // setup the values.
         // set the icon based on the Type of the icon.
-        ivIconEvent.setImageResource(getObjectTypeIcon(events.get(position).getObject()));
+        ivIconEvent.setImageResource(getObjectTypeIcon(events.get(position).getType()));
         tvItemTitle.setText(events.get(position).getTitle());
         tvItemDate.setText(events.get(position).getDate().toString());
         return viewRow;
@@ -69,28 +69,29 @@ public class CustomScheduleAdapter extends ArrayAdapter {
 
     }
 
-    private int getObjectTypeIcon(Object object) {
+    private int getObjectTypeIcon(TypeEvent object) {
         int type = R.drawable.ic_item_blood_sugar;
-        if(object instanceof InsulinDose){
+        if(object == TypeEvent.DOSE){
             type=R.drawable.ic_item_dose;
         }
-        if(object instanceof Meal){
+        if(object == TypeEvent.MEAL){
             type= R.drawable.ic_item_meal;
         }
-        if(object instanceof Messages){
+        if(object == TypeEvent.MESSAGE){
             type = R.drawable.ic_item_message;
         }
-        if(object instanceof Categories){
-            Categories categories = (Categories)object;
-            // this for heart rate;
-            if(categories.getCategory_name_id()==1){
-                type = R.drawable.ic_item_heart_rate;
-            }
-            // for the blood sugar
-            if(categories.getCategory_name_id()==2){
-                    type= R.drawable.ic_item_blood_sugar;
-            }
+        if(object == TypeEvent.BLOODSUGAR) {
+            type = R.drawable.ic_item_blood_sugar;
         }
+            // this for heart rate;
+        if(object == TypeEvent.HEARATE){
+            type = R.drawable.ic_item_heart_rate;
+        }
+            // for the blood sugar
+        if(object == TypeEvent.MEDITCATION){
+            type = R.drawable.ic_item_medication;
+        }
+
         return type ;
 
     }

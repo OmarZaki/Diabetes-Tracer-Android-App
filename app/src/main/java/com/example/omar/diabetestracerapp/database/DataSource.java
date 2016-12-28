@@ -351,21 +351,19 @@ public class DataSource {
 
     public ArrayList<Schedule> retrieveListEvents(int month) {
         open();
-
         ArrayList<Schedule> scheduleList = null;
         //String sql = "SELECT * FROM " + Schedule._SCHEDULE_TABLE+" WHERE MONTH("+Schedule._COL_DATE+")=? ; ";
         String sql = "SELECT * FROM " + Schedule._SCHEDULE_TABLE+" ;";
         Cursor cursor = database.query(Schedule._SCHEDULE_TABLE,Schedule._SCHEDULE_COLL,null,null,null,null,null);
         cursor.moveToFirst();
-        if(cursor.moveToNext()){
+        scheduleList = new ArrayList<Schedule>();
+        while(cursor.moveToNext()){
             Schedule s = Schedule.getScheduleDoseObject(cursor);
             // check if the date is
             Calendar cal = Calendar.getInstance();
             cal.setTime(s.getDate());
             int itemMonth = cal.get(Calendar.MONTH);
-            if(itemMonth != month){
-                scheduleList.add(s);
-            }
+            scheduleList.add(s);
         }
         close();
         return scheduleList;

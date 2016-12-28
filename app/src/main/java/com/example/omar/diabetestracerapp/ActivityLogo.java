@@ -7,6 +7,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.omar.diabetestracerapp.data_model.Schedule;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 import com.example.omar.diabetestracerapp.rest_client.RestClient;
@@ -46,6 +47,7 @@ public class ActivityLogo extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
+                dataSource.cleanTable(Schedule._SCHEDULE_TABLE);
                 User user = dataSource.retrieveUserFromDataBase();
                 finish();
                 if(user!=null){

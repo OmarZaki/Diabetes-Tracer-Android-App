@@ -283,7 +283,6 @@ public class RestClient {
             public void onResponse(JSONArray response) {
                 Log.i("RESPONSE", response.toString());
                 dataSource.cleanTable(InsulinDose._InsulinDose_TABLE);
-                dataSource.cleanTable(Schedule._SCHEDULE_TABLE);
                 List<InsulinDose> insulinDoses = InsulinDose.convertJsonToList(response.toString());
                 dataSource.insertListOfInsulinDoses(insulinDoses);
 
