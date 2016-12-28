@@ -20,6 +20,7 @@ import com.example.omar.diabetestracerapp.database.DataSource;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *  The Fragment that should hold
@@ -27,8 +28,9 @@ import java.util.Date;
 public class FragmentSchedule extends Fragment {
     /** ------------> Back-end Code <------- */
     ArrayList<Schedule> scheduleArrayList;
-    CustomScheduleAdapter customScheduleAdapter;
     ArrayList<Schedule> allEvents;
+    DataSource dataSource ;
+
     /** ------> List-View Elemtns <------ **/
     ListView lvEvents;
 
@@ -52,15 +54,7 @@ public class FragmentSchedule extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        lvEvents = (ListView)getActivity().findViewById(R.id.lvEvents);
-        //allevents = getAllEventFromDataBase();
-        // TODO 1. get the events schedule from database;
-
-        // TODO 2. set up it with data adapter.
-
-        customScheduleAdapter = new CustomScheduleAdapter(getActivity(),allEvents);
-        lvEvents.setAdapter(customScheduleAdapter);
-
+        allEvents= new ArrayList<Schedule>();
 
 
     }
@@ -74,24 +68,35 @@ public class FragmentSchedule extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        return view;
     }
-
-
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
 
+    }
+
+
+    @Override
+        public void onDetach() {
+        super.onDetach();
 
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void onResume() {
+        super.onResume();
+        lvEvents = (ListView)getActivity().findViewById(R.id.lvEvents);
+        dataSource = new DataSource(getActivity());
+        GetAllEventsTask task = new GetAllEventsTask(getActivity());
+        task.execute(1);
     }
 
     /**
@@ -110,13 +115,10 @@ public class FragmentSchedule extends Fragment {
     }
 
     public class GetAllEventsTask extends AsyncTask<Integer, Void, Void> {
-
         DataSource dataSource;
-
         public GetAllEventsTask(Activity thisActivity) {
             super();
 
-            dataSource = new DataSource(thisActivity.getBaseContext());
         }
 
         protected void onPreExecute() {
@@ -125,29 +127,26 @@ public class FragmentSchedule extends Fragment {
 
         @Override
         protected Void doInBackground(Integer... params) {
-//            Boolean b = true;
-//            while (b) {
-//                Log.i("Sync-Task", "I am trying ... ");
-//                InsulinDose insulinDose = dataSource.retrieveCurrentInsulinDose(new Date());
-//                if (insulinDose != null) {
-//                    b = false;
-//                } else {
-//                    Thread.currentThread();
-//                    try {
-//                        Thread.sleep(5000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
+            Boolean lock = true;
+            while(lock){
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Log.i("TRYING-SCHEDULE","trying to download");
+                dataSource=new DataSource(getActivity());
+                allEvents= new ArrayList<>();
+                allEvents = dataSource.retrieveListEvents(12);
+                lock = (allEvents==null)? true: false;
+            }
             return null;
         }
 
         @Override
         protected void onPostExecute(Void response) {
-
-//        /** ----- > Back-end source code <----- */
-
+            CustomScheduleAdapter customScheduleAdapter = new CustomScheduleAdapter(getActivity(), allEvents);
+            lvEvents.setAdapter(customScheduleAdapter);
         }
     }
 }

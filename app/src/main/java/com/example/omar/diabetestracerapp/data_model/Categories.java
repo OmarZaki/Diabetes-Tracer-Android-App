@@ -1,6 +1,7 @@
 package com.example.omar.diabetestracerapp.data_model;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,7 +18,11 @@ import java.util.Date;
 public class Categories {
 
 	public final static String _Categories_TABLE="Categories";
-	
+	public static String[] _CATEGORRIES_COLL = {Categories._ID,
+			Categories._DATE_TIME,
+			Categories._VALUE,
+			Categories._USERS_ID,
+			Categories._CATEGORY_NAME_ID};
 	// Categories Columns names
 	public final static String _ID = "id";
 	public final static String _DATE_TIME = "date_time";
@@ -73,7 +78,7 @@ public class Categories {
 		return new JSONObject(gson.toJson(categories));
 	}
 
-	public ContentValues getContentValuesObject(){
+		public ContentValues getContentValuesObject(){
 		ContentValues userFieldValues = new ContentValues();
 		userFieldValues.put(Categories._ID, this.getId());
 		userFieldValues.put(Categories._VALUE, this.getValue());
@@ -91,4 +96,13 @@ public class Categories {
         return categoriesAsString;
     }
 
+
+	public static Categories getCategoriesDoseObject(Cursor cursor) {
+		Categories categories = new Categories();
+		categories.setId(cursor.getInt(cursor.getColumnIndex(Categories._ID)));
+		categories.setValue(cursor.getString(cursor.getColumnIndex(Categories._VALUE)));
+		categories.setDate_time(new Date(Messages.convertStringToDateObjectFormDB(cursor.getString(cursor.getColumnIndex(Categories._DATE_TIME))).getTime()));
+
+		return categories;
+	}
 }

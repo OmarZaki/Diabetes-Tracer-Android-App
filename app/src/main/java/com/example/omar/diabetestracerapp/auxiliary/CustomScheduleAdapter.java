@@ -63,7 +63,7 @@ public class CustomScheduleAdapter extends ArrayAdapter {
         // set the icon based on the Type of the icon.
         ivIconEvent.setImageResource(getObjectTypeIcon(events.get(position).getObject()));
         tvItemTitle.setText(events.get(position).getTitle());
-        tvItemDate.setText(events.get(position).getDate());
+        tvItemDate.setText(events.get(position).getDate().toString());
         return viewRow;
 
 

@@ -41,7 +41,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_blood_sugar"
+        app:srcCompat="@drawable/ic_item_blood_sugar"
         android:id="@+id/BloodSugar_iconLevel"
         android:layout_marginTop="46dp"
         android:layout_centerHorizontal="true"

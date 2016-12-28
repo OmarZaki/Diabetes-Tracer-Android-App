@@ -1,6 +1,7 @@
 package com.example.omar.diabetestracerapp.data_model;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.util.Base64;
 
 import com.google.gson.Gson;
@@ -132,5 +133,12 @@ public class Meal {
         buf.close();
         this.image = Base64.encodeToString(bytes,Base64.NO_WRAP);
     }
-
+	public static Meal getInsulinDoseObject(Cursor cursor) {
+		Meal meal = new Meal();
+		meal.setId(cursor.getInt(cursor.getColumnIndex(Meal._ID)));
+		meal.setType(cursor.getString(cursor.getColumnIndex(Meal._TYPE)));
+		meal.setDescription(cursor.getString(cursor.getColumnIndex(Meal._DESCRIPTION)));
+		meal.setDate_time(new Date(User.ConvertStringToDateObjectFormDB(cursor.getString(cursor.getColumnIndex(Meal._DATE_TIME))).getTime()) );
+		return meal;
+	}
 }

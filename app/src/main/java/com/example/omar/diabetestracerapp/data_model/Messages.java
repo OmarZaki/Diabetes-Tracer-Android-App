@@ -5,12 +5,14 @@ import android.database.Cursor;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -128,5 +130,12 @@ public class Messages {
                 .create();
         Messages message = gson.fromJson(response, Messages.class);
         return message;
+    }
+    public static ArrayList<Messages> convertJsonToList(String messages) {
+        Gson gson =new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd hh:mm:ss")
+                .create();
+        ArrayList<Messages> messagesList = gson.fromJson(messages, new TypeToken<ArrayList<Messages>>(){}.getType());
+        return messagesList;
     }
 }

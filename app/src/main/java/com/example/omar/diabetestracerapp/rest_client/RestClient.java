@@ -21,6 +21,7 @@ import com.example.omar.diabetestracerapp.data_model.Categories;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.Messages;
+import com.example.omar.diabetestracerapp.data_model.Schedule;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 
@@ -282,8 +283,10 @@ public class RestClient {
             public void onResponse(JSONArray response) {
                 Log.i("RESPONSE", response.toString());
                 dataSource.cleanTable(InsulinDose._InsulinDose_TABLE);
+                dataSource.cleanTable(Schedule._SCHEDULE_TABLE);
                 List<InsulinDose> insulinDoses = InsulinDose.convertJsonToList(response.toString());
                 dataSource.insertListOfInsulinDoses(insulinDoses);
+
 
             }
         }, new Response.ErrorListener() {
@@ -314,7 +317,7 @@ public class RestClient {
         });
 
         queue.add(arrayRequest);
-
+        // TODO : Sync Categories.
         url = get_base_HTTPs_URL() + "/users/allCategories";
         arrayRequest = new CustomJsonArrayRequest(Request.Method.POST, url, User.toJsonObject(user), new Response.Listener<JSONArray>() {
 
@@ -334,8 +337,30 @@ public class RestClient {
         });
 
         queue.add(arrayRequest);
-        // TODO 5: Sync Appointment.
+
         // TODO 6: Sync Messages.
+        url = get_base_HTTPs_URL() + "/users/allMessages";
+        arrayRequest = new CustomJsonArrayRequest(Request.Method.POST, url, User.toJsonObject(user), new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.i("RESPONSE", response.toString());
+
+                dataSource.cleanTable(Messages._MESSAGES_TABLE);
+                List<Messages> messages = Messages.convertJsonToList(response.toString());
+                dataSource.insertListOfMessages(messages);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("ERROR_VOLLEY", "ERROR in the response ");
+            }
+        });
+
+        queue.add(arrayRequest);
+
+        // TODO 5: Sync Appointment.
 
 
 

@@ -96,9 +96,9 @@ public class SqlContacts {
      */
     public static final java.lang.String STATEMENT_CREATE_TABLE_SCHEDULE =
             "CREATE TABLE IF NOT EXISTS "+ Schedule._SCHEDULE_TABLE+" (\n" +
-                    "  "+ Schedule._COL_TITLE+ " TEXT NOT NULL ,\n" +
-                    "  "+Schedule._COL_DATE + " TEXT NULL DEFAULT NULL" +
-                    "  "+Schedule._COL_TYPE+ " INTEGER NULL DEFAULT NULL" +
+                    "  "+ Schedule._COL_TITLE + " TEXT NOT NULL ,\n" +
+                    "  "+ Schedule._COL_DATE   + " TEXT NULL DEFAULT NULL" +" , "+
+                    "  "+ Schedule._COL_TYPE   + " STRING NULL DEFAULT NULL" +
                     ")\n";
 
     /**
