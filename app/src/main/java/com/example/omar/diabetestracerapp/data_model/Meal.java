@@ -113,7 +113,7 @@ public class Meal {
 
 	public static ArrayList<Meal> convertJsonToList(String meals) {
 		Gson gson =new GsonBuilder()
-				.setDateFormat("yyyy-MM-dd hh:mm:ss")
+				.setDateFormat("yyyy-MM-dd HH:mm:ss")
 				.create();
         ArrayList<Meal> mealsAsString = gson.fromJson(meals, new TypeToken<ArrayList<Meal>>(){}.getType());
         return mealsAsString;

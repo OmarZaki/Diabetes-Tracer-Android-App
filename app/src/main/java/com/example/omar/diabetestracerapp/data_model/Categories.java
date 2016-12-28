@@ -74,7 +74,9 @@ public class Categories {
 	}
 
 	public static JSONObject toJSONObject(Categories categories) throws JSONException {
-		Gson gson = new Gson();
+		Gson gson =new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd HH:mm:ss")
+				.create();
 		return new JSONObject(gson.toJson(categories));
 	}
 

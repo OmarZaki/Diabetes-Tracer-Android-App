@@ -3,6 +3,7 @@ package com.example.omar.diabetestracerapp.data_model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by OMAR on 12/9/2016.
@@ -154,7 +156,7 @@ public class InsulinDose {
     }
     public static ArrayList<InsulinDose> convertJsonToList(String insulinDose) {
         Gson gson =new  GsonBuilder()
-                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .setDateFormat("yyyy-MM-dd HH:mm:ss.S")
                 .create();
         ArrayList<InsulinDose> insulinDoseAsString = gson.fromJson(insulinDose,new TypeToken<ArrayList<InsulinDose>>(){}.getType());
         return insulinDoseAsString;
@@ -166,7 +168,7 @@ public class InsulinDose {
      */
     public static InsulinDose convertStringToObject(String insulinDoseAsString){
         Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
+                .setDateFormat("yyyy-MM-dd HH:mm:ss.S")
                 .create();
         InsulinDose dose = gson.fromJson(insulinDoseAsString, InsulinDose.class);
         return dose;
@@ -214,9 +216,10 @@ public class InsulinDose {
      */
     public static Long getHours(Date currentDate){
         Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         calendar.setTime(currentDate);
         long hours= calendar.get(Calendar.HOUR_OF_DAY);
-        if(hours==0) hours=23;
+        //if(hours==0) hours=23;
         return hours;
     }
 
@@ -227,38 +230,11 @@ public class InsulinDose {
      */
     public static Long getMinutes(Date currentDate){
         Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         calendar.setTime(currentDate);
         long minutes = calendar.get(Calendar.MINUTE) ;
-        if(minutes==0) minutes=60;
+        //if(minutes==-1) minutes=60;
         return minutes;
-    }
-
-    /**
-     * get the number of hours that're left for the next insulin dose.
-     * @param insulinDoseDate
-     * @param currentDate
-     * @return
-     */
-    public static Integer getHoursLeft(Date insulinDoseDate, Date currentDate){
-        long insulinDoseHours = getHours(insulinDoseDate);
-        long currentDoseHours = getHours(currentDate);
-        Integer hoursLeft =   (int)(insulinDoseHours-currentDoseHours);
-        return hoursLeft;
-    }
-
-    /**
-     * get the number of minutes that're left for the next insulin dose.
-     *
-     * @param insulinDoseDate
-     * @param currentDate
-     * @return
-     */
-    public static Integer getMinutesLeft(Date insulinDoseDate, Date currentDate){
-
-        long currentDoseMinutes= getMinutes(currentDate);
-        long insulinDoseMinutes= getMinutes(insulinDoseDate);
-        int minutesLeft= (int)(insulinDoseMinutes-currentDoseMinutes);
-        return  minutesLeft;
     }
 
     /**
@@ -272,16 +248,20 @@ public class InsulinDose {
         return df.format(Date.getTime());
     }
     public static Long [] getTimeLeft(Date insulinDoseDate, Date currentDate){
-        Date sub = new Date(insulinDoseDate.getTime()-currentDate.getTime());
-        long Hours  = getHours(sub);
-        long Minutes= getMinutes(sub);
-        Long time [] = new Long[2];
-        time[0] = Hours;
-        time[1] = Minutes;
+        if(insulinDoseDate.getTime()>=currentDate.getTime()) {
+            Date sub = new Date(insulinDoseDate.getTime() - currentDate.getTime());
+            Log.d("Diff", sub.toString());
+            Calendar calendar = GregorianCalendar.getInstance();
+            calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+            calendar.setTime(sub);
+            Long time[] = new Long[2];
+            time[0] = (long) calendar.get(Calendar.HOUR_OF_DAY);
+            time[1] = (long) calendar.get(Calendar.MINUTE);
+            return time;
+        }
+        Long time[] = new Long[2];
+        time[0] = (long) 0;
+        time[1] = (long) 0;
         return time;
     }
-
-
-
-
 }
