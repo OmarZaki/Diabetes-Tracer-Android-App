@@ -52,7 +52,7 @@ public class SqlContacts {
             "  PRIMARY KEY ("+User._ID+"))\n" ;
 
     public static final String STATEMENT_CREATE_TABLE_INSULIN_DOSE =
-            "CREATE TABLE IF NOT EXISTS "+ InsulinDose._InsulinDose_TABLE+" (\n" +
+            "CREATE TABLE IF NOT EXISTS "+ InsulinDose._INSULIN_DOSE_TABLE +" (\n" +
                     "  "+ InsulinDose._ID+ " INTEGER NOT NULL,\n" +
                     "  "+ InsulinDose._ORIGANL_ID+ " INTEGER NOT NULL ,\n" +
                     "  "+InsulinDose._QUANTITY + " INTEGER NULL DEFAULT NULL,\n" +

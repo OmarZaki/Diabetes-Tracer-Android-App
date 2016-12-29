@@ -25,15 +25,14 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
                 return FragmentSchedule.newInstance();
             case 2:
                 return FragmentAskDoctor.newInstance();
-            case 3:
-                return StatisticsFragment.newInstance("A","Thing");
+
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
     @Override

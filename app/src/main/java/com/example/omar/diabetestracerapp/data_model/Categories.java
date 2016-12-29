@@ -3,6 +3,7 @@ package com.example.omar.diabetestracerapp.data_model;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.example.omar.diabetestracerapp.auxiliary.TypeEvent;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -10,15 +11,19 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 /**
  * Created by OMAR on 12/9/2016.
  */
 public class Categories {
+	public static final String _BLOOD_SUGAR_TITLE="Blood Sugar";
+	public static final String _HEART_RATE_TITLE="Heart RATE";
+	public static final String _MEDICATION_TITLE="Midication";
 
 	public final static String _Categories_TABLE="Categories";
-	public static String[] _CATEGORRIES_COLL = {Categories._ID,
+	public static String[] _CATEGORIES_COLL = {Categories._ID,
 			Categories._DATE_TIME,
 			Categories._VALUE,
 			Categories._USERS_ID,
@@ -106,5 +111,14 @@ public class Categories {
 		categories.setDate_time(new Date(Messages.convertStringToDateObjectFormDB(cursor.getString(cursor.getColumnIndex(Categories._DATE_TIME))).getTime()));
 
 		return categories;
+	}
+	public static TypeEvent getType(Categories cat){
+		TypeEvent typeEvent = null;
+		if(cat!= null){
+			typeEvent= (cat.getCategory_name_id() ==1)? TypeEvent.HEARATE: null;
+			typeEvent= (cat.getCategory_name_id() ==2)? TypeEvent.MEDITCATION: null;
+			typeEvent= (cat.getCategory_name_id() ==3)? TypeEvent.BLOODSUGAR: null;
+		}
+		return typeEvent;
 	}
 }

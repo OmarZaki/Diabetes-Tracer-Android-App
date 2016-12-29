@@ -211,6 +211,15 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        TimeHandler.removeCallbacks(new UpdateTimeTask());
+        timeLive.removeCallbacks(new UpdateTimeLive());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        TimeHandler.removeCallbacks(new UpdateTimeTask());
+        timeLive.removeCallbacks(new UpdateTimeLive());
     }
 
     /**

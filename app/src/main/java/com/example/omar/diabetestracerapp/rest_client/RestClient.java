@@ -2,7 +2,6 @@ package com.example.omar.diabetestracerapp.rest_client;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +16,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.omar.diabetestracerapp.ActivityLogin;
 import com.example.omar.diabetestracerapp.ActivityMain;
 import com.example.omar.diabetestracerapp.R;
+import com.example.omar.diabetestracerapp.auxiliary.SyncIndicators;
 import com.example.omar.diabetestracerapp.data_model.Categories;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
@@ -282,10 +282,10 @@ public class RestClient {
             @Override
             public void onResponse(JSONArray response) {
                 Log.i("RESPONSE", response.toString());
-                dataSource.cleanTable(InsulinDose._InsulinDose_TABLE);
+                dataSource.cleanTable(InsulinDose._INSULIN_DOSE_TABLE);
                 List<InsulinDose> insulinDoses = InsulinDose.convertJsonToList(response.toString());
                 dataSource.insertListOfInsulinDoses(insulinDoses);
-
+                SyncIndicators.SyncInsulin = true;
 
             }
         }, new Response.ErrorListener() {
@@ -306,6 +306,7 @@ public class RestClient {
                 dataSource.cleanTable(Meal._Meal_TABLE);
                 List<Meal> meals = Meal.convertJsonToList(response.toString());
                 dataSource.insertListOfMeals(meals);
+                SyncIndicators.SyncMeal = true;
 
             }
         }, new Response.ErrorListener() {
@@ -326,7 +327,7 @@ public class RestClient {
                 dataSource.cleanTable(Categories._Categories_TABLE);
                 List<Categories> categories = Categories.convertJsonToList(response.toString());
                 dataSource.insertListOfCategories(categories);
-
+                SyncIndicators.SyncCategories = true;
             }
         }, new Response.ErrorListener() {
             @Override
@@ -348,6 +349,7 @@ public class RestClient {
                 dataSource.cleanTable(Messages._MESSAGES_TABLE);
                 List<Messages> messages = Messages.convertJsonToList(response.toString());
                 dataSource.insertListOfMessages(messages);
+                SyncIndicators.SyncMessages= true;
 
             }
         }, new Response.ErrorListener() {
@@ -428,6 +430,8 @@ public class RestClient {
                                     DataSource dataSource = new DataSource(activity);
                                     dataSource.insertCategoriesToDataBase(categories);
                                     Toast.makeText(activity.getBaseContext(), "Entry sent!", Toast.LENGTH_LONG).show();
+
+
                                     activity.finish();
                                 } else {
                                     Toast.makeText(activity.getBaseContext(), "Sending entry failed", Toast.LENGTH_SHORT).show();

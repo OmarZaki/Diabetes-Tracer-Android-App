@@ -39,7 +39,8 @@ public class Meal {
 			Meal._IMAGE,
 			Meal._DATE_TIME,
 			Meal._USERS_ID};
-	
+	public static final  String _MEAL_TITLE="Meal";
+
 	private int id;
 	private String type;
 	private String description;

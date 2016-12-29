@@ -31,6 +31,7 @@ public class Messages {
             Messages._TEXT,
             Messages._DATE_TIME,
             Messages._USERS_ID};
+    public static final String  _MESSAGE_TITLE="Message ";
     private int id;
     private String text;
     private Date date_time;

@@ -1,9 +1,7 @@
 package com.example.omar.diabetestracerapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,15 +10,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.example.omar.diabetestracerapp.auxiliary.CustomScheduleAdapter;
-import com.example.omar.diabetestracerapp.data_model.InsulinDose;
+import com.example.omar.diabetestracerapp.auxiliary.SyncIndicators;
+import com.example.omar.diabetestracerapp.auxiliary.TypeEvent;
 import com.example.omar.diabetestracerapp.data_model.Schedule;
 import com.example.omar.diabetestracerapp.database.DataSource;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,7 +34,11 @@ public class FragmentSchedule extends Fragment {
     ArrayList<Schedule> allEvents;
     DataSource dataSource ;
     Handler eventHandler;
+    Boolean downloaded = false;
 
+    Spinner spinnerYears;
+    Spinner spinnerMonths;
+    Spinner spinnerType;
     /** ------> List-View Elemtns <------ **/
     ListView lvEvents;
 
@@ -48,8 +54,9 @@ public class FragmentSchedule extends Fragment {
     public static FragmentSchedule newInstance() {
         FragmentSchedule fragment = new FragmentSchedule();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
+
+
         return fragment;
     }
 
@@ -81,28 +88,103 @@ public class FragmentSchedule extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-
     }
 
 
     @Override
         public void onDetach() {
         super.onDetach();
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
         lvEvents = (ListView)getActivity().findViewById(R.id.lvEvents);
+        spinnerYears = (Spinner) getActivity().findViewById(R.id.spinnerYear);
+        spinnerMonths = (Spinner) getActivity().findViewById(R.id.spinnerMonth);
+        spinnerType= (Spinner) getActivity().findViewById(R.id.spinnerType);
         dataSource=new DataSource( getActivity());
-        eventHandler = new Handler();
-        eventHandler.postDelayed( new GetAllEventsTask(), 1000*20 );
-//        GetAllEventsTask task = new GetAllEventsTask(getActivity());
-//        task.execute(1);
-        //eventHandler.removeCallbacks(new GetAllEventsTask() );
 
+        setupListAdapters();
+
+        final int month = spinnerMonths.getSelectedItemPosition();
+        final int year = Integer.valueOf(spinnerYears.getSelectedItem().toString());
+        final TypeEvent type =TypeEvent.valueOf(spinnerType.getSelectedItem().toString());
+
+        spinnerMonths.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                filterSchedule();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        spinnerYears.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                filterSchedule();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                filterSchedule();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        // download the list.
+        eventHandler = new Handler();
+        eventHandler.post( new GetAllEventsTask(month,year,type) );
+    }
+
+    private void setupListAdapters() {
+        // month spinner adapter
+        List<String> monthList =   Arrays.asList(getActivity().getResources().getStringArray(R.array.months_array));
+        ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, monthList);
+        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMonths.setAdapter(monthAdapter);
+        spinnerMonths.setSelection(0);
+        // years spinner adapter
+        List <String> yearList = Arrays.asList(getActivity().getResources().getStringArray(R.array.years_array));
+        ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, yearList);
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerYears.setAdapter(yearAdapter);
+        spinnerYears.setSelection(0);
+        // types spinner adapter.
+        List <String> typeList = new ArrayList<String>();
+        typeList.add(String.valueOf(TypeEvent.BLOODSUGAR));
+        typeList.add(String.valueOf(TypeEvent.DOSE));
+        typeList.add(String.valueOf(TypeEvent.HEARATE));
+        typeList.add(String.valueOf(TypeEvent.MEAL));
+        typeList.add(String.valueOf(TypeEvent.MEDITCATION));
+        typeList.add(String.valueOf(TypeEvent.MESSAGE));
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, typeList);
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerType.setAdapter(typeAdapter);
+        spinnerType.setSelection(0);
+    }
+
+    private void filterSchedule() {
+        int month = spinnerMonths.getSelectedItemPosition();
+        int year = Integer.valueOf(spinnerYears.getSelectedItem().toString());
+        final TypeEvent type = TypeEvent.valueOf(spinnerType.getSelectedItem().toString());
+
+        allEvents = new ArrayList<>();
+        allEvents = dataSource.retrieveListEvents(month, year,type);
+        CustomScheduleAdapter customScheduleAdapter = new CustomScheduleAdapter(getActivity(), allEvents);
+        lvEvents.setAdapter(customScheduleAdapter);
     }
 
     /**
@@ -119,47 +201,35 @@ public class FragmentSchedule extends Fragment {
 
         void onFragmentInteraction(Uri uri);
     }
-//
-//    public class GetAllEventsTask extends AsyncTask<Integer, Void, Void> {
-//        DataSource dataSource;
-//        public GetAllEventsTask(Activity thisActivity) {
-//            super();
-//
-//        }
-//
-//        protected void onPreExecute() {
-//
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Integer... params) {
-//            Boolean lock = true;
-//            while(lock){
-//
-//                Log.i("TRYING-SCHEDULE","trying to download");
-//
-//                lock = (allEvents==null)? true: false;
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void response) {
-//
-//        }
-//    }
+
     class GetAllEventsTask implements Runnable {
+     int month = 0 ;
+    int year = 0 ;
+    TypeEvent type=TypeEvent.DOSE;
+    public GetAllEventsTask( int month, int year,TypeEvent type) {
+        this.month = month;
+        this.year = year;
+        this.type= type;
+    }
 
-        @Override
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+
+        SyncIndicators.SyncSchedule = true;
+    }
+
+    @Override
         public void run() {
-           // eventHandler.postDelayed(this,1000*20);
+            eventHandler.postDelayed(this,1000*2);
             Log.i("TRYING-SCHEDULE","trying to download");
-            allEvents= new ArrayList<>();
-
-            allEvents = dataSource.retrieveListEvents(12);
-            CustomScheduleAdapter customScheduleAdapter = new CustomScheduleAdapter(getActivity(), allEvents);
-            lvEvents.setAdapter(customScheduleAdapter);
-
+            if(SyncIndicators.SyncCategories  && SyncIndicators.SyncMessages && SyncIndicators.SyncMeal && SyncIndicators.SyncInsulin) {
+                allEvents = new ArrayList<>();
+                allEvents = dataSource.retrieveListEvents(month,year,type);
+                CustomScheduleAdapter customScheduleAdapter = new CustomScheduleAdapter(getActivity(), allEvents);
+                lvEvents.setAdapter(customScheduleAdapter);
+                eventHandler.removeCallbacks(this);
+            }
         }
     }
 

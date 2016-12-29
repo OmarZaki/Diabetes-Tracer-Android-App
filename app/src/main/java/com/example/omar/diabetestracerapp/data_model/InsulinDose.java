@@ -24,8 +24,8 @@ import java.util.TimeZone;
  * Created by OMAR on 12/9/2016.
  */
 public class InsulinDose {
-
-    public final static String _InsulinDose_TABLE = "insulinDose";
+    public final static String _INSULIN_DOSE_TITLE="Insulin Dose";
+    public final static String _INSULIN_DOSE_TABLE = "insulinDose";
     public static final String _DATE_FORMAT_NOW="yyyy-MM-dd HH:mm:ss";
 
     public static String[] _INSULIN_COLS = {InsulinDose._ID,
