@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.example.omar.diabetestracerapp.R;
 import com.example.omar.diabetestracerapp.data_model.Schedule;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by OMAR on 12/26/2016.
@@ -51,6 +53,7 @@ public class CustomScheduleAdapter extends ArrayAdapter {
         // List User Interface elements
         ImageView ivIconEvent = (ImageView)viewRow.findViewById(R.id.ivIconScheduleItem);
         TextView tvItemTitle = (TextView) viewRow.findViewById(R.id.tvTitleScheduleItem);
+
         TextView tvItemDate = (TextView) viewRow.findViewById(R.id.tvDateScheduleItem);
        // Button tbnDetails = (Button)viewRow.findViewById(R.id.btnDetailsScheduleItem);
 
@@ -58,11 +61,19 @@ public class CustomScheduleAdapter extends ArrayAdapter {
         // set the icon based on the Type of the icon.
         ivIconEvent.setImageResource(getObjectTypeIcon(events.get(position).getType()));
         tvItemTitle.setText(events.get(position).getTitle());
-        tvItemDate.setText(events.get(position).getDate().toString());
+
+        tvItemDate.setText(dateConversion(events.get(position).getDate()));
         return viewRow;
 
 
     }
+    private String dateConversion(Date date){
+        String dateTimeFormat="yyyy-MM-dd 'at' HH:mm:ss ";
+        SimpleDateFormat formatter = new SimpleDateFormat(dateTimeFormat);
+        String d = formatter.format(date);
+        return d;
+    }
+
 
     private int getObjectTypeIcon(TypeEvent object) {
         int type = R.drawable.ic_item_blood_sugar;
