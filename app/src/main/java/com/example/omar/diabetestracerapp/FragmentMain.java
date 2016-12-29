@@ -305,7 +305,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
                     ivTimeLeftCircle.setImageResource(R.drawable.circle_main_send);
                 }
             } else {
-                ivTimeLeftCircle.setImageResource(R.drawable.circle_main_send);
+                ivTimeLeftCircle.setImageResource(R.drawable.circle_main);
                 tvTimeLeft.setText("Dose Taken");
             }
                 Log.i("HEY", "DELAY!");
