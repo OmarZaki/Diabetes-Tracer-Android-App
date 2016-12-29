@@ -166,9 +166,9 @@ public class FragmentSchedule extends Fragment {
         List <String> typeList = new ArrayList<String>();
         typeList.add(String.valueOf(TypeEvent.BLOODSUGAR));
         typeList.add(String.valueOf(TypeEvent.DOSE));
-        typeList.add(String.valueOf(TypeEvent.HEARATE));
+        typeList.add(String.valueOf(TypeEvent.HEARTRATE));
         typeList.add(String.valueOf(TypeEvent.MEAL));
-        typeList.add(String.valueOf(TypeEvent.MEDITCATION));
+        typeList.add(String.valueOf(TypeEvent.MEDICATION));
         typeList.add(String.valueOf(TypeEvent.MESSAGE));
         ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, typeList);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

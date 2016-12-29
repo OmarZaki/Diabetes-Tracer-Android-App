@@ -14,7 +14,6 @@ import com.example.omar.diabetestracerapp.data_model.Messages;
 import com.example.omar.diabetestracerapp.data_model.Schedule;
 import com.example.omar.diabetestracerapp.data_model.User;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -227,7 +226,7 @@ public class DataSource {
             // add to Schedule table
             Schedule s = new Schedule();
             s.setType(Categories.getType(categories));
-            s.setTitle((s.getType()== TypeEvent.BLOODSUGAR)?Categories._BLOOD_SUGAR_TITLE:((s.getType()==TypeEvent.MEDITCATION)?Categories._MEDICATION_TITLE:(s.getType()== TypeEvent.HEARATE?Categories._HEART_RATE_TITLE:null)));
+            s.setTitle((s.getType()== TypeEvent.BLOODSUGAR)?Categories._BLOOD_SUGAR_TITLE:((s.getType()==TypeEvent.MEDICATION)?Categories._MEDICATION_TITLE:(s.getType()== TypeEvent.HEARTRATE ?Categories._HEART_RATE_TITLE:null)));
             s.setDate(categories.getDate_time());
             insertSchedule(s);
         } else {
@@ -278,11 +277,11 @@ public class DataSource {
                 schedule.setDate(categories.getDate_time());
                 if(categories.getCategory_name_id() == 1){
                     schedule.setTitle(Categories._HEART_RATE_TITLE);
-                    schedule.setType(TypeEvent.HEARATE);
+                    schedule.setType(TypeEvent.HEARTRATE);
                 }
                 if(categories.getCategory_name_id() == 2){
                     schedule.setTitle(Categories._MEDICATION_TITLE);
-                    schedule.setType(TypeEvent.MEDITCATION);
+                    schedule.setType(TypeEvent.MEDICATION);
                 }
                 if(categories.getCategory_name_id()==3){
                     schedule.setTitle(Categories._BLOOD_SUGAR_TITLE);

@@ -11,7 +11,6 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 /**
@@ -19,8 +18,8 @@ import java.util.Date;
  */
 public class Categories {
 	public static final String _BLOOD_SUGAR_TITLE="Blood Sugar";
-	public static final String _HEART_RATE_TITLE="Heart RATE";
-	public static final String _MEDICATION_TITLE="Midication";
+	public static final String _HEART_RATE_TITLE="Heart Rate";
+	public static final String _MEDICATION_TITLE="Medication";
 
 	public final static String _Categories_TABLE="Categories";
 	public static String[] _CATEGORIES_COLL = {Categories._ID,
@@ -115,8 +114,8 @@ public class Categories {
 	public static TypeEvent getType(Categories cat){
 		TypeEvent typeEvent = null;
 		if(cat!= null){
-			typeEvent= (cat.getCategory_name_id() ==1)? TypeEvent.HEARATE: null;
-			typeEvent= (cat.getCategory_name_id() ==2)? TypeEvent.MEDITCATION: null;
+			typeEvent= (cat.getCategory_name_id() ==1)? TypeEvent.HEARTRATE : null;
+			typeEvent= (cat.getCategory_name_id() ==2)? TypeEvent.MEDICATION : null;
 			typeEvent= (cat.getCategory_name_id() ==3)? TypeEvent.BLOODSUGAR: null;
 		}
 		return typeEvent;

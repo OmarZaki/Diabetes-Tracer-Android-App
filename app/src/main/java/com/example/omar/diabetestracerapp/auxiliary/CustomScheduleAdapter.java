@@ -7,16 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.example.omar.diabetestracerapp.R;
-import com.example.omar.diabetestracerapp.data_model.Categories;
-import com.example.omar.diabetestracerapp.data_model.InsulinDose;
-import com.example.omar.diabetestracerapp.data_model.Meal;
-import com.example.omar.diabetestracerapp.data_model.Messages;
 import com.example.omar.diabetestracerapp.data_model.Schedule;
 
 import java.util.ArrayList;
@@ -84,11 +79,11 @@ public class CustomScheduleAdapter extends ArrayAdapter {
             type = R.drawable.ic_item_blood_sugar;
         }
             // this for heart rate;
-        if(object == TypeEvent.HEARATE){
+        if(object == TypeEvent.HEARTRATE){
             type = R.drawable.ic_item_heart_rate;
         }
             // for the blood sugar
-        if(object == TypeEvent.MEDITCATION){
+        if(object == TypeEvent.MEDICATION){
             type = R.drawable.ic_item_medication;
         }
 

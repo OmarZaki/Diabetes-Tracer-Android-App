@@ -46,7 +46,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     Long HoursLeft;
     Long MinutesLeft;
     String todayDate;
-    Boolean taken;
+    Boolean taken=false;
     /**
      * ----------> end <----------
      **/
