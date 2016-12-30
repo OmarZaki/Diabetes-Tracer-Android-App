@@ -59,6 +59,11 @@ public class ActivitySendHeartRate extends AppCompatActivity {
         });
     }
 
+    /**
+     * get current time
+     * @param currentDate
+     * @return
+     */
     private String getCurrentTime(Date currentDate) {
 
         Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
@@ -67,6 +72,7 @@ public class ActivitySendHeartRate extends AppCompatActivity {
         long minutes = calendar.get(Calendar.MINUTE);        // get current format;
         return hours+":"+ minutes;
     }
+
 
     public void sendOnClick(View v){
         Categories categories = new Categories();

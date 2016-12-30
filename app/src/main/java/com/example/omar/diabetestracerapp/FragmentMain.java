@@ -232,12 +232,14 @@ public class FragmentMain extends android.support.v4.app.Fragment {
 
         void onFragmentInteraction(Uri uri);
     }
+
     public void setUpAlarm( ){
        //run the alarm
         alarm= new DoseAlarmReceiver();
         alarm.setAlarm(getActivity());
 
     }
+
     public class TaskGetCurrentInsulinDoseAfterItDownloaded extends AsyncTask<Integer, Void, Void> {
         Activity ThisActivity;
         DataSource dataSource;

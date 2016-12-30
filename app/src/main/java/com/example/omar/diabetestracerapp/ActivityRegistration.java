@@ -98,7 +98,7 @@ public class ActivityRegistration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 User user = collectUserInfo();
-                SendRegistrationRequest((Activity) view.getContext(), user);
+                sendRegistrationRequest((Activity) view.getContext(), user);
             }
         });
     }
@@ -148,7 +148,7 @@ public class ActivityRegistration extends AppCompatActivity {
      * @param activity
      * @return
      */
-    public void SendRegistrationRequest(Activity activity, User user ) {
+    public void sendRegistrationRequest(Activity activity, User user ) {
         RestClient client = new RestClient(this);
         client.registration(user);
     }

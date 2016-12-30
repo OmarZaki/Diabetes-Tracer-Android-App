@@ -23,7 +23,7 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
     RestClient restClient;
     /** -----> end <-------*/
 
-
+    // Interface Elements
     ImageView ivIconDateSendInsulinDose;
     ImageView ivIconDoseSendInsulinDose;
     TextView tvDate;
@@ -92,6 +92,10 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
             btnSend.setEnabled(false);
         }
     }
+
+    /**
+     * Setup user interface elements.
+     */
     private void setupUserInterfaceElements(){
         ivIconDateSendInsulinDose = (ImageView) findViewById(R.id.ivIconDateSendInsulinDose);
         ivIconDoseSendInsulinDose = (ImageView) findViewById(R.id.ivIconDoseSendInsulinDose);
