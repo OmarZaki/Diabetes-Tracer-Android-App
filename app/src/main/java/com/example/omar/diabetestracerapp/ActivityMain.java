@@ -3,15 +3,14 @@ package com.example.omar.diabetestracerapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,8 +20,6 @@ import com.example.omar.diabetestracerapp.auxiliary.TabsPagerAdapter;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 import com.example.omar.diabetestracerapp.rest_client.RestClient;
-
-import org.w3c.dom.Text;
 
 public class ActivityMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -113,7 +110,7 @@ public class ActivityMain extends AppCompatActivity
         miUser.setTitle(currentUser.getFirstName()+" "+ currentUser.getLastName());
         miPhone.setTitle(currentUser.getPhoneNumber());
         miBirthdate.setTitle(User.ConvertDateToString(currentUser.getBirthDate()));
-        miType.setTitle((currentUser.getType()==true)? "Type 1":"Type 2");
+        miType.setTitle((currentUser.getType()) ? "Type 1" : "Type 2");
         setupTablayout();
 
         final ViewPager pager = (ViewPager) findViewById(R.id.pager);

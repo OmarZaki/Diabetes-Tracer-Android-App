@@ -9,5 +9,5 @@ public class SyncIndicators {
     public static boolean SyncMeal = false;
     public static boolean SyncCategories = false;
     public static boolean SyncMessages = false;
-    public static boolean SyncSchedule = false;
+    //public static boolean SyncSchedule = false;
 }

@@ -1,14 +1,13 @@
 package com.example.omar.diabetestracerapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.omar.diabetestracerapp.data_model.Categories;
-import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.rest_client.RestClient;
 

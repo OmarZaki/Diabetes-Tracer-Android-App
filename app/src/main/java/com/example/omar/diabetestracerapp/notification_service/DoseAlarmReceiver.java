@@ -94,7 +94,7 @@ public class DoseAlarmReceiver extends WakefulBroadcastReceiver {
 
 
         alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 60 * 1000, 1 * 60 * 1000, alarmIntent);
+                SystemClock.elapsedRealtime() + 60 * 1000, 60 * 1000, alarmIntent);
         Log.i("Starting..", "starting the service");
 //         Enable {@code SampleBootReceiver} to automatically restart the alarm when the
 //         device is rebooted.

@@ -1,15 +1,12 @@
 package com.example.omar.diabetestracerapp;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +21,6 @@ import com.example.omar.diabetestracerapp.notification_service.DoseAlarmReceiver
 import com.example.omar.diabetestracerapp.rest_client.RestClient;
 import com.example.omar.diabetestracerapp.shared_preference.SharedPreferenceMethods;
 import com.github.clans.fab.FloatingActionMenu;
-
 
 import java.util.Date;
 
@@ -82,8 +78,8 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        HoursLeft = new Long(0);
-        MinutesLeft = new Long(0);
+        HoursLeft = 0L;
+        MinutesLeft = 0L;
     }
 
     @Override
@@ -174,7 +170,6 @@ public class FragmentMain extends android.support.v4.app.Fragment {
                 todayDate = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
                 Log.d("DATES", "InsulinDose: " + currentInsulinDose.getDate_time().toString() + "/Current: " + todayCurrentDate.toString());
                 tvTodayDate.setText(todayDate);
-                // TODO 2. Calculate the date left for the dose.
                 Long[] time = InsulinDose.getTimeLeft(currentInsulinDose.getDate_time(), todayCurrentDate);
                 HoursLeft = time[0];
                 MinutesLeft = time[1];
@@ -290,7 +285,6 @@ public class FragmentMain extends android.support.v4.app.Fragment {
             todayDate = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
             Log.d("DATES", "InsulinDose: " + currentInsulinDose.getDate_time().toString() + "/Current: " + new Date().toString());
             tvTodayDate.setText(todayDate);
-            // TODO 2. Calculate the date left for the dose.
             Long[] time = InsulinDose.getTimeLeft(currentInsulinDose.getDate_time(), new Date());
             HoursLeft = time[0];
             MinutesLeft = time[1];

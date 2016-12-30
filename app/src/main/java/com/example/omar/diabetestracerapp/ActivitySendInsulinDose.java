@@ -112,9 +112,7 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
         dataSource.updateInsulinDoseRecord(insulinDose);
         //TODO3: Send request to server to change this data;
         restClient.SendInsulinDose(insulinDose);
-        //TODO 4: if request success -> done.
 
-        //TODO 5: if request not -> mark user as dirty flag;
 
 
     }

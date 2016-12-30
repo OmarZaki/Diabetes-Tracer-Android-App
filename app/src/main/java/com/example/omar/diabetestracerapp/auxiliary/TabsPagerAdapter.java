@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.example.omar.diabetestracerapp.FragmentAskDoctor;
 import com.example.omar.diabetestracerapp.FragmentMain;
 import com.example.omar.diabetestracerapp.FragmentSchedule;
-import com.example.omar.diabetestracerapp.StatisticsFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
@@ -17,7 +16,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        //TODO: Change arguments received by fragments
         switch(position){
             case 0:
                 return FragmentMain.newInstance();

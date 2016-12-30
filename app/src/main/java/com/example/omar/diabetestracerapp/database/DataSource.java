@@ -173,8 +173,6 @@ public class DataSource {
      */
     public InsulinDose retrieveCurrentInsulinDose(Date date) {
 
-        //TODO 1. Get All records from dataBase;
-        //TODO 2. Extract the current date record ;
 
         open();
         InsulinDose insulinDose = null;
@@ -450,10 +448,6 @@ public class DataSource {
         return doseList;
     }
 
-    public List<Schedule> retrieveALlEventByDate() {
-        // TODO 1. select the records ordered by date.
-        return new ArrayList<Schedule>();
-    }
 
     /**
      * get the User from database

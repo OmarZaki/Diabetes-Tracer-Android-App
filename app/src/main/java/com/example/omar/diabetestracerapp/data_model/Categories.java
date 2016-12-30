@@ -69,16 +69,9 @@ public class Categories {
 	public void setCategory_name_id(int category_name_id) {
 		Category_name_id = category_name_id;
 	}
-	
-	public boolean validate(){
-		if(this.getCategory_name_id()>=0 && this.getCategory_name_id()<4
-				&& this.getUsers_id()>0 && this.getValue()!=null)
-			return true;
-		return false;
-	}
 
-	public static JSONObject toJSONObject(Categories categories) throws JSONException {
-		Gson gson =new GsonBuilder()
+    public static JSONObject toJSONObject(Categories categories) throws JSONException {
+        Gson gson =new GsonBuilder()
 				.setDateFormat("yyyy-MM-dd HH:mm:ss")
 				.create();
 		return new JSONObject(gson.toJson(categories));

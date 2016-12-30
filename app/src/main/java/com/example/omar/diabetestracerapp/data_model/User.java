@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -174,7 +175,7 @@ public class User {
      */
     public Boolean validate() {
         Boolean result = false;
-        if (this.firstName != "" && this.lastName != "" && validateEmailFormat(this.email) && this.password != "") {
+        if (!Objects.equals(this.firstName, "") && !Objects.equals(this.lastName, "") && validateEmailFormat(this.email) && !Objects.equals(this.password, "")) {
             result = true;
         }
         return result;

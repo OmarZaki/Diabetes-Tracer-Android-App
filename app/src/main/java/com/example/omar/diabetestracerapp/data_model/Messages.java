@@ -81,9 +81,7 @@ public class Messages {
     }
 
     public boolean validate() {
-        if (this.getDate_time() != null && !this.getText().equals("") && this.getUsers_id() > 0)
-            return true;
-        return false;
+        return this.getDate_time() != null && !this.getText().equals("") && this.getUsers_id() > 0;
     }
 
     public static Messages getMessageObjectFromCursor(Cursor cursor) {

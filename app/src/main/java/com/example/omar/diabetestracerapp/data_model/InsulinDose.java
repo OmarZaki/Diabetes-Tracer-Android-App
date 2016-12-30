@@ -218,9 +218,8 @@ public class InsulinDose {
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         calendar.setTime(currentDate);
-        long hours= calendar.get(Calendar.HOUR_OF_DAY);
         //if(hours==0) hours=23;
-        return hours;
+        return (long) calendar.get(Calendar.HOUR_OF_DAY);
     }
 
     /**
@@ -232,9 +231,8 @@ public class InsulinDose {
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         calendar.setTime(currentDate);
-        long minutes = calendar.get(Calendar.MINUTE) ;
         //if(minutes==-1) minutes=60;
-        return minutes;
+        return (long) calendar.get(Calendar.MINUTE);
     }
 
     /**

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -12,7 +13,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -86,8 +86,6 @@ public class ActivitySendMeal extends AppCompatActivity {
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
-        } else {
-            //Nothing happens!
         }
     }
 
@@ -106,7 +104,6 @@ public class ActivitySendMeal extends AppCompatActivity {
                     imgTakePhoto.setImageResource(R.drawable.ic_denied);
                     Toast.makeText(this, "Permissions to access camera and write files required, picture cannot be taken.", Toast.LENGTH_SHORT).show();
                 }
-                return;
             }
             // other 'case' lines to check for other
             // permissions this app might request

@@ -11,7 +11,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.omar.diabetestracerapp.ActivityLogin;
 import com.example.omar.diabetestracerapp.ActivityMain;
@@ -21,7 +20,6 @@ import com.example.omar.diabetestracerapp.data_model.Categories;
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.data_model.Meal;
 import com.example.omar.diabetestracerapp.data_model.Messages;
-import com.example.omar.diabetestracerapp.data_model.Schedule;
 import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 
@@ -72,37 +70,8 @@ public class RestClient {
     }
 
     /**
-     * Get the full url Path for the Restful Api server App;
-     */
-    public void HelloTest() {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.activity);
-        String url = get_base_HTTPs_URL() + "/hello";
-
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Toast.makeText(activity.getBaseContext(), response, Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("TAG", "That didn't work!");
-            }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
-    }
-
-    /**
      * Register New Patient to the System.
      *
-     * @param user
-     * @return
      */
     private void registrationRequest(final User user) {
 
@@ -149,7 +118,6 @@ public class RestClient {
     /**
      * Include check if the user email is existed
      *
-     * @param user
      */
     public void registration(final User user) {
         //  1: Request to check if the user is already exist.
@@ -188,7 +156,7 @@ public class RestClient {
     }
 
     /**
-     * @param user
+     * Authenticate user on remote server
      */
     public void logInUser(final User user) {
 
@@ -234,7 +202,6 @@ public class RestClient {
     /**
      * Send Insulin dose .
      *
-     * @param insulinDose
      */
     public void SendInsulinDose(InsulinDose insulinDose) {
 
@@ -271,7 +238,6 @@ public class RestClient {
     /**
      * Synchronize data.
      *
-     * @param user
      */
     public void syncData(User user) {
 
@@ -317,7 +283,6 @@ public class RestClient {
         });
 
         queue.add(arrayRequest);
-        // TODO : Sync Categories.
         url = get_base_HTTPs_URL() + "/users/allCategories";
         arrayRequest = new CustomJsonArrayRequest(Request.Method.POST, url, User.toJsonObject(user), new Response.Listener<JSONArray>() {
 
@@ -338,7 +303,6 @@ public class RestClient {
 
         queue.add(arrayRequest);
 
-        // TODO 6: Sync Messages.
         url = get_base_HTTPs_URL() + "/users/allMessages";
         arrayRequest = new CustomJsonArrayRequest(Request.Method.POST, url, User.toJsonObject(user), new Response.Listener<JSONArray>() {
 
@@ -360,7 +324,6 @@ public class RestClient {
 
         queue.add(arrayRequest);
 
-        // TODO 5: Sync Appointment.
 
 
 
@@ -375,7 +338,6 @@ public class RestClient {
             meal.encodeImageToBase64String();
             User user = datasource.retrieveUserFromDataBase();
             meal.setUsers_id(user.getId());
-            //TODO: Send user for authentication
             JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, Meal.toJSONObject(meal),
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -419,7 +381,6 @@ public class RestClient {
         try {
             User user = datasource.retrieveUserFromDataBase();
             categories.setUsers_id(user.getId());
-            //TODO: Send user for authentication
             JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, url, Categories.toJSONObject(categories),
                     new Response.Listener<JSONObject>() {
                         @Override

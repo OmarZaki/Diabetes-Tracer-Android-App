@@ -10,7 +10,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.omar.diabetestracerapp.ActivitySendInsulinDose;
 import com.example.omar.diabetestracerapp.R;
