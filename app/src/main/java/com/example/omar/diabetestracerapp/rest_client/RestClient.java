@@ -71,11 +71,8 @@ public class RestClient {
 
     /**
      * Register New Patient to the System.
-     *
      */
     private void registrationRequest(final User user) {
-
-
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.activity);
         String url = get_base_HTTPs_URL() + "/users/register";
@@ -117,7 +114,6 @@ public class RestClient {
 
     /**
      * Include check if the user email is existed
-     *
      */
     public void registration(final User user) {
         //  1: Request to check if the user is already exist.
@@ -201,7 +197,6 @@ public class RestClient {
 
     /**
      * Send Insulin dose .
-     *
      */
     public void SendInsulinDose(InsulinDose insulinDose) {
 
@@ -237,7 +232,6 @@ public class RestClient {
 
     /**
      * Synchronize data.
-     *
      */
     public void syncData(User user) {
 
@@ -312,7 +306,7 @@ public class RestClient {
                 dataSource.cleanTable(Messages._MESSAGES_TABLE);
                 List<Messages> messages = Messages.convertJsonToList(response.toString());
                 dataSource.insertListOfMessages(messages);
-                SyncIndicators.SyncMessages= true;
+                SyncIndicators.SyncMessages = true;
 
             }
         }, new Response.ErrorListener() {
@@ -323,12 +317,13 @@ public class RestClient {
         });
 
         queue.add(arrayRequest);
-
-
-
-
     }
 
+    /**
+     * send meal to server app .
+     *
+     * @param meal
+     */
     public void sendMeal(final Meal meal) {
         DataSource datasource = new DataSource(this.activity);
         RequestQueue queue = Volley.newRequestQueue(this.activity);
@@ -374,6 +369,11 @@ public class RestClient {
         }
     }
 
+    /**
+     * Send category
+     *
+     * @param categories
+     */
     public void sendCategories(final Categories categories) {
         DataSource datasource = new DataSource(this.activity);
         RequestQueue queue = Volley.newRequestQueue(this.activity);
@@ -407,7 +407,7 @@ public class RestClient {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.i("ERROR", error.getLocalizedMessage()+"");
+                    Log.i("ERROR", error.getLocalizedMessage() + "");
                 }
             });
 
@@ -418,6 +418,11 @@ public class RestClient {
         }
     }
 
+    /**
+     * Send Message
+     *
+     * @param message
+     */
     public void SendMessage(final Messages message) {
 
 
@@ -428,20 +433,20 @@ public class RestClient {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                            if(response.has(Messages._ID)){
-                                // convert to Messages Object
-                                Messages messages = Messages.convertJsonToMessages(response.toString());
-                                // insert into database
-                                dataSource.insertMessage(messages);
-                                EditText etText = (EditText)activity.findViewById(R.id.etMessage);
-                                etText.setText("");
-                                Toast.makeText(activity.getBaseContext(), "Message has been sent", Toast.LENGTH_SHORT).show();
+                        if (response.has(Messages._ID)) {
+                            // convert to Messages Object
+                            Messages messages = Messages.convertJsonToMessages(response.toString());
+                            // insert into database
+                            dataSource.insertMessage(messages);
+                            EditText etText = (EditText) activity.findViewById(R.id.etMessage);
+                            etText.setText("");
+                            Toast.makeText(activity.getBaseContext(), "Message has been sent", Toast.LENGTH_SHORT).show();
 
-                                Log.i("DATASOURSE", "MESSAGE SENT AND INSERTED ! ");
+                            Log.i("DATASOURSE", "MESSAGE SENT AND INSERTED ! ");
 
-                            }else{
-                                Log.i("DATASOURSE-ERROR", "MESSAGE DOES NOT SENT NOR INSERTED ! ");
-                            }
+                        } else {
+                            Log.i("DATASOURSE-ERROR", "MESSAGE DOES NOT SENT NOR INSERTED ! ");
+                        }
 
 
                     }
