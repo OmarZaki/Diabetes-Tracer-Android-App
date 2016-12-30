@@ -1,12 +1,15 @@
 package com.example.omar.diabetestracerapp;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
 import com.example.omar.diabetestracerapp.database.DataSource;
+import com.example.omar.diabetestracerapp.notification_service.DoseAlarmReceiver;
 import com.example.omar.diabetestracerapp.rest_client.RestClient;
 import com.example.omar.diabetestracerapp.shared_preference.SharedPreferenceMethods;
 import com.github.clans.fab.FloatingActionMenu;
@@ -36,6 +40,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     /**
      * ---------> Back-End Code <-----------
      */
+    DoseAlarmReceiver alarm; // AlarmReceiver for the NotificationService
     DataSource dataSource;
     RestClient restClient;
     InsulinDose currentInsulinDose;
@@ -147,12 +152,14 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     public void onResume() {
         super.onResume();
 
-
     }
 
-    /**
-     *
-     */
+    @Override
+    public void onStop() {
+        super.onStop();
+        alarm.cancelAlarm(getActivity());
+    }
+
 
     public void syncTimeLeftForNextDose() {
 
@@ -170,24 +177,14 @@ public class FragmentMain extends android.support.v4.app.Fragment {
                 HoursLeft = time[0];
                 MinutesLeft = time[1];
 
-//            int HoursLeft = InsulinDose.getHoursLeft(currentInsulinDose.getDate_time(), todayCurrentDate);
-//            int MinutesLeft = InsulinDose.getMinutesLeft(currentInsulinDose.getDate_time(), todayCurrentDate);
-
                 tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
-                // save the itme
+
             } else {
                 taken = true;
                 tvTimeLeft.setText("Dose Taken");
             }
-
         }
 
-
-        // TODO 3. Update the TextView Elements.
-
-        // TODO 4. When the Time comes to take the insulin dose, circle should turned to red and button should appear
-        //    TODO: button should redirect to Send InsulinDose Activity .
-        // TODO 5. Then the User can report taking the activity.
     }
 
     @Override
@@ -236,7 +233,12 @@ public class FragmentMain extends android.support.v4.app.Fragment {
 
         void onFragmentInteraction(Uri uri);
     }
+    public void setUpAlarm( ){
+       //run the alarm
+                alarm= new DoseAlarmReceiver();
+        alarm.setAlarm(getActivity());
 
+    }
     public class TaskGetCurrentInsulinDoseAfterItDownloaded extends AsyncTask<Integer, Void, Void> {
         Activity ThisActivity;
         DataSource dataSource;
@@ -245,6 +247,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
             super();
             this.ThisActivity = thisActivity;
             dataSource = new DataSource(thisActivity.getBaseContext());
+
         }
 
         protected void onPreExecute() {
@@ -259,6 +262,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
                 InsulinDose insulinDose = dataSource.retrieveCurrentInsulinDose(new Date());
                 if (insulinDose != null) {
                     b = false;
+
                 } else {
                     Thread.currentThread();
                     try {
@@ -273,8 +277,21 @@ public class FragmentMain extends android.support.v4.app.Fragment {
 
         @Override
         protected void onPostExecute(Void response) {
+
             syncTimeLeftForNextDose();
-//        /** ----- > Back-end source code <----- */
+            setUpAlarm();
+
+            dataSource = new DataSource(getActivity());
+            InsulinDose currentInsulinDose = dataSource.retrieveCurrentInsulinDose(new Date());
+            todayDate = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
+            Log.d("DATES", "InsulinDose: " + currentInsulinDose.getDate_time().toString() + "/Current: " + new Date().toString());
+            tvTodayDate.setText(todayDate);
+            // TODO 2. Calculate the date left for the dose.
+            Long[] time = InsulinDose.getTimeLeft(currentInsulinDose.getDate_time(), new Date());
+            HoursLeft = time[0];
+            MinutesLeft = time[1];
+
+            tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
 
         }
     }
@@ -307,9 +324,11 @@ public class FragmentMain extends android.support.v4.app.Fragment {
             } else {
                 ivTimeLeftCircle.setImageResource(R.drawable.circle_main);
                 tvTimeLeft.setText("Dose Taken");
+
             }
                 Log.i("HEY", "DELAY!");
             timeLive.postDelayed(this,1000);
         }
     }
+
 }

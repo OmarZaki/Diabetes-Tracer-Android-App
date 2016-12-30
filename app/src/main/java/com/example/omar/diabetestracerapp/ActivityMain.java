@@ -219,6 +219,7 @@ public class ActivityMain extends AppCompatActivity
             Intent LogoutIntent = new Intent(getBaseContext(), ActivityIntro.class);
             startActivity(LogoutIntent);
 
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
