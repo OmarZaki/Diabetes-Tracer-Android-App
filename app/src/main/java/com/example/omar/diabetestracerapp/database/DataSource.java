@@ -149,14 +149,18 @@ public class DataSource {
         ContentValues cv = insulinDose.getContentValuesObject();
         long i = database.update(InsulinDose._INSULIN_DOSE_TABLE, cv, InsulinDose._ID + "=" + insulinDose.getId(), null);
         if (i != 0) {
-            Log.i("TAG", "Insulin's record is inserted!");
-            Schedule s = new Schedule();
+            Log.i("TAG", "Insulin's record is updated!");
+            /**
+             * No need to add dose to schedule; it is already there when data is
+             * synchronized from remote Database.
+             */
+            /*Schedule s = new Schedule();
             s.setType(TypeEvent.DOSE);
             s.setTitle(InsulinDose._INSULIN_DOSE_TITLE);
             s.setDate(insulinDose.getDate_time());
-            insertSchedule(s);
+            insertSchedule(s);*/
         } else {
-            Log.i("TAG", "Insulin's record is not inserted !");
+            Log.i("TAG", "Insulin's record is not updated !");
         }
         open();
     }

@@ -239,7 +239,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     }
     public void setUpAlarm( ){
        //run the alarm
-                alarm= new DoseAlarmReceiver();
+        alarm= new DoseAlarmReceiver();
         alarm.setAlarm(getActivity());
 
     }

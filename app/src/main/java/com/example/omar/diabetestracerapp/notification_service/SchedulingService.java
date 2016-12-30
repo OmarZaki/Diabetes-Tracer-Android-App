@@ -41,17 +41,21 @@ public class SchedulingService extends IntentService{
     protected void onHandleIntent(Intent intent) {
         dataSource = new DataSource(this);
        InsulinDose currentInsulinDose = dataSource.retrieveCurrentInsulinDose(new Date());
-            Long[] timeLeft = InsulinDose.getTimeLeft(currentInsulinDose.getDate_time(),new Date());
-            Long hour= timeLeft[0];
-            Long minute= timeLeft[1];
+        Log.d("NOTIFICATION", "Got intent");
+        if(currentInsulinDose!=null) {
+            if(!currentInsulinDose.getTaken()) {
+                Long[] timeLeft = InsulinDose.getTimeLeft(currentInsulinDose.getDate_time(), new Date());
+                Long hour = timeLeft[0];
+                Long minute = timeLeft[1];
 
-            if(hour==0 && minute ==0){
-                sendNotification("Dose Time");
-                Log.i(TAG, "Found doodle!!");
-                // Release the wake lock provided by the BroadcastReceiver.
-                DoseAlarmReceiver.completeWakefulIntent(intent);
+                if (hour == 0 && minute == 0) {
+                    sendNotification("Dose Time");
+                    Log.i(TAG, "Found doodle!!");
+                    // Release the wake lock provided by the BroadcastReceiver.
+                    DoseAlarmReceiver.completeWakefulIntent(intent);
+                }
             }
-
+        }
     }
 
 
