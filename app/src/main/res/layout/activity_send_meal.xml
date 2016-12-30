@@ -48,7 +48,7 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_camera"
+                app:srcCompat="@drawable/ic_item_camera"
                 android:id="@+id/Meal_iconMeal"
                 android:layout_marginTop="23dp"
                 android:layout_centerHorizontal="true"

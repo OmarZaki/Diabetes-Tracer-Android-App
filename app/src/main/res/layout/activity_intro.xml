@@ -15,7 +15,7 @@
         android:id="@+id/IntroIcon"
         android:layout_width="@dimen/logo_main"
         android:layout_height="@dimen/logo_main"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_app_logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
