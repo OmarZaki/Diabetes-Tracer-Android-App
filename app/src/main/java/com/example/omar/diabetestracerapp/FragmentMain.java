@@ -167,7 +167,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
         Log.d("MainFrag","Going to Sync");
         Date todayCurrentDate = new Date();
         dataSource = new DataSource(this.getActivity());
-        InsulinDose currentInsulinDose = dataSource.retrieveCurrentInsulinDose(todayCurrentDate);
+        currentInsulinDose = dataSource.retrieveCurrentInsulinDose(todayCurrentDate);
         if (currentInsulinDose != null) {
             if(!currentInsulinDose.getTaken()) {
                 taken = false;

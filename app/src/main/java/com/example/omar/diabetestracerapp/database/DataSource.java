@@ -177,13 +177,16 @@ public class DataSource {
         Cursor cursor = database.query(InsulinDose._INSULIN_DOSE_TABLE, InsulinDose._INSULIN_COLS, null, null, null, null, null);
         cursor.moveToFirst();
         Log.i("DATASOURCE-INSULINDOSE", "Get insulin dose");
-        while (cursor.moveToNext()) {
-            insulinDose = InsulinDose.getInsulinDoseObject(cursor);
-            String currentDate = InsulinDose.getDateFromDateTimeObejct(date);
-            String insulinDoseDate = InsulinDose.getDateFromDateTimeObejct(insulinDose.getDate_time());
-            if (currentDate.equals(insulinDoseDate)) {
-                return insulinDose;
-            }
+        if(cursor.getCount()>0) {
+            do {
+                insulinDose = InsulinDose.getInsulinDoseObject(cursor);
+                String currentDate = InsulinDose.getDateFromDateTimeObejct(date);
+                String insulinDoseDate = InsulinDose.getDateFromDateTimeObejct(insulinDose.getDate_time());
+                Log.d("DATES", "Cur: " + currentDate + "/" + insulinDoseDate);
+                if (currentDate.equals(insulinDoseDate)) {
+                    return insulinDose;
+                }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         close();
