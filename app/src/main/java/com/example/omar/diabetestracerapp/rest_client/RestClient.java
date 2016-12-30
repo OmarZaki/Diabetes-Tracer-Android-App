@@ -291,7 +291,7 @@ public class RestClient {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("ERROR_VOLLEY", "ERROR in the response ");
+                Log.i("ERROR_VOLLEY_INSULIN", "ERROR in the response ");
             }
         });
 
@@ -312,7 +312,7 @@ public class RestClient {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("ERROR_VOLLEY", "ERROR in the response ");
+                Log.i("ERROR_VOLLEY_MEALS", "ERROR in the response ");
             }
         });
 
@@ -332,7 +332,7 @@ public class RestClient {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("ERROR_VOLLEY", "ERROR in the response ");
+                Log.i("ERROR_VOLLEY_CATEGORIES", "ERROR in the response ");
             }
         });
 
@@ -345,7 +345,6 @@ public class RestClient {
             @Override
             public void onResponse(JSONArray response) {
                 Log.i("RESPONSE", response.toString());
-
                 dataSource.cleanTable(Messages._MESSAGES_TABLE);
                 List<Messages> messages = Messages.convertJsonToList(response.toString());
                 dataSource.insertListOfMessages(messages);
@@ -355,7 +354,7 @@ public class RestClient {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("ERROR_VOLLEY", "ERROR in the response ");
+                Log.i("ERROR_VOLLEY_MESSAGES", "ERROR in the response ");
             }
         });
 

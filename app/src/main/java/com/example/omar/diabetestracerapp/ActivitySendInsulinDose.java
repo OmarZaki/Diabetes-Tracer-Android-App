@@ -1,22 +1,18 @@
 package com.example.omar.diabetestracerapp;
 
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.omar.diabetestracerapp.data_model.InsulinDose;
-import com.example.omar.diabetestracerapp.data_model.User;
 import com.example.omar.diabetestracerapp.database.DataSource;
 import com.example.omar.diabetestracerapp.rest_client.RestClient;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.function.IntUnaryOperator;
 
 /**
  * Activity Main Code
@@ -58,27 +54,34 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
 
         Date currentDate = new Date();
         InsulinDose  currentInsulinDose= dataSource.retrieveCurrentInsulinDose(currentDate);
-        String currentDateString = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
-        tvDate.setText(currentDateString);
-        String time = InsulinDose.getCurrentTime(currentInsulinDose.getDate_time());
-        tvTime.setText(time);
-        tvQuantity.setText(String.valueOf(currentInsulinDose.getQuantity()) + "ML");
-        /**
-         * Set the onClick
-         */
-        ivIconDoseSendInsulinDose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentAddQuantityField fragmentAddQuantityField = new FragmentAddQuantityField();
-                fragmentAddQuantityField.setMax(1000);
-                fragmentAddQuantityField.setMin(0);
-                fragmentAddQuantityField.setTitle(R.string.insulin_dose_quantity_dialog_title);
-                fragmentAddQuantityField.setMessage(R.string.insulin_dose_quantity_dialog);
-                fragmentAddQuantityField.setTextView(R.id.tvDoseQuantitySendInsulinDose);
-                fragmentAddQuantityField.setUnit(R.string.insulin_dose_unit);
-                fragmentAddQuantityField.show(getFragmentManager(),"TAG");
-            }
-        });
+        if(currentInsulinDose!=null) {
+            String currentDateString = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
+            tvDate.setText(currentDateString);
+            String time = InsulinDose.getCurrentTime(currentInsulinDose.getDate_time());
+            tvTime.setText(time);
+            tvQuantity.setText(String.valueOf(currentInsulinDose.getQuantity()) + "ML");
+            /**
+             * Set the onClick
+             */
+            ivIconDoseSendInsulinDose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentAddQuantityField fragmentAddQuantityField = new FragmentAddQuantityField();
+                    fragmentAddQuantityField.setMax(1000);
+                    fragmentAddQuantityField.setMin(0);
+                    fragmentAddQuantityField.setTitle(R.string.insulin_dose_quantity_dialog_title);
+                    fragmentAddQuantityField.setMessage(R.string.insulin_dose_quantity_dialog);
+                    fragmentAddQuantityField.setTextView(R.id.tvDoseQuantitySendInsulinDose);
+                    fragmentAddQuantityField.setUnit(R.string.insulin_dose_unit);
+                    fragmentAddQuantityField.show(getFragmentManager(), "TAG");
+                }
+            });
+        } else {
+            tvDate.setText("No Insulin Dose");
+            tvTime.setText("");
+            tvQuantity.setText("N/A");
+            btnSend.setEnabled(false);
+        }
     }
     private void setupUserInterfaceElements(){
         ivIconDateSendInsulinDose = (ImageView) findViewById(R.id.ivIconDateSendInsulinDose);

@@ -43,7 +43,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     DoseAlarmReceiver alarm; // AlarmReceiver for the NotificationService
     DataSource dataSource;
     RestClient restClient;
-    InsulinDose currentInsulinDose;
+    InsulinDose currentInsulinDose = null;
     Handler TimeHandler;
     Handler timeLive;
 
@@ -83,7 +83,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         HoursLeft = new Long(0);
-        MinutesLeft = new Long(2);
+        MinutesLeft = new Long(0);
     }
 
     @Override
@@ -157,12 +157,14 @@ public class FragmentMain extends android.support.v4.app.Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        alarm.cancelAlarm(getActivity());
+        if(alarm!=null)
+            alarm.cancelAlarm(getActivity());
     }
 
 
     public void syncTimeLeftForNextDose() {
 
+        Log.d("MainFrag","Going to Sync");
         Date todayCurrentDate = new Date();
         dataSource = new DataSource(this.getActivity());
         InsulinDose currentInsulinDose = dataSource.retrieveCurrentInsulinDose(todayCurrentDate);
@@ -183,6 +185,8 @@ public class FragmentMain extends android.support.v4.app.Fragment {
                 taken = true;
                 tvTimeLeft.setText("Dose Taken");
             }
+        } else {
+            tvTimeLeft.setText("No Dose");
         }
 
     }
@@ -282,7 +286,7 @@ public class FragmentMain extends android.support.v4.app.Fragment {
             setUpAlarm();
 
             dataSource = new DataSource(getActivity());
-            InsulinDose currentInsulinDose = dataSource.retrieveCurrentInsulinDose(new Date());
+            currentInsulinDose = dataSource.retrieveCurrentInsulinDose(new Date());
             todayDate = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
             Log.d("DATES", "InsulinDose: " + currentInsulinDose.getDate_time().toString() + "/Current: " + new Date().toString());
             tvTodayDate.setText(todayDate);
@@ -310,23 +314,26 @@ public class FragmentMain extends android.support.v4.app.Fragment {
         @Override
         public void run() {
             tvTodayDate.setText(todayDate);
-            if(!taken) {
-                if (b) {
-                    tvTimeLeft.setText(HoursLeft + "H" + " " + MinutesLeft + "M");
-                    b = false;
+            if(currentInsulinDose!=null) {
+                if (!taken) {
+                    if (b) {
+                        tvTimeLeft.setText(HoursLeft + "H" + " " + MinutesLeft + "M");
+                        b = false;
+                    } else {
+                        tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
+                        b = true;
+                    }
+                    if (HoursLeft == 0 && MinutesLeft == 0) {
+                        ivTimeLeftCircle.setImageResource(R.drawable.circle_main_send);
+                    }
                 } else {
-                    tvTimeLeft.setText(HoursLeft + "H" + ":" + MinutesLeft + "M");
-                    b = true;
-                }
-                if(HoursLeft==0 && MinutesLeft==0){
-                    ivTimeLeftCircle.setImageResource(R.drawable.circle_main_send);
+                    ivTimeLeftCircle.setImageResource(R.drawable.circle_main);
+                    tvTimeLeft.setText("Dose Taken");
                 }
             } else {
-                ivTimeLeftCircle.setImageResource(R.drawable.circle_main);
-                tvTimeLeft.setText("Dose Taken");
-
+                tvTimeLeft.setText("No Dose");
             }
-                Log.i("HEY", "DELAY!");
+            Log.i("HEY", "DELAY!");
             timeLive.postDelayed(this,1000);
         }
     }

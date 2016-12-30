@@ -121,7 +121,9 @@ public class Meal {
 	}
 
     public static JSONObject toJSONObject(Meal meal) throws JSONException {
-        Gson gson = new Gson();
+		Gson gson =new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd HH:mm:ss")
+				.create();
         return new JSONObject(gson.toJson(meal));
     }
 
