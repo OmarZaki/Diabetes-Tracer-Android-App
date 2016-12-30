@@ -31,11 +31,6 @@ public class ActivityMain extends AppCompatActivity
     TabLayout tabLayout;
     TextView tvPatientName;
     TextView tvPatientEmail;
-    TextView tvFirstName;
-
-    TextView tvPhone;
-    TextView tvBirthdate;
-    TextView tvType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +51,6 @@ public class ActivityMain extends AppCompatActivity
 
 
         }
-
-
-
-
         /** ------------ end -------------**/
         setUserInterfaceElements();
     }
@@ -98,7 +89,6 @@ public class ActivityMain extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
@@ -111,7 +101,7 @@ public class ActivityMain extends AppCompatActivity
         miPhone.setTitle(currentUser.getPhoneNumber());
         miBirthdate.setTitle(User.ConvertDateToString(currentUser.getBirthDate()));
         miType.setTitle((currentUser.getType()) ? "Type 1" : "Type 2");
-        setupTablayout();
+        setupTabLayout();
 
         final ViewPager pager = (ViewPager) findViewById(R.id.pager);
         TabsPagerAdapter adapter = new TabsPagerAdapter(getSupportFragmentManager());
@@ -224,7 +214,7 @@ public class ActivityMain extends AppCompatActivity
         return true;
     }
 
-    private void setupTablayout() {
+    private void setupTabLayout() {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }

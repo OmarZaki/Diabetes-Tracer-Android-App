@@ -54,11 +54,7 @@ public class ActivityLogin extends AppCompatActivity {
 
 
         /** ------> Back End Logic <------ **/
-        /*
-        1. Get User from database .
-        2. Since we came over here, this means that user has already registered in the the app
-                            -> setup the user email and password.
-         */
+
         restClient = new RestClient(this);
         dataSource = new DataSource(getBaseContext());
         sharedPreferenceMethods = new SharedPreferenceMethods(this);
@@ -75,7 +71,7 @@ public class ActivityLogin extends AppCompatActivity {
 
             }
         }
-        /** --------- > End Logic <------- **/
+
     }
 
 
@@ -176,11 +172,20 @@ public class ActivityLogin extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * check if the user email inserted has valid format.
+     * @param email
+     * @return
+     */
     private boolean isEmailValid(String email) {
         return email.contains("@");
     }
 
+    /**
+     * check if the password id valid .
+     * @param password
+     * @return
+     */
     private boolean isPasswordValid(String password) {
         return password.length() > 2;
     }

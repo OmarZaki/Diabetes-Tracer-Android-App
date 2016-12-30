@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class ActivityIntro extends AppCompatActivity {
-    /** ------> back end logic Parameters <------ **/
 
     Button btnLogin;
     Button btnRegistration;
