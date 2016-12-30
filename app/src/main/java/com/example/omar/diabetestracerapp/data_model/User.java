@@ -24,7 +24,7 @@ import javax.mail.internet.InternetAddress;
 
 public class User {
     //
-     public final static String _USER_ONFO_PUT_EXTRA_STRING="UserInfoToLogIn";
+    public final static String _USER_ONFO_PUT_EXTRA_STRING = "UserInfoToLogIn";
     // Table name
     public final static String _USER_TABLE = "Users";
 
@@ -39,7 +39,7 @@ public class User {
     public final static String _ADMIN = "admin";
     public final static String _TYPE = "type";
     public final static String _CREATION_DATE = "creation_date";
-    public final static String _BIRTH_DATE= "birth_date";
+    public final static String _BIRTH_DATE = "birth_date";
     public final static String _ADDRESS = "address";
 
     public static String[] USER_COLS = {User._ID,
@@ -76,7 +76,7 @@ public class User {
 
     public void setBirthDate(java.util.Date birthDate) {
 //        this.birthDate =new java.sql.Date(birthDate.getTime());
-        this.birthDate=birthDate;
+        this.birthDate = birthDate;
     }
 
     public String getAddress() {
@@ -165,7 +165,7 @@ public class User {
 
     public void setCreationDate(java.util.Date creationDate) {
 //        this.creationDate = new java.sql.Date(creationDate.getTime());
-            this.creationDate= creationDate;
+        this.creationDate = creationDate;
     }
 
     /**
@@ -202,6 +202,7 @@ public class User {
 
         return result;
     }
+
     /**
      * Convert date as string to Java.util.Date Object
      *
@@ -219,6 +220,7 @@ public class User {
         }
         return parsedDate;
     }
+
     /**
      * Convert date as string to Java.util.Date Object
      *
@@ -229,7 +231,7 @@ public class User {
         java.util.Date convertedDate = null;
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-             convertedDate = df.parse(date);
+            convertedDate = df.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -238,10 +240,11 @@ public class User {
 
     /**
      * Convert Date Object to String
+     *
      * @param Date
      * @return
      */
-    public static String ConvertDateToString(java.util.Date Date){
+    public static String ConvertDateToString(java.util.Date Date) {
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(Date.getTime());
@@ -249,6 +252,7 @@ public class User {
 
     /**
      * Convert day, month and year (Integers) to Calender object
+     *
      * @param day
      * @param month
      * @param year
@@ -264,10 +268,11 @@ public class User {
 
     /**
      * Convert to Json object
+     *
      * @param user
      * @return
      */
-    public static org.json.JSONObject toJsonObject(User user){
+    public static org.json.JSONObject toJsonObject(User user) {
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(convertUserToJson(user));
@@ -279,17 +284,20 @@ public class User {
 
     /**
      * Convert user Java Object to String
+     *
      * @param object
      * @return
      */
-    public static String convertUserToJson(User object){
+    public static String convertUserToJson(User object) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd hh:mm:ss.S")
                 .create();
         return gson.toJson(object);
     }
+
     /**
      * Convert to User Json String to User Object.
+     *
      * @param jsonObject
      * @return
      */
@@ -300,7 +308,8 @@ public class User {
         User user = gson.fromJson(jsonObject, User.class);
         return user;
     }
-    public ContentValues getContentValuesObject(){
+
+    public ContentValues getContentValuesObject() {
         ContentValues userFieldValues = new ContentValues();
         userFieldValues.put(User._ID, this.getId());
         userFieldValues.put(User._FIRST_NAME, this.getFirstName());
@@ -319,6 +328,7 @@ public class User {
 
     /**
      * get Data from Cursor Object
+     *
      * @param cursor
      * @return
      */
@@ -332,7 +342,7 @@ public class User {
         user.setAddress(cursor.getString(cursor.getColumnIndex(User._ADDRESS)));
         user.setBirthDate(new Date(User.ConvertStringToDateObjectFormDB(cursor.getString(cursor.getColumnIndex(User._BIRTH_DATE))).getTime()));
         user.setPhoneNumber(cursor.getString(cursor.getColumnIndex(User._PHONE_NUMBER)));
-        user.setType(cursor.getInt(cursor.getColumnIndex(User._TYPE))>0);
+        user.setType(cursor.getInt(cursor.getColumnIndex(User._TYPE)) > 0);
         user.setToken(cursor.getString(cursor.getColumnIndex(User._TOKEN)));
         user.setCreationDate(User.ConvertStringToDateObjectFormDB(cursor.getString(cursor.getColumnIndex(User._CREATION_DATE))));
         return user;

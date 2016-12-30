@@ -104,6 +104,12 @@ public class InsulinDose {
             return true;
         return false;
     }
+
+    /**
+     * get contentValues for the current InsulinDose object.
+     *
+     * @return
+     */
     public ContentValues getContentValuesObject(){
         ContentValues userFieldValues = new ContentValues();
         userFieldValues.put(InsulinDose._ID, this.getId());
@@ -117,6 +123,10 @@ public class InsulinDose {
         return userFieldValues;
     }
 
+    /**
+     * Get getOriginal id;
+     * @return
+     */
     public int getOriginal_id() {
         return original_id;
     }
@@ -125,6 +135,11 @@ public class InsulinDose {
         this.original_id = original_id;
     }
 
+    /**
+     * get InsulinDoseObject from Cursor object.
+     * @param cursor
+     * @return
+     */
     public static InsulinDose getInsulinDoseObject(Cursor cursor) {
         InsulinDose insulinDose = new InsulinDose();
         insulinDose.setId(cursor.getInt(cursor.getColumnIndex(InsulinDose._ID)));
@@ -134,7 +149,9 @@ public class InsulinDose {
         insulinDose.setDate_time(new Date(cursor.getLong(cursor.getColumnIndex(InsulinDose._DATE_TIME))));
         return insulinDose;
     }
-    public static String getDateFromDateTimeObejct(Date dateObj){
+
+
+    public static String getDateFromDateTimeObject(Date dateObj){
 
         SimpleDateFormat sdf = new SimpleDateFormat(InsulinDose._DATE_FORMAT_NOW);
         String fullDateString = sdf.format(dateObj);
@@ -185,6 +202,8 @@ public class InsulinDose {
         String dose= gson.toJson(insulinDose);
         return dose;
     }
+
+
     public static org.json.JSONObject toJsonObject(InsulinDose dose){
         JSONObject jsonObject = null;
         try {
@@ -245,6 +264,8 @@ public class InsulinDose {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(Date.getTime());
     }
+
+
     public static Long [] getTimeLeft(Date insulinDoseDate, Date currentDate){
         if(insulinDoseDate.getTime()>=currentDate.getTime()) {
             Date sub = new Date(insulinDoseDate.getTime() - currentDate.getTime());

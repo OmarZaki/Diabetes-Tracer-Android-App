@@ -36,7 +36,6 @@ public class DataSource {
      */
     public DataSource(Context context) {
         dbHelper = new SqlHelper(context);
-
     }
 
     /**
@@ -182,8 +181,8 @@ public class DataSource {
         if(cursor.getCount()>0) {
             do {
                 insulinDose = InsulinDose.getInsulinDoseObject(cursor);
-                String currentDate = InsulinDose.getDateFromDateTimeObejct(date);
-                String insulinDoseDate = InsulinDose.getDateFromDateTimeObejct(insulinDose.getDate_time());
+                String currentDate = InsulinDose.getDateFromDateTimeObject(date);
+                String insulinDoseDate = InsulinDose.getDateFromDateTimeObject(insulinDose.getDate_time());
                 Log.d("DATES", "Cur: " + currentDate + "/" + insulinDoseDate);
                 if (currentDate.equals(insulinDoseDate)) {
                     return insulinDose;
@@ -373,7 +372,13 @@ public class DataSource {
         return messagesList;
     }
 
-
+    /**
+     * retrieve List of Events that user has done.
+     * @param month
+     * @param year
+     * @param type
+     * @return
+     */
     public ArrayList<Schedule> retrieveListEvents(int month, int year,TypeEvent type) {
         open();
         ArrayList<Schedule> scheduleList = null;
@@ -399,6 +404,10 @@ public class DataSource {
         return scheduleList;
     }
 
+    /**
+     * retrieve List of all categories from data base. (Not used yet)
+     * @return
+     */
     private List<Categories> retrieveListCategories() {
         open();
         List<Categories> CatList = null;
@@ -416,6 +425,11 @@ public class DataSource {
 
     }
 
+    /**
+     * retrieve all List of all Meals that the user has taken from database.
+     *
+     * @return
+     */
     private List<Meal> retrieveListMeal() {
         List<Meal> MealList = null;
 
@@ -431,6 +445,7 @@ public class DataSource {
         close();
         return MealList;
     }
+
 
     private List<InsulinDose> retrieveListDoses() {
         List<InsulinDose> doseList = null;

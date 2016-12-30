@@ -14,7 +14,6 @@ import com.example.omar.diabetestracerapp.data_model.User;
 public class SqlContacts {
     public static final String DATABASE_NAME="diabetesdb";
 
-
     /**
      * Constructor should be a private to prevent being initiated accidentally.
      */
@@ -26,9 +25,6 @@ public class SqlContacts {
     public static final String PRIMARY_KEY_AUTO=" primary key autoincrement ";
 
     // SQL statements
-
-
-
     /**
      *
      -- -----------------------------------------------------
@@ -100,80 +96,6 @@ public class SqlContacts {
                     "  "+ Schedule._COL_DATE   + " TEXT NULL DEFAULT NULL" +" , "+
                     "  "+ Schedule._COL_TYPE   + " STRING NULL DEFAULT NULL" +
                     ")\n";
-
-    /**
-     *  Table `diabetesdb`.`appointments`
-     */
-    public static final String STATEMENT_CREATE_TABLE_APPOINTMENTS=
-            "CREATE TABLE IF NOT EXISTS `diabetesdb`.`appointments` (\n" +
-            "  `id` INT(11) NOT NULL,\n" +
-            "  `title` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  `date_time` DATETIME NULL DEFAULT NULL,\n" +
-            "  `assessment` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  `blood_pressure` FLOAT NULL DEFAULT NULL,\n" +
-            "  `weight` FLOAT NULL DEFAULT NULL,\n" +
-            "  `Users_id` INT(11) NOT NULL,\n" +
-            "  PRIMARY KEY (`id`),\n" +
-            "  INDEX `fk_Appointments_Users1_idx` (`Users_id` ASC),\n" +
-            "  CONSTRAINT `fk_Appointments_Users1`\n" +
-            "    FOREIGN KEY (`Users_id`)\n" +
-            "    REFERENCES `diabetesdb`.`users` (`id`)\n" +
-            "    ON DELETE NO ACTION\n" +
-            "    ON UPDATE NO ACTION)\n" +
-            "ENGINE = InnoDB\n" +
-            "DEFAULT CHARACTER SET = utf8;";
-
-    /**
-     *   Table `diabetesdb`.`category_name`
-     */
-    public static final String STATEMENT_CREATE_TABLE_CATEGORY_NAME=
-            "CREATE TABLE IF NOT EXISTS `diabetesdb`.`category_name` (\n" +
-            "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-            "  `title` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  PRIMARY KEY (`id`))\n" +
-            "ENGINE = InnoDB\n" +
-            "DEFAULT CHARACTER SET = utf8;\n";
-
-
-    /**
-     * Table `diabetesdb`.`categories`
-     */
-    public static final String STATEMENT_CREATE_TABLE_CATEGORYIES=
-            "CREATE TABLE IF NOT EXISTS `diabetesdb`.`categories` (\n" +
-            "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-            "  `date_time` DATETIME NULL DEFAULT NULL,\n" +
-            "  `value` VARCHAR(45) NULL DEFAULT NULL,\n" +
-            "  `Users_id` INT(11) NOT NULL,\n" +
-            "  `Category_name_id` INT(11) NOT NULL,\n" +
-            "  PRIMARY KEY (`id`),\n" +
-            "  INDEX `fk_Categories_Users1_idx` (`Users_id` ASC),\n" +
-            "  INDEX `fk_Categories_Category_name1_idx` (`Category_name_id` ASC),\n" +
-            "  CONSTRAINT `fk_Categories_Category_name1`\n" +
-            "    FOREIGN KEY (`Category_name_id`)\n" +
-            "    REFERENCES `diabetesdb`.`category_name` (`id`)\n" +
-            "    ON DELETE NO ACTION\n" +
-            "    ON UPDATE NO ACTION,\n" +
-            "  CONSTRAINT `fk_Categories_Users1`\n" +
-            "    FOREIGN KEY (`Users_id`)\n" +
-            "    REFERENCES `diabetesdb`.`users` (`id`)\n" +
-            "    ON DELETE NO ACTION\n" +
-            "    ON UPDATE NO ACTION)\n" +
-            "ENGINE = InnoDB\n" +
-            "DEFAULT CHARACTER SET = utf8;";
-    /**
-     *  Table `diabetesdb`.`insulindose`
-     */
-
-
-
-    /**
-     * SETUP parameters
-     */
-    public static final String STATEMENT_CREATE_TABLE_SETUPS="\n" +
-            "SET SQL_MODE=@OLD_SQL_MODE;\n" +
-            "SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;\n" +
-            "SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;";
-
 
 
 }

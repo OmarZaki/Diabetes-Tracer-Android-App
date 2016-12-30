@@ -24,7 +24,6 @@ public class Schedule {
     String title;
     Date date;
     TypeEvent type;
-    Object object;
 
 
     public TypeEvent getType() {
@@ -34,6 +33,7 @@ public class Schedule {
     public void setType(TypeEvent type) {
         this.type = type;
     }
+
     public String getTitle() {
         return title;
     }
@@ -48,14 +48,6 @@ public class Schedule {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Object getObject() {
-        return object;
-    }
-
-    public void setObject(Object object) {
-        this.object = object;
     }
 
 

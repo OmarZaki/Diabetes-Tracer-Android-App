@@ -130,6 +130,7 @@ public class Messages {
         Messages message = gson.fromJson(response, Messages.class);
         return message;
     }
+
     public static ArrayList<Messages> convertJsonToList(String messages) {
         Gson gson =new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
