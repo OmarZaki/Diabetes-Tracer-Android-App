@@ -134,7 +134,7 @@ public class Messages {
     }
     public static ArrayList<Messages> convertJsonToList(String messages) {
         Gson gson =new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd hh:mm:ss")
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();
         ArrayList<Messages> messagesList = gson.fromJson(messages, new TypeToken<ArrayList<Messages>>(){}.getType());
         return messagesList;

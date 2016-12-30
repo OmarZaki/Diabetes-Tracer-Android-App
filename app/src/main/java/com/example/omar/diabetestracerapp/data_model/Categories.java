@@ -114,9 +114,18 @@ public class Categories {
 	public static TypeEvent getType(Categories cat){
 		TypeEvent typeEvent = null;
 		if(cat!= null){
-			typeEvent= (cat.getCategory_name_id() ==1)? TypeEvent.HEARTRATE : null;
-			typeEvent= (cat.getCategory_name_id() ==2)? TypeEvent.MEDICATION : null;
-			typeEvent= (cat.getCategory_name_id() ==3)? TypeEvent.BLOODSUGAR: null;
+            switch(cat.getCategory_name_id()){
+                case 1:
+                    typeEvent=TypeEvent.HEARTRATE;
+                    break;
+                case 2:
+                    typeEvent=TypeEvent.MEDICATION;
+                    break;
+                case 3:
+                    typeEvent=TypeEvent.BLOODSUGAR;
+                    break;
+
+            }
 		}
 		return typeEvent;
 	}

@@ -103,9 +103,9 @@ public class DataSource {
         ContentValues scheduleContentValues = schedule.getContentValuesObject();
         long i = database.insert(Schedule._SCHEDULE_TABLE, null, scheduleContentValues);
         if (i != 0) {
-            Log.i("TAG", "User's record inserted!");
+            Log.i("TAG", "Schedule entry inserted!");
         } else {
-            Log.i("TAG", "User's record is not inserted !");
+            Log.i("TAG", "Schedule entry not inserted !");
         }
 
 
@@ -202,7 +202,7 @@ public class DataSource {
         open();
         ContentValues contentValues = meal.getContentValuesObject();
         long i = database.insert(Meal._Meal_TABLE, null, contentValues);
-        if (i != 0) {
+        if (i != -1) {
             Log.i("TAG", "Meal's record inserted!");
             Schedule s = new Schedule();
             s.setType(TypeEvent.MEAL);
@@ -223,8 +223,9 @@ public class DataSource {
     public void insertCategoriesToDataBase(Categories categories) {
         open();
         ContentValues contentValues = categories.getContentValuesObject();
+        contentValues.remove(Categories._ID);
         long i = database.insert(Categories._Categories_TABLE, null, contentValues);
-        if (i != 0) {
+        if (i != -1) {
             Log.i("TAG", "Entry inserted!");
             // add to Schedule table
             Schedule s = new Schedule();
@@ -248,7 +249,7 @@ public class DataSource {
         for (Meal meal : meals) {
             ContentValues mealContentValues = meal.getContentValuesObject();
             long i = database.insert(Meal._Meal_TABLE, null, mealContentValues);
-            if (i != 0) {
+            if (i != -1) {
                 Log.i("TAG", "Meals record inserted!");
                 // Insert into schedule table.
                 Schedule schedule = new Schedule();
@@ -273,7 +274,7 @@ public class DataSource {
         for (Categories categories : categoriesList) {
             ContentValues categoriesContentValues = categories.getContentValuesObject();
             long i = database.insert(Categories._Categories_TABLE, null, categoriesContentValues);
-            if (i != 0) {
+            if (i != -1) {
                 Log.i("TAG", "Meals record inserted!");
                 // Insert into schedule table.
                 Schedule schedule = new Schedule();
@@ -308,10 +309,10 @@ public class DataSource {
         open();
         ContentValues messagesContentValuesObject = messages.getContentValuesObject();
         long i = database.insert(Messages._MESSAGES_TABLE, null, messagesContentValuesObject);
-        if (i != 0) {
+        if (i != -1) {
             Log.i("DATASOURCE", "Message Object has been inserted to local database");
             Schedule s = new Schedule();
-            s.setType(TypeEvent.DOSE);
+            s.setType(TypeEvent.MESSAGE);
             s.setTitle(Messages._MESSAGE_TITLE);
             s.setDate(messages.getDate_time());
             insertSchedule(s);
@@ -332,7 +333,7 @@ public class DataSource {
         for (Messages msg : messagesList) {
             ContentValues messagesContentValuesObject = msg.getContentValuesObject();
             long i = database.insert(Messages._MESSAGES_TABLE, null, messagesContentValuesObject);
-            if (i != 0) {
+            if (i != -1) {
                 Log.i("DATASOURCE", "Message Object has been inserted to local database");
                 // Insert into schedule table.
                 Schedule schedule = new Schedule();

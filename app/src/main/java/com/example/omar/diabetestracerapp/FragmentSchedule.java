@@ -145,8 +145,14 @@ public class FragmentSchedule extends Fragment {
             }
         });
         // download the list.
-        eventHandler = new Handler();
-        eventHandler.post( new GetAllEventsTask(month,year,type) );
+        /**
+         * The background task is redundant.
+         * I passed the check on whether database was synced to the filterSchedule function.
+         * Check filterSchedule() for more details.
+         * Filtering won't raise an exception anymore.
+         */
+        /*eventHandler = new Handler();
+        eventHandler.post( new GetAllEventsTask(month,year,type) );*/
     }
 
     private void setupListAdapters() {
@@ -180,11 +186,12 @@ public class FragmentSchedule extends Fragment {
         int month = spinnerMonths.getSelectedItemPosition();
         int year = Integer.valueOf(spinnerYears.getSelectedItem().toString());
         final TypeEvent type = TypeEvent.valueOf(spinnerType.getSelectedItem().toString());
-
-        allEvents = new ArrayList<>();
-        allEvents = dataSource.retrieveListEvents(month, year,type);
-        CustomScheduleAdapter customScheduleAdapter = new CustomScheduleAdapter(getActivity(), allEvents);
-        lvEvents.setAdapter(customScheduleAdapter);
+        if(SyncIndicators.SyncCategories  && SyncIndicators.SyncMessages && SyncIndicators.SyncMeal && SyncIndicators.SyncInsulin) {
+            allEvents = new ArrayList<>();
+            allEvents = dataSource.retrieveListEvents(month, year, type);
+            CustomScheduleAdapter customScheduleAdapter = new CustomScheduleAdapter(getActivity(), allEvents);
+            lvEvents.setAdapter(customScheduleAdapter);
+        }
     }
 
     /**
@@ -202,6 +209,13 @@ public class FragmentSchedule extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * The background task is redundant.
+     * I passed the check on whether database was synced to the filterSchedule function.
+     * Check filterSchedule() for more details.
+     * Filtering won't raise an exception anymore.
+     */
+    /*
     class GetAllEventsTask implements Runnable {
      int month = 0 ;
     int year = 0 ;
@@ -232,5 +246,5 @@ public class FragmentSchedule extends Fragment {
             }
         }
     }
-
+*/
 }
