@@ -55,27 +55,36 @@ public class ActivitySendInsulinDose extends AppCompatActivity {
         Date currentDate = new Date();
         InsulinDose  currentInsulinDose= dataSource.retrieveCurrentInsulinDose(currentDate);
         if(currentInsulinDose!=null) {
-            String currentDateString = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
-            tvDate.setText(currentDateString);
-            String time = InsulinDose.getCurrentTime(currentInsulinDose.getDate_time());
-            tvTime.setText(time);
-            tvQuantity.setText(String.valueOf(currentInsulinDose.getQuantity()) + "ML");
-            /**
-             * Set the onClick
-             */
-            ivIconDoseSendInsulinDose.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FragmentAddQuantityField fragmentAddQuantityField = new FragmentAddQuantityField();
-                    fragmentAddQuantityField.setMax(1000);
-                    fragmentAddQuantityField.setMin(0);
-                    fragmentAddQuantityField.setTitle(R.string.insulin_dose_quantity_dialog_title);
-                    fragmentAddQuantityField.setMessage(R.string.insulin_dose_quantity_dialog);
-                    fragmentAddQuantityField.setTextView(R.id.tvDoseQuantitySendInsulinDose);
-                    fragmentAddQuantityField.setUnit(R.string.insulin_dose_unit);
-                    fragmentAddQuantityField.show(getFragmentManager(), "TAG");
-                }
-            });
+            if(currentInsulinDose.getTaken()){
+                String currentDateString = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
+                tvDate.setText(currentDateString);
+                String time = InsulinDose.getCurrentTime(currentInsulinDose.getDate_time());
+                tvTime.setText(time);
+                tvQuantity.setText("Dose Taken");
+                btnSend.setEnabled(false);
+            } else {
+                String currentDateString = InsulinDose.ConvertDateToString(currentInsulinDose.getDate_time());
+                tvDate.setText(currentDateString);
+                String time = InsulinDose.getCurrentTime(currentInsulinDose.getDate_time());
+                tvTime.setText(time);
+                tvQuantity.setText(String.valueOf(currentInsulinDose.getQuantity()) + "ML");
+                /**
+                 * Set the onClick
+                 */
+                ivIconDoseSendInsulinDose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FragmentAddQuantityField fragmentAddQuantityField = new FragmentAddQuantityField();
+                        fragmentAddQuantityField.setMax(1000);
+                        fragmentAddQuantityField.setMin(0);
+                        fragmentAddQuantityField.setTitle(R.string.insulin_dose_quantity_dialog_title);
+                        fragmentAddQuantityField.setMessage(R.string.insulin_dose_quantity_dialog);
+                        fragmentAddQuantityField.setTextView(R.id.tvDoseQuantitySendInsulinDose);
+                        fragmentAddQuantityField.setUnit(R.string.insulin_dose_unit);
+                        fragmentAddQuantityField.show(getFragmentManager(), "TAG");
+                    }
+                });
+            }
         } else {
             tvDate.setText("No Insulin Dose");
             tvTime.setText("");
