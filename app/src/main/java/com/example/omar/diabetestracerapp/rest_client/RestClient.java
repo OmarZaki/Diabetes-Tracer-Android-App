@@ -166,10 +166,10 @@ public class RestClient {
                             if (!response.has("result")) {
 
                                 dataSource = new DataSource(activity);
-                                if (dataSource.retrieveUserFromDataBase() == null) {
+                                    dataSource.cleanTable(User._USER_TABLE);
                                     User userfound = User.convertJsonToUser(response.toString());
                                     dataSource.insertUserToDataBase(userfound);
-                                }
+
                                 activity.finish();
                                 Intent intent = new Intent(activity.getBaseContext(), ActivityMain.class);
                                 intent.putExtra(ActivityLogin.LOGIN_INDICATOR, true);
